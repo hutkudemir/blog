@@ -21,45 +21,20 @@ twitter: ''
 # Contact (edit or remove options as required)
 
 email: utkudemir@karabuk.edu.tr
-phone: 888 888 88 88
-address:
-  street: NA
-  city: Karabük
-  region: Batı Karadeniz
-  postcode: '78000'
-  country: Türkiye
-  country_code: TR
 coordinates:
   latitude: '41.1956'
   longitude: '32.6227'
-directions: NA
-office_hours:
-  - 'NA 10:00 to 13:00'
-  - 'NA 09:00 to 10:00'
-appointment_url: 'NA'
 contact_links:
   - icon: twitter
     icon_pack: fab
-    name: DM Me
+    name: Tweet
     link: 'https://twitter.com/hutkudemir'
-  - icon: skype
-    icon_pack: fab
-    name: Skype Me
-    link: 'NA'
-  - icon: keybase
-    icon_pack: fab
-    name: Chat on Keybase
-    link: 'NA'
-  - icon: comments
-    icon_pack: fas
-    name: Discuss on Forum
-    link: 'NA'
 
 # Site header
 
 main_menu:
   enable: true
-  align: l
+  align: r
   show_logo: true
   show_language: false
   show_day_night: true
@@ -157,4 +132,4 @@ cms:
   local_backend: false
 icon:
   pack:
-    ai: false
+    ai: true
