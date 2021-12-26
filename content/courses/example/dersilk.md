@@ -19,11 +19,13 @@ weight: 30
 <link href="/rmarkdown-libs/plotly-htmlwidgets-css/plotly-htmlwidgets.css" rel="stylesheet" />
 <script src="/rmarkdown-libs/plotly-main/plotly-latest.min.js"></script>
 
+Önceki bölümlerde basit regresyon modeli ele alındı ancak basit regresyon açıklamak istediğimiz bağımlı değişkeni sadece bir bağımsız değişkenle açıklamaya çalıştığı için ceteris paribus (diğer herşey sabitken) varsayımını ihlal etmesi çok olasıydı.
+
 <!--more-->
 
 {{< icon name="clock" pack="fas" >}} Haftada 1-2 saat, 2 hafta için.
 
-Önceki bölümlerde basit regresyon modeli ele alındı ancak basit regresyon açıklamak istediğimiz bağımlı değişkeni sadece bir bağımsız değişkenle açıklamaya çalıştığı için ceteris paribus (diğer herşey sabitken) varsayımını ihlal etmesi çok olasıydı. Üstelik bu bağımlı değişkeni açıklayan ve bağımlı değişkenin üzerinde de etkisi olan başka bir değişken olmaması olasılığı da çok düşüktü. Çoklu regresyon modeli tahmincimize başka değişkenler ekleyerek y nin üzerindeki varyasyonu daha fazla açıklama şansı doğuracaktır. Çoklu regresyon modelinin bir diğer avantajı bağımsız değişkenin derecelerini arttırarak parametrelerde doğrusal olmasına rağmen doğrusal olmayan fonksiyonlar elde edilebilir ve daha iyi bir açıklayıcı elde edilebilir. Çoklu regresyon analizinde bir çok fonksiyonel form kullanılabilir ve bu bize daha fazla esneklik sağlar.
+Üstelik bu bağımlı değişkeni açıklayan ve bağımlı değişkenin üzerinde de etkisi olan başka bir değişken olmaması olasılığı da çok düşüktü. Çoklu regresyon modeli tahmincimize başka değişkenler ekleyerek y nin üzerindeki varyasyonu daha fazla açıklama şansı doğuracaktır. Çoklu regresyon modelinin bir diğer avantajı bağımsız değişkenin derecelerini arttırarak parametrelerde doğrusal olmasına rağmen doğrusal olmayan fonksiyonlar elde edilebilir ve daha iyi bir açıklayıcı elde edilebilir. Çoklu regresyon analizinde bir çok fonksiyonel form kullanılabilir ve bu bize daha fazla esneklik sağlar.
 
 ## İki bağımsız değişkenli model
 

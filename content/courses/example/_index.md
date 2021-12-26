@@ -4,6 +4,7 @@ linkTitle: Ekonometri
 summary: Ekonometri 1, Ekonometri 2 ve Uygulamalı Ekonometri Dersleri
 title: "\U0001F4CA R ile Ekonometri"
 type: book
+weight: 1
 ---
 
 {{< figure src="featured.jpg" >}}

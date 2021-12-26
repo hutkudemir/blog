@@ -14,6 +14,8 @@ weight: 50
 <link href="/rmarkdown-libs/pagedtable/css/pagedtable.css" rel="stylesheet" />
 <script src="/rmarkdown-libs/pagedtable/js/pagedtable.js"></script>
 
+Wooldridge Çoklu Regresyon Bölüm Sonu Soruları ve Cevapları
+
 <!--more-->
 
 {{< icon name="clock" pack="fas" >}} Haftada 1-2 saat, 2 hafta için.

@@ -12,11 +12,11 @@ weight: 40
 <link href="/rmarkdown-libs/pagedtable/css/pagedtable.css" rel="stylesheet" />
 <script src="/rmarkdown-libs/pagedtable/js/pagedtable.js"></script>
 
+Bu bölümde, çoklu regresyon analizine devam ediyoruz. Popülasyon regresyon modelindeki parametrelerle ilgili hipotezleri test etmemiz gerekiyor. En küçük kareler yöntemiyle tahmin ettiğimiz parametrelerin dağılımlarına bakacağız ve normal dağılıp dağılmadığını anlamaya çalışacağız. Daha sonra parametrelerle ilgili hipotez testlerini oluşturacağız. 
+
 <!--more-->
 
 {{< icon name="clock" pack="fas" >}} Haftada 1-2 saat, 2 hafta için.
-
-Bu bölümde, çoklu regresyon analizine devam ediyoruz. Popülasyon regresyon modelindeki parametrelerle ilgili hipotezleri test etmemiz gerekiyor. En küçük kareler yöntemiyle tahmin ettiğimiz parametrelerin dağılımlarına bakacağız ve normal dağılıp dağılmadığını anlamaya çalışacağız. Daha sonra parametrelerle ilgili hipotez testlerini oluşturacağız. 
 
 ## En küçük kareler tahmincilerinin örneklem dağılımları
 
