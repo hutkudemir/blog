@@ -1,0 +1,109 @@
+---
+title: "Zaman Serileri Tahmini ve Quantmod Paketi"
+author: "Dr. Hüseyin Utku Demir"
+date: 2020-12-01T21:13:14-05:00
+categories: ["R"]
+tags: ["R Markdown", "plot", "regression"]
+type: book
+weight: 60
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>Geçmiş verilerle, geleceği tahmin etmeye çalışmak iş alanlarında ve ekonomide yaygın kullanılan bir yöntemdir. Bu bölümde kullanacağımız yöntemler makine öğrenimi konusunun altında da geçmektedir.</p>
+<div id="zaman-serisi-tahmini-nedir" class="section level2">
+<h2>Zaman Serisi Tahmini Nedir?</h2>
+<p>Eğer elimizde düzenli olarak kaydedilen veriler varsa, bu verileri kullanarak gelecek olan düzenli gözlemi tahmin etmeye çalışabiliriz. Örneğin, GSYH her çeyrekte ve her yıl açıklanmaktadır. Biz bugüne kadar olan, GSYH verilerini kullanarak, gelecek yılın veya gelecek çeyreğin GSYH verisini tahmin etmeye çalışabiliriz. Aynı durum hisse senedi fiyatları, döviz kurları veya benzeri veriler içinde geçerli olabilir.</p>
+</div>
+<div id="zaman-serisi-bileşenleri" class="section level2">
+<h2>Zaman Serisi Bileşenleri?</h2>
+<p>Bu tahmini yapabilmek için zaman serilerinin yapısını iyi anlamamız gerekir. Zaman serileri 4 ana bileşenden oluşur.</p>
+<div id="trend" class="section level3">
+<h3>Trend</h3>
+<p>Pek çok zaman serisi zaman içinde değişecektir, iktisadi değişkenler ise zaman içinde artma eğilimindedirler. Trendler özellikle iki zaman serisini karşılaştırıken önemlidir. Eğer zamana göre artan iki zaman serisi alırsanız, ikisi arasında var olmayan bir korelasyon gösterebilirsiniz. Örneğin bir ülkenin GSYH’si sürekli artma eğilimi gösteriyorsa ve siz bu veriyi Afrikaya düşen birikerek artan yağmur suyu oranıyla karşılaştırırsanız var olmayan bir korelasyona ulaşabilirsiniz.</p>
+</div>
+<div id="mevsimsellik" class="section level3">
+<h3>Mevsimsellik</h3>
+<p>Bir veri seti dönemsel hareket kalıpları gösterebilir. Örneğin, dondurma satışları havalar sıcak olduğunda artıyorsa ve soğuk olduğunda düşüyorsa, dondurma satış sayısı zaman serisinin, yazları artış gösteren, kışları düşen ve bu hareket kalıbını sürekli tekrar eden bir yapıya sahip olduğunu gözlemleyebiliriz.</p>
+</div>
+<div id="seviye" class="section level3">
+<h3>Seviye</h3>
+<p>Eğer zaman serisi düz bir çizgi olsaydı, seviyesinin ne olacağını gösterir.</p>
+</div>
+<div id="noise-gürültü" class="section level3">
+<h3>Noise (gürültü)</h3>
+<p>Zaman serisinde oluşan rastgele dalgalanmaları anlatır. Bu dalgalanmalar rastgeledir ve zaman serisi verileriyle tahmin edilemez ve açıklanamaz.</p>
+</div>
+</div>
+<div id="hangi-modelleri-kullanacağız" class="section level2">
+<h2>Hangi modelleri kullanacağız?</h2>
+<div id="arima-modeli" class="section level3">
+<h3>ARIMA Modeli</h3>
+<p>ARIMA, hareketli ortalama (moving avarege, MA) ile entegre otoregresif (autoregression, AR) model anlamına gelir. Bu tür bir tahmin modelde, açıklayı değişkenler (x’ler) tahmin etmek istediğimiz (y) değişkeninin geçmiş tarihteki verileri ve hareketli ortalamalarıdır. ARIMA’nın AR ve MA’inin ortasında kalan I ise, tahmin değişkeninin kaç kere farkı alındığını belirtir.</p>
+<p>Örnek vermemiz gerekirse, enflasyonun, gelecek ay ne kadar olacağını tahmin etmek için 2010-2020 yılları arasında CPI (consumere price index, tüketici fiyat endeksi) datasını aylık olarak TUİK’den indirdiğimizi varsayalım. Fiyat verisinin yüzdelik değişimi, enflasyonu verir, yani enflasyon, <span class="math inline">\(\pi\)</span> formülünü şu şekilde yazabiliriz.</p>
+<p><span class="math display">\[
+\pi = \frac{CPI_t - CPI_{t-1}}{CPI_{t-1}}
+\]</span></p>
+<p>Yüzdelik değişim aynı zamanda logaritma yardımıyla da bulunabilir</p>
+<p><span class="math display">\[
+\pi = \frac{ln(CPI_{t})}{ln(CPI_{t-1})} = ln(CPI_t) - (CPI_{t-1})
+\]</span></p>
+<p>eğer y değişkeni (<span class="math inline">\(ln(CPI_{t})\)</span>) tahmin etmek istersek ve I’yı 1 alırsak, aslında y’nin ilk farkını alacağımızda, enflasyonu (<span class="math inline">\(\pi\)</span>)’yi tahmin etmeye çalışırız. İlk farkı almak, ekonomik verilerde genellikle en büyük sorunumuz olan ortak trend sorununu genellikle ortadan kaldırır. Fiyatlar zamana göre atmaktayken, enflasyon zamana göre artar demeyebiliriz.</p>
+</div>
+<div id="sarima-modeli" class="section level3">
+<h3>SARIMA Modeli</h3>
+<p>Mevsimsel Otoregresif Entegre Hareketli Ortalama anlamına gelir. ARIMA modelinin, mevsimsel (seasonal) olarak genişletilmiş halidir.</p>
+</div>
+<div id="var-modeli" class="section level3">
+<h3>VAR Modeli</h3>
+<p>Vektör Otoregresyon (VAR) yöntemi, bir zaman serisi yerini, bir çok zaman serisinin birbirlerini açıklayarak ortak bir modelde yazılması halidir.</p>
+</div>
+</div>
+<div id="quantmod-paketi" class="section level2">
+<h2>Quantmod Paketi</h2>
+<p>Başlangıç olarak, Yahoo Finance, Google Finance ve Federal Reserve Bank of St. Louis’in Federal Rezerv Ekonomik Verileri (FRED) dahil olmak üzere bazı açık kaynaklardan doğrudan mali verileri indirmek için Quantmod paketini indireceğiz. Paket, Jeffry A. Ryan tarafından oluşturulmuştur.</p>
+<p>Quantmod paketi yüklendikten sonra, internet bağlantısı olan kullanıcıların Yahoo ve Google Finance’ten günlük hisse senedi verilerine erişmek için tik sembollerini kullanmalarına ve FRED’den 1000’den fazla ekonomik ve finansal zaman serisine erişmek için getSymbols komutunu kullanmalarına olanak tanır. Paket ayrıca, örneğin kapanış fiyatı ve işlem hacminin zaman serisi grafiklerini elde etmek gibi bazı güzel işlevlere de sahiptir.</p>
+<p>Quantmod paketini bir seferlik olmak üzere, sağ alt köşede bulunan kutucuktaki, Packages sekmesinden yükleyin.</p>
+<pre class="r"><code>library(quantmod)</code></pre>
+<p>Örnek olarak tesla’nın hisse senedi fiyatlarını indirelim. Yahoo-finance size şirketlerin sembollerini verecektir. Sizde yahoo finance’den tesla’yı ararsanız, sembolünün TSLA olduğunu göreceksiniz. Tesla hisse senedi veri setini indirmek için getSymbols komutunu kullanıyoruz.</p>
+<pre class="r"><code>getSymbols(&quot;TSLA&quot;)</code></pre>
+<pre><code>## [1] &quot;TSLA&quot;</code></pre>
+<p>Artık teslanın 26 Haziran 2010 sonrası günlük verilerine sahibiz. Dataya bir göz atalım. Datanın boyutuna dim() komutuyla bakalım, ve verinin ilk 6 ve son 6 gözlemine bir göz atalım.</p>
+<pre class="r"><code>dim(TSLA)</code></pre>
+<pre><code>## [1] 2894    6</code></pre>
+<pre class="r"><code>head(TSLA)</code></pre>
+<pre><code>##            TSLA.Open TSLA.High TSLA.Low TSLA.Close TSLA.Volume TSLA.Adjusted
+## 2010-06-29     3.800     5.000    3.508      4.778    93831500         4.778
+## 2010-06-30     5.158     6.084    4.660      4.766    85935500         4.766
+## 2010-07-01     5.000     5.184    4.054      4.392    41094000         4.392
+## 2010-07-02     4.600     4.620    3.742      3.840    25699000         3.840
+## 2010-07-06     4.000     4.000    3.166      3.222    34334500         3.222
+## 2010-07-07     3.280     3.326    2.996      3.160    34608500         3.160</code></pre>
+<pre class="r"><code>tail(TSLA)</code></pre>
+<pre><code>##            TSLA.Open TSLA.High TSLA.Low TSLA.Close TSLA.Volume TSLA.Adjusted
+## 2021-12-16    994.50    994.98   921.85     926.92    27590500        926.92
+## 2021-12-17    914.77    960.66   909.04     932.57    33479100        932.57
+## 2021-12-20    910.70    921.69   893.39     899.94    18826700        899.94
+## 2021-12-21    916.87    939.50   886.12     938.53    23839300        938.53
+## 2021-12-22    965.66   1015.66   957.05    1008.87    31211400       1008.87
+## 2021-12-23   1006.80   1072.98   997.56    1067.00    30841900       1067.00</code></pre>
+<p>TSLA.Open, hisse senedinin o günkü açılış fiyatı, Close, kapanış, High, en yüksek, Low, en düşük, Adjuste, Ayarlanmış fiyatlarını vermektedir.Volume, Kaç kişinin işlem yaptığını gösterir.</p>
+<p>Bu zaman serisinin grafiğini chartSeries() ile gösterebiliriz.</p>
+<pre class="r"><code>chartSeries(TSLA)</code></pre>
+<p><img src="/courses/example/zamanserileri_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>Bu hem zaman serisinin grafiğini, hem işlem yapan kişi sayısını göstermektedir. Aynı grafiği beyaz olarak almak isterseniz</p>
+<pre class="r"><code>chartSeries(TSLA, theme=&quot;white&quot;)</code></pre>
+<p><img src="/courses/example/zamanserileri_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>kullanabilirsiniz.</p>
+<p>Mesela, Türkiye’nin 16-24 yaş arası işsizlik oranının verisini indirmek istiyorsunuz. FRED, bu veri setinin sembolünü size verir. Bu zaman serisi için sembol LRHU24TTTRM156S’dir.</p>
+<pre class="r"><code>getSymbols(&quot;LRHU24TTTRM156S&quot;,src=&quot;FRED&quot;)</code></pre>
+<pre><code>## [1] &quot;LRHU24TTTRM156S&quot;</code></pre>
+<pre class="r"><code>chartSeries(LRHU24TTTRM156S,theme=&quot;white&quot;) </code></pre>
+<p><img src="/courses/example/zamanserileri_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>Farketiyseniz, src kaynağınızın neresi olacağını yazabilmenizi sağlıyor. Hiçbirşey yazmasanız, sembolü Yahoo’da arayacaktır. Diyelim ki, son bir yıl için TL USD değerini istiyorsunuz. getFX("") komutunu her döviz kuru için kullanabilirsiniz.</p>
+<pre class="r"><code>getFX(&quot;USD/TRY&quot;,from=&quot;2020-01-01&quot;)</code></pre>
+<pre><code>## [1] &quot;USD/TRY&quot;</code></pre>
+<pre class="r"><code>chartSeries(USDTRY,theme=&quot;white&quot;) </code></pre>
+<p><img src="/courses/example/zamanserileri_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+</div>

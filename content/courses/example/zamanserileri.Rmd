@@ -1,0 +1,137 @@
+---
+title: "Zaman Serileri Tahmini ve Quantmod Paketi"
+author: "Dr. Hüseyin Utku Demir"
+date: 2020-12-01T21:13:14-05:00
+categories: ["R"]
+tags: ["R Markdown", "plot", "regression"]
+type: book
+weight: 60
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Geçmiş verilerle, geleceği tahmin etmeye çalışmak iş alanlarında ve ekonomide yaygın kullanılan bir yöntemdir. Bu bölümde kullanacağımız yöntemler makine öğrenimi konusunun altında da geçmektedir.
+
+## Zaman Serisi Tahmini Nedir?
+
+Eğer elimizde düzenli olarak kaydedilen veriler varsa, bu verileri kullanarak gelecek olan düzenli gözlemi tahmin etmeye çalışabiliriz. Örneğin, GSYH her çeyrekte ve her yıl açıklanmaktadır. Biz bugüne kadar olan, GSYH verilerini kullanarak, gelecek yılın veya gelecek çeyreğin GSYH verisini tahmin etmeye çalışabiliriz. Aynı durum hisse senedi fiyatları, döviz kurları veya benzeri veriler içinde geçerli olabilir.
+
+## Zaman Serisi Bileşenleri?
+
+Bu tahmini yapabilmek için zaman serilerinin yapısını iyi anlamamız gerekir. Zaman serileri 4 ana bileşenden oluşur.
+
+### Trend
+
+Pek çok zaman serisi zaman içinde değişecektir, iktisadi değişkenler ise zaman içinde artma eğilimindedirler. Trendler özellikle iki zaman serisini karşılaştırıken önemlidir. Eğer zamana göre artan iki zaman serisi alırsanız, ikisi arasında var olmayan bir korelasyon gösterebilirsiniz. Örneğin bir ülkenin GSYH'si sürekli artma eğilimi gösteriyorsa ve siz bu veriyi Afrikaya düşen birikerek artan yağmur suyu oranıyla karşılaştırırsanız var olmayan bir korelasyona ulaşabilirsiniz. 
+
+### Mevsimsellik
+
+Bir veri seti dönemsel hareket kalıpları gösterebilir. Örneğin, dondurma satışları havalar sıcak olduğunda artıyorsa ve soğuk olduğunda düşüyorsa, dondurma satış sayısı zaman serisinin, yazları artış gösteren, kışları düşen ve bu hareket kalıbını sürekli tekrar eden bir yapıya sahip olduğunu gözlemleyebiliriz.
+
+### Seviye
+
+Eğer zaman serisi düz bir çizgi olsaydı, seviyesinin ne olacağını gösterir.
+
+### Noise (gürültü)
+
+Zaman serisinde oluşan rastgele dalgalanmaları anlatır. Bu dalgalanmalar rastgeledir ve zaman serisi verileriyle tahmin edilemez ve açıklanamaz.
+
+## Hangi modelleri kullanacağız?
+
+### ARIMA Modeli
+
+ARIMA, hareketli ortalama (moving avarege, MA) ile entegre otoregresif (autoregression, AR) model anlamına gelir. Bu tür bir tahmin modelde, açıklayı değişkenler (x'ler) tahmin etmek istediğimiz (y) değişkeninin geçmiş tarihteki verileri ve hareketli ortalamalarıdır. ARIMA'nın AR ve MA'inin ortasında kalan I ise, tahmin değişkeninin kaç kere farkı alındığını belirtir. 
+
+Örnek vermemiz gerekirse, enflasyonun, gelecek ay ne kadar olacağını tahmin etmek için 2010-2020 yılları arasında CPI (consumere price index, tüketici fiyat endeksi) datasını aylık olarak TUİK'den indirdiğimizi varsayalım. Fiyat verisinin yüzdelik değişimi, enflasyonu verir, yani enflasyon, $\pi$ formülünü şu şekilde yazabiliriz.
+
+$$
+\pi = \frac{CPI_t - CPI_{t-1}}{CPI_{t-1}}
+$$
+
+Yüzdelik değişim aynı zamanda logaritma yardımıyla da bulunabilir
+
+$$
+\pi = \frac{ln(CPI_{t})}{ln(CPI_{t-1})} = ln(CPI_t) - (CPI_{t-1})
+$$
+
+eğer y değişkeni ($ln(CPI_{t})$) tahmin etmek istersek ve I'yı 1 alırsak, aslında y'nin ilk farkını alacağımızda, enflasyonu ($\pi$)'yi tahmin etmeye çalışırız. İlk farkı almak, ekonomik verilerde genellikle en büyük sorunumuz olan ortak trend sorununu genellikle ortadan kaldırır. Fiyatlar zamana göre atmaktayken, enflasyon zamana göre artar demeyebiliriz. 
+
+### SARIMA Modeli
+
+Mevsimsel Otoregresif Entegre Hareketli Ortalama anlamına gelir. ARIMA modelinin, mevsimsel (seasonal) olarak genişletilmiş halidir. 
+
+### VAR Modeli
+
+Vektör Otoregresyon (VAR) yöntemi, bir zaman serisi yerini, bir çok zaman serisinin birbirlerini açıklayarak ortak bir modelde yazılması halidir.
+
+
+## Quantmod Paketi
+
+Başlangıç olarak, Yahoo Finance, Google Finance ve Federal Reserve Bank of St. Louis'in Federal Rezerv Ekonomik Verileri (FRED) dahil olmak üzere bazı açık kaynaklardan doğrudan mali verileri indirmek için Quantmod paketini indireceğiz. Paket, Jeffry A. Ryan tarafından oluşturulmuştur.
+
+Quantmod paketi yüklendikten sonra, internet bağlantısı olan kullanıcıların Yahoo ve Google Finance'ten günlük hisse senedi verilerine erişmek için tik sembollerini kullanmalarına ve FRED'den 1000'den fazla ekonomik ve finansal zaman serisine erişmek için getSymbols komutunu kullanmalarına olanak tanır. Paket ayrıca, örneğin kapanış fiyatı ve işlem hacminin zaman serisi grafiklerini elde etmek gibi bazı güzel işlevlere de sahiptir. 
+
+Quantmod paketini bir seferlik olmak üzere, sağ alt köşede bulunan kutucuktaki, Packages sekmesinden yükleyin.
+
+
+```{r message=FALSE, warning=FALSE}
+library(quantmod)
+```
+
+Örnek olarak tesla'nın hisse senedi fiyatlarını indirelim. Yahoo-finance size şirketlerin sembollerini verecektir. Sizde yahoo finance'den tesla'yı ararsanız, sembolünün TSLA olduğunu göreceksiniz. Tesla hisse senedi veri setini indirmek için getSymbols komutunu kullanıyoruz.
+
+```{r message=FALSE, warning=FALSE}
+getSymbols("TSLA")
+```
+
+Artık teslanın 26 Haziran 2010 sonrası günlük verilerine sahibiz. Dataya bir göz atalım. Datanın boyutuna dim() komutuyla bakalım, ve verinin ilk 6  ve son 6 gözlemine bir göz atalım.
+
+```{r}
+dim(TSLA)
+head(TSLA)
+```
+
+```{r}
+tail(TSLA)
+```
+
+TSLA.Open, hisse senedinin o günkü açılış fiyatı, Close, kapanış, High, en yüksek, Low, en düşük, Adjuste, Ayarlanmış fiyatlarını vermektedir.Volume, Kaç kişinin işlem yaptığını gösterir.
+
+Bu zaman serisinin grafiğini chartSeries() ile gösterebiliriz.
+
+```{r}
+chartSeries(TSLA)
+```
+
+
+Bu hem zaman serisinin grafiğini, hem işlem yapan kişi sayısını göstermektedir. Aynı grafiği beyaz olarak almak isterseniz
+
+```{r}
+chartSeries(TSLA, theme="white")
+```
+
+kullanabilirsiniz.
+
+Mesela, Türkiye'nin 16-24 yaş arası işsizlik oranının verisini indirmek istiyorsunuz. FRED, bu veri setinin sembolünü size verir. Bu zaman serisi için sembol LRHU24TTTRM156S'dir.
+
+```{r}
+getSymbols("LRHU24TTTRM156S",src="FRED")
+```
+
+```{r}
+chartSeries(LRHU24TTTRM156S,theme="white") 
+```
+
+Farketiyseniz, src kaynağınızın neresi olacağını yazabilmenizi sağlıyor. Hiçbirşey yazmasanız, sembolü Yahoo'da arayacaktır. Diyelim ki, son bir yıl için TL USD değerini istiyorsunuz. getFX("") komutunu her döviz kuru için kullanabilirsiniz.
+
+```{r message=FALSE, warning=FALSE}
+getFX("USD/TRY",from="2020-01-01")
+```
+
+```{r}
+chartSeries(USDTRY,theme="white") 
+```
+
+
