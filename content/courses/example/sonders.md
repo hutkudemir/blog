@@ -4,7 +4,8 @@ author: "Dr. Hüseyin Utku Demir"
 date: 2020-12-01T21:13:14-05:00
 categories: ["R"]
 tags: ["R Markdown", "plot", "regression"]
-weight: 80
+type: book
+weight: 50
 ---
 <link href="/rmarkdown-libs/pagedtable/css/pagedtable.css" rel="stylesheet" />
 <script src="/rmarkdown-libs/pagedtable/js/pagedtable.js"></script>
@@ -13,7 +14,9 @@ weight: 80
 <link href="/rmarkdown-libs/pagedtable/css/pagedtable.css" rel="stylesheet" />
 <script src="/rmarkdown-libs/pagedtable/js/pagedtable.js"></script>
 
+<!--more-->
 
+{{< icon name="clock" pack="fas" >}} Haftada 1-2 saat, 2 hafta için.
 
 ## Ödev
 

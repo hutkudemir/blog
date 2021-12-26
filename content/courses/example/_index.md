@@ -14,7 +14,8 @@ type: book
 
 - Temel {{<hl>}}R programlama{{</hl>}}
 - {{<hl>}}Ekonometri içerikleri{{</hl>}} ve pratikte nasıl uygulanır
-- R paketlerini kullanarak analizler {{<hl>}}Scikit{{</hl>}}, zaman serisi tahminleri {{<hl>}}Rmarkdown{{</hl>}} nedensellik {{<hl>}}ve site yapımı{{</hl>}}
+-  Nedensellik ve zaman serisi tahminleri 
+- R paketlerini kullanarak analizler ve {{<hl>}}Rmarkdown{{</hl>}} site yapımı
 
 ## Dersi neden almalıyım?
 
@@ -38,4 +39,4 @@ Bu ders için bir ön koşul bulunmamaktadır. R ve R-studio sıfırdan öğreti
 Her dönem işlenen dersler ve güncellemeri yüklenecektir.
 {{< /spoiler >}}
 
-{{< cta cta_text="Derse başlayın" cta_link="python" >}}
+{{< cta cta_text="Derse başlayın" cta_link="rgiris" >}}

@@ -4,14 +4,17 @@ author: "Dr. Hüseyin Utku Demir"
 date: 2020-12-01T21:13:14-05:00
 categories: ["R"]
 tags: ["R Markdown", "plot", "regression"]
-weight: 60
+type: book
+weight: 40
 ---
 <link href="/rmarkdown-libs/pagedtable/css/pagedtable.css" rel="stylesheet" />
 <script src="/rmarkdown-libs/pagedtable/js/pagedtable.js"></script>
 <link href="/rmarkdown-libs/pagedtable/css/pagedtable.css" rel="stylesheet" />
 <script src="/rmarkdown-libs/pagedtable/js/pagedtable.js"></script>
 
+<!--more-->
 
+{{< icon name="clock" pack="fas" >}} Haftada 1-2 saat, 2 hafta için.
 
 Bu bölümde, çoklu regresyon analizine devam ediyoruz. Popülasyon regresyon modelindeki parametrelerle ilgili hipotezleri test etmemiz gerekiyor. En küçük kareler yöntemiyle tahmin ettiğimiz parametrelerin dağılımlarına bakacağız ve normal dağılıp dağılmadığını anlamaya çalışacağız. Daha sonra parametrelerle ilgili hipotez testlerini oluşturacağız. 
 
