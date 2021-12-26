@@ -1,0 +1,441 @@
+---
+title: "R ile Çoklu Regresyon Analizi: Çıkarım: (Wooldridge Örnekleri)"
+author: "Dr. Hüseyin Utku Demir"
+date: 2020-12-01T21:13:14-05:00
+categories: ["R"]
+tags: ["R Markdown", "plot", "regression"]
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Bu bölümde, çoklu regresyon analizine devam ediyoruz. Popülasyon regresyon modelindeki parametrelerle ilgili hipotezleri test etmemiz gerekiyor. En küçük kareler yöntemiyle tahmin ettiğimiz parametrelerin dağılımlarına bakacağız ve normal dağılıp dağılmadığını anlamaya çalışacağız. Daha sonra parametrelerle ilgili hipotez testlerini oluşturacağız. 
+
+## En küçük kareler tahmincilerinin örneklem dağılımları
+
+Bu bölüme başlamadan önce 6. varsayımımızı hatırlamamız gerekecek.
+
+- Altıncı Varsayım (MLR.6): Normalite (Normality), popülasyon hatası $u$ açıklayıcı değişkenler, $x_1, x_2, ..., x_k$, den bağımsızdır ve ortalaması sıfır, varyansı $\delta^2$ olmak üzere normal dağılmıştır. ($u \sim Normal(0,\delta^2)$)
+
+Eğer MLR.6 varsayımını kabul etmek, MLR.4 ve MLR.5 varsayımlarını kabul etmemizi zorunlu kılar. MLR.1'den MLR.6'ya kadar olab varsayımlar klasik lineer model (CLM) varsayımları olarak bilinir. Klasik lineer model (CLM) varsayımları bütün Gauss-Markov varsayımları artı normal dağılan hatalar varsayımı olarak da bilinir.
+
+Klasik lineer model (CLM) varsayımları sağlandığında en küçük kareler (OLS) yöntemi en az varyansa sahip ve sapmasız tahminci olarak adlandırılabilir. Unutulmamalıdır ki, bu varsayım çok güçlü bir varsayımdır ve sağlanması oldukça zordur. Örneğin maaşlar böyle bir değişkendir. Popülasyonda bulunan bir çok kişi minimum ücret alır ve maaşların sıfırın altına düşmesi söz konusu değildir. Gelir eşitsizliğine de bakarsak, maaşlar sağ kuyruğa doğru da oldukça uzayabilir. 
+
+## Tek Bir Popülasyon Parametresi Hakkında Hipotezlerin Test Edilmesi: t Testi
+
+Çoklu popülasyon modelimizi hatırlayalım
+
+$$
+y= \beta_0 + \beta_1 x_1 + \beta_2 x_2  + \beta_3 x_3 + ... + \beta_k x_k  + u
+$$
+
+Bu bölümde herhangi bir $\beta_j$ parametresini test etmeyi öğreneceğiz.
+
+CLM varsayımları sayesinde biliyoruz ki $\frac{\hat{\beta_j}-\beta_j}{se(\hat{\beta_j})} \sim Normal(0,1)$. Popülasyon için kullandığımız bu normal dağılım, örneklem için t-dağılımına dönüşür $\frac{\hat{\beta_j}-\beta_j}{se(\hat{\beta_j})} \sim t_{n-k-1}=t_{df}$. n-k-1 t-dağılımının esneklik derecesini (degrees of freedom, df) verir. n veri setinde kaç gözlem olduğunu, k modelimizde kaç bağımsız değişken olduğunu söyler. 
+
+
+Bir örnek vermemiz gerekirse maaş veri seti üzerinden tartışabiliriz.
+
+
+$$
+maaş= \beta_0 + \beta_1 eğitim + \beta_2 deneyim  + \beta_3 iş.yılı + u
+$$
+
+
+Bir hipotez kurup test etmek istediğimizde, katsayılardan birini seçip $H_0$ nul hipotezini kurabiliriz.
+
+Örneğin,
+
+$H_0: \beta_2=0$, eğitim ve iş yılı sabit tutulduğunda, deneyimin saatlik maaşlar üzerinde hiçbir etkisi yoktur anlamı taşır. Eğer bu hipotez doğruysa, şu anda çalışdığı işten önce kişinin çalışmış olduğu yılların ücretin üzerinde hiçbir etkisi olmadığı anlamı çıkar. Eğer $\beta_2>0$ ise, önceki iş yılları, üretkenliğe dolayısıyla ücretlere pozitif etki yapmaktadır.
+
+$H_0: \beta_2=0$ olup olmadığını test ettiğimize göre, t istatistiğini (t oranı) şu şekide bulabiliriz.
+
+$t_{\hat{\beta_j}} = \frac{\hat{\beta_j}}{se(\hat{\beta_j})}$
+
+$\beta_2$'nun sıfır olup olmadığını ($\beta_2 \neq 0$) test etmek için $t_{\hat{\beta_j}}$ iyi bir araç mı? $H_0: \beta_2=0$ test ediyoruz, fakat gerçek $\beta_2$ değerini bilmiyoruz. Ancak elimizde $\beta_2$ değerinin en iyi sapmasız tahmini $\hat{\beta_j}$ var. $H_0: \beta_2=0$ gerçek olsa bile, biz asla bu gerçek değere sahip olan bir $\hat{\beta_j}$ değerine sahip olamıyacağız. Asıl sormamız gereken soru, tahminimiz $\hat{\beta_j}$'nin sıfıra ne kadar yakın olduğu. Bu ölçünün uzaklığını bize ancak standart hata değeri verebilir. Standar hata sayesinde $\hat{\beta_j}$ değerinin sıfırdan kaç standart sapma uzak olduğunu hesaplayabiliriz. Bu kaç standart sapma uzaklıkta oldğunu veren değer $t_{\hat{\beta_j}}$ değeridir. $t_{\hat{\beta_j}}$ değeri ne kadar büyükse, gerçek parametre değerimiz sıfırdan o kadar uzaktır ve $H_0: \beta_2=0$ hipotezini reddetmemiz için o kadar kanıt sağlar.
+
+### Örnek 4.1 Saatlik Maaş Denklemi
+
+Wooldridge wage1 datasını kullanalım.
+
+```{r}
+library(wooldridge)
+data(wage1)
+```
+
+Verilere bir göz gezdirin.
+
+```{r}
+library(rmarkdown)
+paged_table(wage1)
+```
+
+Kullanacağımız değişkenlerin açıklamalarına bakalım.
+
+```{r}
+?wage1
+```
+
+Kullanacağımız değişkenlerin açıklamalarını daha önce çevirdik. İsterseniz help(wage1) veya ?wage1 kodlarını kullanarak veriler hakkında bilgiye ulaşabilirsiniz.
+
+Bu veri setini kullanarak deneyimin getirisini test etmeye çalışacağız, bunu yaparken eğitim ve güncel işindeki çalışma yıllarını kontrol edeceğiz.
+
+$$
+log(maaş)= \beta_0 + \beta_1 eğitim + \beta_2 deneyim  + \beta_3 iş.yılı + u
+$$
+ veri setindeki ingilizce değişkenler
+ 
+ 
+$$
+log(wage)= \beta_0 + \beta_1 educ + \beta_2 exper  + \beta_3 tenure + u
+$$
+
+Diğer iki değişkeni sabit tutarken, deneyimin getirisinin sıfır olup olmadığını test etmek için kurduğumuz hipotez $H_0: \beta_2=0$ olaarak yazılabilir. Bu hipotezi reddersek $H_1: \beta_2>0$ alternatif hipotezini kabul ediyoruz. 
+
+```{r}
+maasreg <- lm(log(wage)~ educ+exper+tenure,data = wage1)
+summary(maasreg)
+```
+
+
+$\beta_2$'nun popülasyon parametresi olduğunu unutmayın. Biz popülasyon parametresini test ediyoruz. exper'in tahmini katsayısı $\hat{\beta_2}$ gördüğünüz gibi 0.0041. Hipotezi tekrar yazmak isterseniz $0.0041=0$ ya da  $H_0:\hat{\beta_2}=0$ yazamazsınız. 
+
+Veri setimizde her bir değişken için gözlem sayısı $n=526$, t dağılımı için serbestlik derecesini bulmak isterseniz $n-k-1= 526-3-1=522$ değerini kullanmanız gerekecektir. Bu değer aslında regresyon sonuçlarında "degrees of freedom" değeri olarak yazıldığına dikkat edin (Alttan üçüncü satır "Residual standard error: 0.4409 on $\bf{522}$ $\bf{degrees}$ $\bf{of}$ $\bf{freedom}$". 
+
+R-studio ile 522 serbestlik derecesine sahip t dağılımının kritik değerlerini bulmak çok kolaydır. Bunun için bir formüle ya da tabloya ihtiyacımız yok. qt komutu size bu değeri verecektir.
+
+Mesela eğer \%95 olasılıkta t değerini bulmak istiyorsanız aşağıdaki kod yeterli olacaktır.
+
+```{r}
+qt(0.95,522)
+```
+
+\%99 olasılıkta t değeri için 
+
+```{r}
+qt(0.99,522)
+```
+
+kullanıyoruz. 522 gibi büyük bir gözlem sayısına sahip olduğumuz için t değerlerimiz, normal dağılım kritik değerlerine çok yakındır. Kritik t değerini bulduktan sonra, regresyon tablomuzda karşılaştırma yapmak istediğimiz parametrenin t değerine bakalım. Exper değişkeni için bu değer t value'nun altında 2.391 olarak bulunur. 2.39 iki kritik değerimizden de büyük bu durumda $\hat{\beta_{exper}}$ veya exper \%1 seviyesinde istatistiksel olarak anlamlıdır ve \%1 anlamlılık seviyesinde istatiksel olarak sıfırdan büyüktür. Unutmayın ki negatif bir t değerini kritik değerlerle karşılaştırıyor olabilirdik. Böyle bir durumda t değerinin mutlak değerinin kritik t değerlerinden büyük olup olmadığına bakacaktık.
+
+Aynı cevabı t değerlerine bakmadan olasılıklara bakarak da çıkarabilirdik. Tekrar regresyon tablomuza bir göz atın. Her bir değişken için olasılık değerlerini Pr (probability, olasılık) sütununda göreceksiniz. Biz exper değişkeni için olasılık değerine bakıyoruz. Olasılık 0.01714, exper katsayısının sıfır olma olasılığını yaklaşık olarak \%1.7 versede, biz t değerine göre \%1'in altında bulmuştuk. Bu durum kafanızı karıştırmamalı. Çünkü R p değerini her zaman iki taraflı test olarak verecektir. Eğer 0.01714 değerini 2'ye bölersek 0.00857 buluruz. Gördüğünüz gibi exper katsayısının 0 olma ihtimali \%1'den küçüktür. Bu yüzden $H_0$ hipotezini reddederiz.
+
+## Güven Aralığı
+
+Güven aralığını oluşturmayı daha önce basit bir konsepte konuşmuştuk. Örneğin bir parametre için \%95 güven aralığı oluşturmak istiyorsak, bulduğumuz katsayı sonucunun standart hatasının iki katından çıkarıyor ve topluyorduk.
+
+$$
+\beta_j \pm 2 \cdot se(\beta_j)
+$$
+
+Burada 2 yerine hangi yüzdeyle güven aralığı oluşturmak isteniyorsa o t kritik değeri kullanılmalıdır.
+
+R bizim için bu güven aralıklarını kolaylıkla oluşturabilir. Örneğimizden devam edecek olursak
+
+```{r}
+confint(maasreg)
+```
+
+confint bizim için \%95 güven aralığını oluşturacaktır. \%99 güven aralığı oluşturmak isterseniz
+
+```{r}
+confint(maasreg, level=0.99)
+```
+
+level detayını eklemeniz gerecektir.
+
+Coefplot paketini yüklerseniz size güven aralığı grafiğini çıkaran bir kod sunar.
+
+```{r}
+library(coefplot)
+coefplot(maasreg)
+```
+
+
+Grafikten de görebileceğiniz gibi exper katsayısı 0'a çok yakın ama güven aralığı 0'ı kapsamıyor.
+
+## Çoklu Doğrusal Kısıtların Testi
+
+Şimdiye kadar sadece bir parametrenin testi üzerinde durduk ve hipotezi bir katsayının sıfıra eşit olup olmadığı üzerinden kurduk. Ancak bir kaç değişkenin katsayısının aynı anda test edilmesi de mümkündür. Beş değişkenli bir model düşünün
+
+$$
+y= \beta_0 + \beta_1 x_1 + \beta_2 x_2  + \beta_3 x_3 + \beta_4 x_4  + \beta_5 x_5  + u
+$$
+$\beta_3, \beta_4, \beta_5$ katsayılarını aynı anda sıfır olup olmadığını merak ediyorsanız hipotezinizi şöyle oluşturursunuz
+
+$$
+H_0: \beta_3=0, \beta_4=0, \beta_5=0
+$$
+
+Farkındaysanız eğer bu hipotezi kabul edersek kısıtlı bir model elde etmiş oluruz.
+
+$$
+y= \beta_0 + \beta_1 x_1 + \beta_2 x_2 + u
+$$
+
+Bu iki model arasında hangi modelin doğru olduğunu F istatistiği ile kontrol ederiz. İlk modelimize kısıtsız model (unrestricted model, ur), ikinci modele ise kısıtlı model (restricted, r) diyeceğiz. F istatistiği şu şekide bulunur.
+
+$$
+F= \frac{(SSR_r-SSR_{ur})/q}{SSR_{ur}/(n-k-1)}
+$$
+$SSR_r$ kısıtlı modelin hata payının karelerinin toplamı, $SSR_{ur}$ kısıtsız modelin hata payının karelerinin toplamı, $q$ kısıt sayısı, $n-k-1$ kısıtsız modelin serbestlik derecesidir. F testi yaparken de t testi yaptığımızdabulduğumuz gibi bir F kritik değeri bulmamız gerekli. Ancak bu sefer t tablo değeri değil, F tablo değeri kullanmalıyız. Bulmamız gereken F değeri $F_{q, n-k-1}$ değeridir. F dağılımı için \%10, \%5, \%1'lik kritik değerler mevcuttur. 
+
+F istatistiğini bulmanın bir başka yolu $R^2$ kullanmaktır.
+
+$$
+F= \frac{R^2_{ur}-R^2_r}{1-R^2_{ur}} \cdot \frac{n-k-1}{q}
+$$
+
+### Dışlama Kısıtlarının Test Edilmesi Örneği
+
+F testi örneği için kullanacağımız data seti HPRICE1. Şimdi bu veri setini yükleyelim ve verilere bir göz atalım.
+
+```{r}
+data("hprice1")
+paged_table(hprice1)
+```
+Veri setinin ne ile ilgili olduğuna bakalım
+
+```{r}
+?hprice1
+```
+
+Açıklama
+Wooldridge Kaynak: 1990 yılında Boston Globe'un emlak sayfalarından toplanmıştır. Bunlar Boston, MA bölgesinde satılan evlerdir.
+
+Mesela price değişkeni ev fiyatlarını, assess değişkeni ev satılmadan önce belirlenmiş ev değerini, lotsize değişkeni arsa büyüklüğünü (feet kare cinsinden), sqrft değişkeni ev büyüklüğünü (feet kare cinsinden), bdrms yatak odası sayısını gösteriyor. lprice, lassess, llotsize ve lsqrft bütün bu değişkenlerin logaritması alınmış şekillerini temsil ediyor.
+
+
+Kısıtsız modelimiz (unresricted model)
+
+Kısıtsız modelimizle ev fiyatlarını tahmin etmeye çalışalım.
+
+$$
+log(price)= \beta_0 + \beta_1 log(assess) + \beta_2 log(lotsize)  + \beta_3 log(sqrft) + \beta_4 bdrms + u
+$$
+
+```{r}
+evfiyaları_ur <- lm(lprice~ lassess+llotsize+lsqrft + bdrms,data = hprice1)
+summary(evfiyaları_ur)
+```
+
+t teslerine bakarsak birtek llotsize anlamlı gibi görünüyor.
+
+$$
+H_0:  \beta_2=0, \beta_3=0, \beta_4=0
+$$
+
+Yukarıdaki hipotezimizi F testi kullanarak test edelim. Bu yüzden kısıtlı (restricted) modelimizi oluşturmamız gerekir.
+
+$$
+log(price)= \beta_0 + \beta_1 log(assess) + u
+$$
+
+```{r}
+evfiyaları_r <- lm(lprice~ lassess,data = hprice1)
+summary(evfiyaları_r)
+```
+
+Bu iki modelde bize $R^2$'leri ve SSR'ları vermektedir. Model özetlerinden $R^2$'leri görsekte kayıt altına alabiliriz.
+
+```{r}
+r2_ur<-summary(evfiyaları_ur)$r.sq
+r2_r<-summary(evfiyaları_r)$r.sq
+r2_ur
+r2_r
+```
+
+Görüleceği üzere üç değiken eklememize rağmen kısıtsız (ur) modelin $R^2$'si kısıtlı modele (r) göre çok artmamış.
+
+F testi
+
+$$
+F= \frac{R^2_{ur}-R^2_r}{1-R^2_{ur}} \cdot \frac{n-k-1}{q}
+$$
+Bu formülde diğer ihtiyacımız olan n,k ve q değerleri.
+
+n için Global Environment kutusunda hprice1 veri setindeki gözlemlerin 88 tane olduğunu gözlemleyebiliyoruz. n değerinini kaydetmek istersek nobs fonksiyonu bize yardımcı olacaktır.
+
+```{r}
+n<-nobs(evfiyaları_ur)
+n
+```
+
+k kısıtsız modelimizde kaç tane bağımsız değişkenimiz olduğunu söyler. lassess, llotsize, lsqrft, bdrms olmak üzere 4 bağımsız değişken kullandık.
+
+```{r}
+k<-4
+```
+
+Son olarak q, kaç tane kısıt kullandığımız önemlidir. Hipotezimiz $H_0:  \beta_2=0, \beta_3=0, \beta_4=0 $ olduğuna göre toplam 3 tane kısıt kullandık.
+
+```{r}
+q<-3
+```
+
+Şimdi F_evfiyatlarını bulabiliriz.
+
+$$
+F= \frac{R^2_{ur}-R^2_r}{1-R^2_{ur}} \cdot \frac{n-k-1}{q}
+$$
+
+```{r}
+F_evfiyatları<-((r2_ur-r2_r)/(1-r2_ur))*((n-k-1)/q)
+F_evfiyatları
+```
+
+Son olarak t testinde olduğu gibi F test sonucu karşılaştırabileceğimiz bir kritik değere ihtiyacımız var. Bulmamız gereken F değeri $F_{q, n-k-1}$ değeridir. Bunun için qf fonksiyonunu kullanacağız. \%99 kritik F değeri
+
+```{r}
+qf(0.99,q,n-k-1)
+```
+
+Görüleceği üzere test sonucumuz, kritik değerin çok altında. Bu yüzden hipotezimizi tahmin edebileceğiniz gibi kabul ediyoruz. 
+
+$$
+H_0:  \beta_2=0, \beta_3=0, \beta_4=0
+$$ 
+
+hipotezinin doğru olma olasığını bulmak istersek, 1-pf() fonksiyonunu kullanmamız yeterli.
+
+```{r}
+1-pf(F_evfiyatları,q,n-k-1)
+```
+ 
+ Bu üç katsayının birlikte sıfır olma ihtimali yaklaşık olarak \%46 bu sonuç sıfır hipotezini kabul etmemiz için yeterli. Ancak hipotez kabul edilir diye bir açıklama yapılamaz.  Onun yerine $H_0:  \beta_2=0, \beta_3=0, \beta_4=0$ katsayılarının sıfır olduğu hipotezi \%45 anlamlılık seviyesinde bile reddedilememiştir denilir.
+ 
+Diyelim ki hipotezimizi değiştirdik, bu üç sayının sıfır olduğunu kabul ediyoruz ve aynı zamanda $\beta_1$'in bire eşit olup olmadığını merak ediyoruz. Yeni sıfır hipotezimiz şu şekilde olacaktır.
+
+$$
+H_0: \beta_1=1, \beta_2=0, \beta_3=0, \beta_4=0
+$$ 
+
+ Bu durumda kısıtlı modelimizi artık şu şekilde yazabiliriz.
+ 
+ Eski kısıtlı model
+ 
+$$
+log(price)= \beta_0 + \beta_1 log(assess) + u
+$$
+
+Yeni kısıtlı model $\beta_1$ bire eşit olduğu model olur ve şu şekilde yazılabilir.
+
+$$
+log(price) - log(assess) = \beta_0 + u
+$$
+ 
+Burda ev değerlemelerinin mantıksal olup olmadığını merak ediyoruz.
+
+Burada kısıtsız modelimiz değişmemiş ancak kısıtlı model değişmiştir yeni kısıtlı modeli tahmin etmek için yeni bir y değerine ihtiyacımız var bu yeni y $y_{yeni}=log(price) - log(assess)$'dir.
+
+```{r}
+yyeni=hprice1$lprice-hprice1$lassess
+```
+
+Yeni kısıtlı modelimizi evfiyatları_r_yeni olarak kaydedelim ve sadece kesen katsayısıyla doğrusal regresyon sonucunu bulalım.
+
+```{r}
+evfiyatları_r_yeni <- lm(yyeni~ 1)
+summary(evfiyatları_r_yeni)
+```
+
+Yeni kısıtlı modelimizin F istatistiğini bulmak için $R^2$ formu kullanılamaz. Çünkü artık iki farklı y kullanıyoruz. Kısıtsız modelimiz aynı ve y olarak lprice alınmıştı ancak şimdi yyeni değişkenini kullandık. Bu yüzden F istatistiği için SSR değerlerini kullanmalıyız.
+
+Bildiğiniz gibi SSR sadece hata payının varyansının n-1 ile çarpılması
+
+$$
+SSR=(n-1) \cdot var(\hat{u})
+$$
+
+kısıtsız modelimizin hata payını bulalım.
+
+
+```{r}
+uhat_ur<-resid(evfiyaları_ur)
+```
+şimdi hata payının varyansını bulup n-1 ile çarpalım ve SSR_ur'yi bulalım.
+
+```{r}
+SSR_ur<- (n-1)*var(uhat_ur)
+SSR_ur
+```
+ 
+Şimdi kısıtlı modelimizin SSR'ını bulmalıyız.
+
+```{r}
+uhat_r<-resid(evfiyatları_r_yeni)
+SSR_r<- (n-1)*var(uhat_r)
+SSR_r
+```
+
+Kısıtlı modelinizin SSR (hata payının karelerinin toplamı) Kısıtsız modelimizden çok fazla değil.
+
+Şimdi F test değerimizi bulabiliriz.
+
+$$
+F= \frac{(SSR_r-SSR_{ur})/q}{SSR_{ur}/(n-k-1)}
+$$
+Formülde q artık ilk örneğimizde bulunan q'dan farklı, çünkü artık 4 kısıt kullanıyoruz. Kısıt sayısını hipotezimize bakıp hatırlayalım.
+
+$$
+H_0: \beta_1=1, \beta_2=0, \beta_3=0, \beta_4=0
+$$ 
+
+Yeni q sayımızı kaydedelim
+
+```{r}
+q_yeni=4
+```
+
+F test değeri
+
+```{r}
+F_evfiyatları_yeni<-((SSR_r-SSR_ur)/(q_yeni))/(SSR_ur/(n-k-1))
+F_evfiyatları_yeni
+```
+
+Bu F testti karşılaştıracağımız bir F kritik değerine ihtiyacımız var.
+
+```{r}
+qf(0.95,q_yeni,n-k-1)
+```
+
+Yine test değerimiz kritik değerin çok altında. Yine $H_0$'ı reddetmekte başarısız olduk.
+
+Bu sonuçları tek tek bulmamıza gerek yok. car paketi sayesinde F testi sonuçlarını direk gözlemleyebiliriz. linearHypothesis komutu F testini yapmamıza yardımcı olacaktır. Kısıtsız modelimizin adını (evfiyatları_ur) hatırlamanız gerek.
+
+$$
+log(price)= \beta_0 + \beta_1 log(assess) + \beta_2 log(lotsize)  + \beta_3 log(sqrft) + \beta_4 bdrms + u
+$$
+
+```{r}
+evfiyatları_ur <- lm(lprice~ lassess+llotsize+lsqrft + bdrms,data = hprice1)
+summary(evfiyatları_ur)
+```
+
+```{r}
+library(car)
+linearHypothesis(evfiyatları_ur, c("lassess=1", "llotsize=0","lsqrft=0","bdrms=0"))
+```
+
+Sonuç bize hipotezlerimizi Res.Df'nin altında kısıtlı (restricted) ve kısıtsız (unrestricted) modellerin serbestlik derecelerini (n-k-1) verir. RSS'ler bizimde hesapladığımız  SSR değerleridir.  F değeri ve F'in olasılık değerleri verilmiştir. Sonuç olarak $H_0$ hipotezini \%60'lık bir anlamlılık düzeyinde bile reddedemeyiz.
+
+## Ödev
+
+A. Aşağıdaki soruları Rmarkdown'da yapın ve rpubs sitesine yükleyin. Ödevlerinizi web sitesi linki olarak gönderin. Tekrar 4 kişilik gruplar oluşturabilirsiniz.
+
+1. Wooldridge veri setlerini araştırın ve 5 tanesinin açıklamasını yazın (sadece 3 değişkenin anlamını yazmanız yeterli).
+2. Bu 5 veri setinden birini seçin ver en az 4 bağımısz değişkenli bir model tahmin edin. Değişkenlerde logaritma kullandınız mı? Neden kullandınız, neden kullanmadınız?
+3. Modelinizin sonuçlarını açıklayın ve t testlerinden bahsedin.
+4. Her bağımsız değişken katsayısı için bir güven aralığı oluşturun ve güven aralığı grafiğini çizin.
+5. İstediğiniz katsayılar için bir kısıtlı model oluşturun ve F testi yapın. Sonuçlarınızı açıklayın.
+
+B. R markdown ile basit bir CV hazırlayın ve yayınlayın. CV'nizin linkini ödev sonucu olarak paylaşın. Telefon numaralarınızı yazmanıza gerek yok.
+
+
+
+
+ 
+ 
+ 

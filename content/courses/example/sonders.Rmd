@@ -1,0 +1,330 @@
+---
+title: "R ile Çoklu Regresyon Analizi Ödev Soruları ve Cevapları"
+author: "Dr. Hüseyin Utku Demir"
+date: 2020-12-01T21:13:14-05:00
+categories: ["R"]
+tags: ["R Markdown", "plot", "regression"]
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Ödev
+
+### Wooldridge Bölüm Soruları
+
+1. 4137 üniversite öğrencisi üzerinde GPA2'deki verileri kullanarak, en küçük kareler (OLS) tarafından aşağıdaki denklem tahmin edilmiştir:
+
+$$
+üniversite.not.ortalaması=1.392 - 0.0135 lmsyd + 0.00148sat
+$$
+
+lmsyd, öğrencilerin lise mezuniyet sınıflarındaki yüzdelik dilimi göstermektedir. Örneğin, lmsyd=5, sınıfın ilk %5'inde olduğu anlamına gelir. sat, öğrenci başarı testindeki birleştirilmiş matematik ve sözel puanlardır.
+
+a. lmsyd katsayısının negatif olması neden mantıklıdır?
+b. lmsyd = 20 ve sat = 1.050 olduğunda tahmini üniversite not ortalaması nedir?
+c. Diyelim ki iki lise mezunu, A ve B, liseden aynı yüzdelik dilimde mezun oldular.
+Ancak Öğrenci A'nın SAT puanı 140 puan daha yüksek. (aynı zamanda yaklaşık bir standart sapmaya sahip). Bu iki öğrenci için üniversite not ortalamasında tahmini fark nedir? Bu fark büyük bir fark mı?
+d. lmsyd sabit tutulduğunda, SAT puanlarındaki hangi fark, tahmini üniversite not ortalaması farkına 0,50 veya bir notun yarısı kadar farka yol açar? Cevabınıza yorum yapın.
+
+2. Aşağıdaki model, Biddle ve Hamermesh (1990) tarafından uyumak ve çalışmak için harcanan zaman arasındaki dengeyi incelemek ve uykuyu etkileyen diğer faktörleri incelemek için kullanılan çoklu regresyon modelinin basitleştirilmiş bir versiyonudur:
+
+$$
+uyku=\beta_0 + \beta_1 toplam.iş+ \beta_2 eğitim + \beta3 yaş + u
+$$
+
+uyku ve toplam iş dakikayla, eğitim ve yaş yılla hesaplanmıştır.
+
+a. Yetişkinler iş için uykuyu takas ediyorsa, $\beta_1$'in işareti nedir?
+b. $\beta_2$ ve $\beta_3$'ün hangi işaretleri olacağını düşünüyorsunuz?
+c. SLEEP75'teki verileri kullanarak, tahmin edilen denklem şu şekildedir:
+
+$$
+uyku=3,638.25 - 0.148 toplam.iş - 11.13 eğitim + 2.20 yaş
+$$
+$n=706$ ve $R^2=0.113$ 
+
+Birisi haftada beş saat daha fazla çalışırsa, uykunun kaç dakika düşeceği tahmin edilir?
+bu büyük bir takas mı?
+d.Eğitim üzerindeki tahmini katsayının üzerindeki işaretini ve büyüklüğünü tartışın.
+e.Uykudaki çeşitliliğin çoğunu toplam iş, eğitim ve yaşın açıkladığını söyleyebilir misiniz? Uyuyarak geçirilen süreyi başka hangi faktörler etkileyebilir? Bunların toplam iş ile ilişkili olması muhtemel mi?
+
+3. Üniversite not ortalamasını çeşitli etkinliklerde harcanan zamanla ilişkilendiren bir çalışma yapmak istiyorsunuz, birkaç öğrenciye bir anket dağıttınız. Öğrencilere her hafta dört aktivitede kaç saat geçirdikleri sordunuz: ders çalışmak, uyumak, bir işte çalışmak ve boş zaman. Herhangi bir aktivite dört kategoriden birine konur, böylece her öğrenci için dört aktivitedeki saatlerin toplamı 168 olmalıdır.
+
+$$
+not.ortalaması=\beta_0 + \beta_1 ders.çalışma+ \beta_2 uyumak + \beta3 iş.çalışma + \beta4 boş.zaman + u
+$$
+
+a. $\beta_1$'i yorumladığınızda çalışmayı değiştirirken uykuyu, işi ve boş zamanları sabit tutmak mantıklı mı?
+b. Bu modelin neden MLR.3 Varsayımını ihlal ettiğini açıklayın.
+c. Modeli, parametrelerinin faydalı bir yoruma sahip olması için nasıl yeniden formüle edebilirsiniz ve varsayım MLR.3'ü ihlal edilmez?
+
+### Cevaplar
+
+1. 
+
+a. lmsyd, ne kadar küçükse öğrencinin lisedeki durumu o kadar düşük olacak şekilde tanımlanır. Diğer her şey eşittir, öğrencinin lisedeki durumu ne kadar kötüyse, beklenen üniversite not ortalaması o kadar düşük olur.
+
+b. Sadece bu değerleri denkleme yerleştirin
+
+$$
+üniversite.not.ortalaması=1.392 - 0.0135 \cdot 20 + 0.00148 \cdot 1050 = 2.676
+$$
+
+c. A ve B arasındaki fark, sat katsayısının 140 katıdır, çünkü lmsyd her iki öğrenci için de aynıdır. Dolayısıyla A'nın $0.00148 \cdot (140)= 0.207$ daha yüksek bir puana sahip olduğu tahmin edilmektedir.
+
+d. lmsy sabit olduğunda, $\Delta universite.not.ortalaması = 0.00148 \cdot \Delta sat$. Bu durumda  $0.5 = 0.00148 \cdot \Delta sat$ veya $\Delta sat= \frac{0.00148}{0.5}$ olacak şekilde bulmak istiyoruz. $\Delta sat= 338$
+
+2. 
+a. Diğer herşey eşit olduğunda, yetişkinler uykuyu iş için tercih ediyorsa, daha fazla iş daha az uyku anlamına gelir, bu yüzden $\beta_1<0$ olur.
+b. $\beta_2$ ve $\beta_3$ işaretleri kişiden kişiye göre değişir. Vereceğiniz örneklere göre bu katsayıların işaretleri eksi veya artı olabilir. Bu yüzden bu çalışma için herhangi bir beklenti içinde olamayız. Kimi yaş ilerledikçe uykunun azaldığını söyler, kimi arttığını ve bunu gerekçeleriyle örneklendirebilir. Aynı durum eğitim ile ilgili olarak da tartışılabilir.
+c. Uyku ve toplam iş dakika ile ölçüldüğünden 5 saati dakikaya çevirmeniz gerekir ($5 \cdot 60= 300$). 300 dakikayı formülde yerine koyarsak $0.148 \cdot 300= 44.4$ dakika. Uyku bir hafta içinde 44.4 dakika düşer bunun çok fazla bir düşüş olduğunu söyleyemeyiz.
+d.Daha fazla eğitim, daha az tahmini uyku süresi anlamına gelir, ancak etkisi oldukça küçüktür. Üniversite ile lise arasındaki farkın dört yıl olduğunu varsayarsak, modelimiz diğer değişkenler sabit olduğunda üniversite mezunu olan kişinin lise mezunu olan bir kişiye göre haftada yaklaşık 45 dakika (11.13 \cdot 4) daha az uyuduğunu tahmin ediyor.
+e. Şaşırtıcı olmayan bir şekilde, üç açıklayıcı değişken, katılımcıların yalnızca yaklaşık \%11.3'ünü ($R^2$) açıklamaktadır. Hata terimindeki önemli bir faktör genel sağlıktır. Bir diğeri ise medeni durum ve kişinin çocuğu olup olmadığıdır. Sağlık, medeni durum ve çocukların sayısı ve yaşları genellikle toplam iş süresiyle ile ilişkilidir. 
+3.
+a. Hayır. Tanım olarak, çalışma + uyku + iş + boş zaman = 168. Bu nedenle, çalışmayı değiştirirsek, toplamın hala 168 olması için diğer kategorilerden en az birini değiştirmeliyiz.
+b. (a) kısmından, mesela iş değişkenini diğer bağımsız değişkenlerin mükemmel bir lineer fonksiyonu olarak yazabiliriz: $iş = 168 - uyku - ders - boş zaman$ Bu her gözlem için geçerlidir, dolayısıyla MLR.3 ihlal edilmiştir.
+c. Bağımsız değişkenlerden birini modelden çıkarın, mesela boş zaman değişkenini çıkarın:
+
+$$
+not.ortalaması=\beta_0 + \beta_1 ders.çalışma+ \beta_2 uyumak + \beta3 iş.çalışma + u
+$$
+
+Bu durumda, $\beta_1$ ders çalışma bir saat arttığında, uyku, iş ve $u$ sabit tutulduğu zaman not ortalamasındaki değişiklik olarak yorumlanır. Uykuyu ve çalışmayı sabit tutuyoruz, ancak ders çalışmayı bir saat artırıyorsak, boş zamanı bir saat azaltıyor olmalıyız. Diğer eğim parametreleri de benzer bir yoruma sahiptir.
+
+### Wooldridge Veri Sorusu 
+
+1. Sağlık görevlilerinin ilgilendiği sorunlardan biri, hamilelik sırasında sigara içmenin bebek sağlığı üzerindeki etkilerini belirlemektir. Bebek sağlığının bir ölçüsü doğum ağırlığıdır; çok düşük doğum ağırlığı, bebeği çeşitli hastalıklara yakalanma riskine sokabilir. Doğum ağırlığını etkileyen sigara içimi dışındaki faktörlerin sigara ile ilişkili olması muhtemel olduğundan, bu faktörleri dikkate almalıyız. Örneğin, daha yüksek gelir genellikle daha iyi doğum öncesi bakıma erişimin yanı sıra anne için daha iyi beslenme ile sonuçlanır. Bunu tanımlayan bir denklem
+
+$$
+bwght=\beta_0 + \beta_1 cigs+ \beta_2 faminc + u
+$$
+
+Wooldridge BWGHT data setini kullanın.
+
+a. Modelin değişkenlerinin ne anlama geldiğini yazın.
+b. Modeli tahmin etmeden, $\beta_2$ için en olası işaret nedir?
+c. cigs ve faminc'in ilişkili olabileceğini düşünüyor musunuz? Korelasyonun pozitif mi negatif mi olabilir?
+d. Şimdi, BWGHT'deki verileri kullanarak, faminc olan ve olmayan denklemi tahmin edin. sonuçları rapor edin. örnek boyutu ve R-kare dahil olmak üzere denklem formunda yazın. Sonuçlarınızı tartışın, faminc eklemenin cigs'in bwght üzerindeki tahmini etkisini önemli ölçüde değiştirip değiştirmediğine odaklanın.
+
+2. Bu soruyu yanıtlamak için DISCRIM verilerini kullanın. Bunlar, New Jersey ve Pennsylvania'daki fast-food restoranlarındaki çeşitli ürünlerin fiyatlarına ilişkin posta kodu düzeyinde veriler ve posta kodu popülasyonunun özellikleridir. Buradaki fikir, fast-food restoranlarının siyahların daha yoğun olduğu bölgelerde daha yüksek fiyatlar talep edip etmediğini öğrenmektir. Modelimiz
+
+$$
+psoda=\beta_0 + \beta_1 prpblck+ \beta_2 income + u
+$$
+
+a. Modelin değişkenlerinin ve prppov değişkeninin ne anlama geldiğini yazın.
+b. ortalama prpblck ve income değerlerini standart sapmalarıyla birlikte bulun. prpblck ve income ölçü birimleri nelerdir?
+c. Bu modeli OLS ile tahmin edin ve sonuçları, n ve R-kare dahil olmak üzere denklem biçiminde rapor edin. (Tahminleri raporlarken bilimsel gösterimi kullanmayın.) prpblck üzerindeki katsayıyı yorumlayın. Sizce ekonomik olarak büyük mü?
+d. Basit regresyon
+$$
+psoda=\beta_0 + \beta_1 prpblck + u
+$$
+modelini kullanarak basit regresyonu tahmin edin. Ayrımcılık etkisi income'ı kontrol ettiğiniz modele göre daha mı büyük daha mı küçük?
+e. Gelire göre sabit fiyat esnekliğine sahip bir model daha uygun olabilir. 
+$$
+log(psoda)=\beta_0 + \beta_1 prpblck+ \beta_2 log(income) + u
+$$
+
+Modelin tahmin edin ve tahminlerini raporlayın.
+Eğer prpblck .20 (20 yüzde puanı) artarsa, psoda'nın tahmini yüzde değişimi ne olur? (İpucu: Cevap 2.xx'dir, burada “xx”i doldurursunuz)
+
+f. Şimdi prppov değişkenini kısım e'deki regresyona ekleyin. $\beta_1$'e ne olur?
+g. log(income) ve prppov arasındaki ilişkiyi bulun. Kabaca beklediğiniz gibi mi?
+h. Aşağıdaki ifadeyi değerlendirin: “log(income) ve prppov çok yüksek oranda ilişkili olduğundan, aynı regresyonda olmalarına gerek yoktur.”
+
+3. Tek ebeveynli hanelerin öğrencilerin matematik performansı üzerindeki etkilerini incelemek için MEAPSINGLE'daki verileri kullanın. Bu veriler, 2000 yılı için güneydoğu Michigan'daki okulların bir alt kümesi içindir. Sosyo-ekonomik değişkenler, Posta kodu düzeyinde elde edilir (burada Posta kodu okulların posta adreslerine göre atanır).
+
+a. math4, pctsgle, lmedinc ve free değişkenlerinin ne anlama geldiklerini yazın.
+b. Math4'ün basit regresyonunu pctsgle üzerinde çalıştırın ve sonuçları normal biçimde rapor edin. Eğim katsayısını yorumlayın. Tek ebeveynliğin etkisi büyük mü yoksa küçük mü görünüyor?
+c. lmedinc ve free değişkenlerini denkleme ekleyin. pctsgle üzerindeki katsayıya ne olur? 
+d. lmedinc ve free arasındaki örnek korelasyonu bulun. Beklediğiniz işaret var mı?
+e. Imedinc ve free arasındaki önemli korelasyon varsa. Tek ebeveynliğin öğrenci performansı üzerindeki nedensel etkisini daha iyi tahmin etmek için bir tanesini regresyondan analizinden çıkarmanız gerektiği anlamına gelir mi? Açıklayın.
+f. Görünen açıklayıcı değişkenlerin her biri için varyans enflasyon faktörlerini (VIF'ler) bulun. Hangi değişken en büyük VIF'ye sahiptir? Bu bilgi, tek ebeveynliğin matematik performansı üzerindeki nedensel etkisini incelemek için kullanacağınız modeli etkiler mi?
+
+### Wooldridge Veri Soruları Cevapları
+
+1. 
+a. 
+```{r}
+library(wooldridge)
+library(rmarkdown)
+data("bwght")
+paged_table(bwght)
+help(bwght)
+```
+
+kullanacağımız değişkenlerin tanımları
+
+-faminc: 1988 family income, $1000s, 1988 aile geliri
+-cigs: cigs smked per day while preg, hamileyken içilen günlük sigara sayısı
+-bwght: birth weight, ounces, doğum ağırlığı, ons
+
+b. Bir yandan, gelirdeki bir artış genellikle gıda tüketimini arttırır ve sigara ile aile geliri arasında pozitif bir ilişki olabilir. Öte yandan, daha fazla eğitime sahip ailelerin aile gelirleri de daha yüksektir ve daha fazla eğitim ile sigara içme arasında olumsuz bir ilişki vardır. 
+c. Sigara ve faminc arasındaki örnek korelasyonu yaklaşık -0.173'tür ve negatif bir korelasyona işaret eder.
+d.
+```{r}
+ilkreg <- lm(bwght~ cigs,data = bwght)
+ikincireg<- lm(bwght~ cigs+faminc,data = bwght)
+library(stargazer)
+stargazer(list(ilkreg,ikincireg),type = "text")
+```
+
+Denklem şeklinde rapor
+
+$$
+bwght=116.974-0.463 cigs + 0.093faminc
+$$
+
+$$
+bwght=119.772-0.514 cigs
+$$
+
+Regresyona faminc eklendiğinde sigara içmenin etkisi biraz daha az ama aradaki fark çok büyük değil. Bunun nedeni, cigs ve faminc'in çok ilişkili olmaması ve faminc üzerindeki katsayının pratik olarak küçük olmasıdır. (Faminc değişkeni binlerle ölçülür, yani 1988'de 10.000\$ daha fazla gelir, öngörülen doğum ağırlığını yalnızca .93 ons artırır.)
+
+2. 
+a. 
+```{r}
+data("discrim")
+paged_table(discrim)
+help(discrim)
+```
+
+Gördüğünüz gibi veri setinde bazı değişkenler için bazı gözlemler NA değerine sahip. NA (not available) o gözlem için mevcut değil anlamına geliyor. Örneğin pfries (price of small fries, küçük kızartmanın fiyatı) değişkeninin beşinci gözlemi veri setinde bulunan beşinci restoranının küçük kızartma fiyatını bilmediğimiz anlamı taşıyor. Mevcut olmayan gözlemler analizlerde her zaman sorunlar çıkarır. Bu mevcut olmayan değişkenlerle nasıl başa çıkacağımızı yavaş yavaş öğrenmemiz gerekir.
+
+Modelin değişkenlerinin ve prppov değişkeninin anlamı.
+
+-psoda: price of medium soda, 1st wave, orta sodanın fiyatı.
+-prpblck: proportion black, zipcode, restoranın bulunduğu bölgede siyahi oranı
+-income: median family income, zipcode, restoranın bulunduğu bölgenin medyan (ortanca) aile geliri.
+-prppov: proportion in poverty, zipcode, restoranın bulunduğu bölgede yoksulluk oranı
+
+b. 
+
+```{r}
+mean(discrim$prpblck)
+sd(discrim$prpblck)
+mean(discrim$income)
+sd(discrim$income)
+```
+
+Bildiğimiz mean ve sd fonksiyonlarını kullanarak ortama ve standart sapma değerlerini bulamadık. Çıkan NA sonucu bize bu değişkenlerin içinde bazı gözlemlerin mevcut olmadığını gösteriyor olabilir. discrim veri setinde 410 gözlem olduğundan her bir gözlemi kontrol edemiyorz ve bu değişkenlerin içinde kaç tane gözlemin mevcut olmadığını çıkaramıyoruz. R bize bu konuda is.na fonksiyonu ile yardımcı oluyor. is.na aslında sorduğumuz ingilizce bir soru ve is na? derken R'a mevcut olmayan gözlem var mı diye soru soruyoruz. R'da bize her bir gözlem için o gözlemin değeri olup olmadığını TRUE (doğru) ve FALSE (yanlış) olarak geri veriyor. Örnek vermek gerekirse konsola is.na(discrim\$income) yazarsanız, R income değişkeninin her bir gözlemi için TRUE ve FALSE değerlerini yükler. TRUE o gözlemin mecut olmadığını, FALSE gözlemin olduğunu söylemektedir. Ancak tekrar aynı sorunla karşı karşıya kalırız. 410 gözlem için TRUE ve FALSE değerlerini okumamız ve FALSE olanları toplamamız kaç gözlemin var olmadığını bulmamıza yol açacaktır. sum(is.na(discrim\$income)) income değişkenin içindeki var olmayan gözlem sayısını toplayacak ve bize verecektir.
+
+```{r}
+sum(is.na(discrim$prpblck))
+sum(is.na(discrim$income))
+```
+
+
+Gördüğünüz gibi hem prbblck hem income değişkenlerinin birer gözlemi boş değere sahip. Bu yüzden mean ve sd fonksiyonlarının NA gözlemlerinine sahip olduğunu söylememiz lazım. 
+
+```{r}
+mean(discrim$prpblck,na.rm = TRUE)
+sd(discrim$prpblck,na.rm = TRUE)
+mean(discrim$income, na.rm = TRUE)
+sd(discrim$income, na.rm = TRUE)
+```
+
+fonksiyonun içine yazdığımız na.rm (na remove, çıkar) öevcut olmayan gözlemleri hesaplamadan çıkarmamızı söyler. prbblck değişkeninin ortalaması 0.11, standart sapması 0.18, income değişkeninin ortalaması 47053, standart sapması 13179 olacaktır.
+
+Diyelim ki siz bütün değişkenler için kaç tane gözlemin mevcut olmadığını, kaç tane gözlemin var olduğunu, ortalamasını ve standart sapmasını görmek istiyorsunuz. Bu durumda vtable paketi size yardımcı olacaktır. Aşağıdaki komutu kullanmak için vtable paketini yüklemeniz gerektiğini unutmayın.
+
+```{r}
+library(vtable)
+sumtable(discrim, summ=c('notNA(x)', 'countNA(x)', 'mean(x)','sd(x)'),out='return')
+```
+
+c. 
+
+```{r}
+discrimreg <- lm(psoda~prpblck+income, data = discrim)
+summary(discrimreg)
+```
+
+$$
+psoda=0.956 + 0.115 prpblck+ 0.0000016 income + u
+$$
+
+Örnek boyutu 399 gözlemdir (398 serbestlik derecesi ve 9 eksik gözlem ile gösterilir) ve ayarlanmış $R^2$ 0.595'tir. prpblck katsayısı, her şey eşit olduğunda, prpblck \%10 artarsa, soda fiyatının ekonomik olarak önemli olmayan derecede yaklaşık 1,2 sent artacağını gösterir.
+
+d. 
+
+```{r}
+basitdiscrimreg <- lm(psoda~prpblck, data = discrim)
+summary(basitdiscrimreg)
+```
+
+Basit regresyon ile prpblack üzerindeki katsayının tahmini 0.065'tir. Bu, önceki tahminden daha düşüktür ve bu nedenle, gelir hariç tutulduğunda ayrımcılık etkisinin azaldığını gösterir.
+
+e. 
+
+```{r}
+logdiscrimreg <- lm(log(psoda)~prpblck+log(income), data = discrim)
+summary(logdiscrimreg)
+```
+
+
+```{r}
+paste( (0.2*100)*0.122, "yüzdelik artış")
+```
+
+"Prpblck" yüzde 20 artarsa, psoda tahmini olarak %2,44 artacaktır.
+
+f.
+
+```{r}
+logdiscrimregprpov <- lm(log(psoda)~prpblck+log(income)+prppov, data = discrim)
+summary(logdiscrimregprpov)
+```
+
+prppov eklemek, prpblck katsayısının 0,0738'e düşmesine neden olur.
+
+g.
+```{r}
+cor(log(discrim$income), discrim$prppov, use = "complete.obs")
+```
+
+Korelasyon yaklaşık olarak -0.838'dir. Bu mantıklı, çünkü gelirdeki düşüşlerin daha yüksek yoksulluk oranlarıyla sonuçlanması beklenebilir.
+
+h. Yüksek düzeyde ilişkili olmalarına rağmen, her ikisinin de dahil edilmesi mükemmel bir doğrusallık ile sonuçlanmaz ve bunun yerine, ayırt edici etkiyi izole etmeye yardımcı olan başka bir kontrol değişkeni ekleyerek modeli tamamlar.
+
+3.
+a.
+```{r}
+data("meapsingle")
+paged_table(meapsingle)
+help(meapsingle)
+```
+math4, pctsgle, lmedinc ve free değişkenlerinin ne anlama geldikleri
+
+-math4: percent satisfactory, 4th grade math, matematik başarı yüzdesi
+-pctsgle: percent of children not in married-couple families, evli-çift ailelerde olmayan çocukların yüzdesi
+-lmedinc: log(medinc), medinc: zipcode median family, \$ (1999), bölgenin ortanca geliri
+-free: percent eligible, free lunch, bedava öğle yemeğine uygun görülen yüzdesi
+
+b.
+
+```{r}
+basitreg3<- lm(math4~pctsgle, data = meapsingle)
+summary(basitreg3)
+```
+
+c.
+
+```{r}
+coklureg3<- lm(math4~pctsgle+lmedinc+free, data = meapsingle)
+summary(coklureg3)
+```
+
+d.
+
+```{r}
+cor(meapsingle$free,meapsingle$lmedinc)
+```
+
+e.
+```{r}
+library(car)
+vif(coklureg3)
+```
