@@ -1,5 +1,5 @@
 ---
-title: "Zaman Serileri Tahmini ve Quantmod Paketi"
+title: "Zaman Serileri ve Quantmod Paketi"
 author: "Dr. Hüseyin Utku Demir"
 date: 2020-12-01T21:13:14-05:00
 categories: ["R"]

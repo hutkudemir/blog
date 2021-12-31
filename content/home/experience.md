@@ -52,10 +52,9 @@ experience:
         Lisans ve Yüksek Lisans Dersleri:
         * International Finance
         * Macroeconomics
-        * International Finance
+        * International Macroeconomics
         * Microeconomics
         * Money and Banking
-        * Macroeconomics
 
   - title: Adjunct Professor
     company: City College of New York
