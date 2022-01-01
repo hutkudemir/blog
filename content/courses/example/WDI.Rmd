@@ -1,0 +1,138 @@
+---
+title: "WDI datası ve grafikleri"
+author: "Dr. Hüseyin Utku Demir"
+date: 2020-12-01T21:13:14-05:00
+categories: ["R"]
+tags: ["R Markdown", "plot", "regression"]
+type: book
+weight: 100
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+WDI https://datatopics.worldbank.org/world-development-indicators/ websitesinden ulaşabileceğiniz, Dünya bankasına ait, ve onların yaptığı tanıma göre "Dünya Kalkınma Göstergeleri, WDI, küresel kalkınma ve yoksullukla mücadele hakkında, yüksek kaliteli ve uluslararası düzeyde karşılaştırılabilir istatistiklerin bir derlemesidir. Veritabanı, 217 ekonomi ve 40'tan fazla ülke grubu için 1400 zaman serisi göstergesi içerir ve birçok göstergeye ilişkin veriler 50 yıldan daha eskiye dayanmaktadır."
+
+## WDI datası
+
+https://data.worldbank.org/ websitesine girdiğinizde, verileri country (ülke) ve indicator (gösterge) olarak gözlemleyebilirsiniz. "Browse by Country or Indicator" seçeneklerinden, indicator'a girerseniz, birçok başlıkta birçok zaman serisine ulaşabilirsiniz. İlk başlık "Agriculture and Rural Development" (Tarım ve Kırsal Kalkınma) "Aid Effectiveness" (Yardım Etkinliği), üçüncü başlık "Climate Change" (İklim Değişikliği) şeklinde toplam 20 başlık altında, 1400 zaman serisiyle istediğiniz bir ülke için elde edebileceğiniz her çeşit veriye ulaşabilirsiniz.
+
+Bu veri setine R'dan ulaşabilmek için WDI paketini yüklemelisiniz. Sağ alt köşede bulunan Packages sekmesinden WDI paketini yükledikten sonra, library yapmalısınız.
+
+```{r}
+library(WDI)
+```
+
+İstediğiniz veri setinin anahtar kelimesine nasıl ulaşabilirsiniz. Diyelim ki göstergeleri okuduğunuz, indicator seçeneğine tıkladınız ve https://data.worldbank.org/indicator sayfasına ulaştınız. Ülkelerin, CO2 emissions  (metric tons per capita), karbondioksit emisyonları (kişi başına metrik ton) verilerini merak ediyorsunuz. Bu yüzden Environment (Çevre) başlığı altında bu veri setine tıkladınız ve şu sayfa açıldı.
+
+https://data.worldbank.org/indicator/EN.ATM.CO2E.PC?view=chart
+
+web sayfasının ortasında bulunan EN.ATM.CO2E.PC bu veri setinin anahtar kelimesidir. Siz Meksika, Türkiye ve US'in bu konu hakkındaki verilerini 1960'dan 2018'e kadar indirmek istiyorsunuz. Bu veri setini R'a df olarak kaydedelim.
+
+```{r}
+df = WDI(indicator='EN.ATM.CO2E.PC', country=c('MX','TR','US'), start=1960, end=2018)
+```
+
+Bu veri setini gözlemleyelim.
+
+```{r}
+head(df)
+```
+
+Veriye verilen isimler ingilizce ve çok uzun, df veri setinde bulunan değişkenlere yeniden isim vermek isterseniz, rename foksiyonu sütünlara göre şu şekilde kullanabilirsiniz. 
+
+
+```{r}
+library(dplyr)
+df <- df %>%
+  rename(ulkekodu = 1,
+         ulke = 2,
+         karbondioksit = 3,
+         sene = 4)
+```
+
+Veri seti alt alta dizilmiş şekilde verilmektedir. En üste Meksika, ortada Türkiye en altta US bulunmakta. Bu veri setini yan yana görmel istersek şu fonksiyonu kullanmalıyız. 
+
+Veriyi, ülkelere göre geniş şekilde gözlemlemek istiyoruz.
+
+```{r}
+library(reshape2)
+data_genis <- dcast(df, sene ~ ulke, value.var="karbondioksit")
+```
+
+```{r}
+head(data_genis)
+```
+
+Veri setinde bulunan bütün ülkelerin 2010 ve 2020 arası GSYH'larını indirmek isterseniz aşağıdaki kodu kullanabilirsiniz.
+
+```{r}
+df2 <- WDI(
+  country = "all",
+  indicator = "NY.GDP.PCAP.KD",
+  start = 2010,
+  end = 2020,
+  extra = TRUE,
+  cache = NULL,
+  latest = NULL,
+  language = "tr"
+)
+```
+
+bütün opsiyonlar isteğe bağlıdır. indicator seçeneğinden sonraki hiçbir opsiyonu yazmasanızda olur. start ve end seçeneklerini yazmasaydınız, verileri 1960'dan günümüze kadar yüklerdiniz. extra, seçeneği size ülkelerin enlem ve boylamlarını verir ve R'da harita çizmek isterseniz işinize yarar. language, seçeneği ülkelerin türkçe adlarını vermek için kullanılabilir. Ama türkçe seçeneği, anlaşılabileceği üzere tam olarak çalışmamaktadır. View(df2) ile veri setini açarsanız, country sütünunda türkçe isimler gözlemlersiniz.
+
+Anahtar kelime aramasını direk, R üzerinden de yapabilirsiniz. Diyelim ki elektrik ile ilgili bir veri arıyorsunuz.
+
+```{r}
+WDIsearch("electricity") 
+```
+
+Size elektirik ile ilgili bütün anahtar kelimeleri verecektir. Google translate yardımıyla istediğiniz veriye ulaşabilirsiniz.
+
+
+Biz data_genis veri setimizi, bir zaman serisine çevirelim. R'da bu tür zaman serilerine, ts denilir.
+
+```{r}
+tsveri <- ts(data_genis, start=1960, frequency=1)
+```
+
+tsveri, artık bir zaman serisi.
+
+
+```{r}
+head(tsveri)
+```
+
+frequency, seçeneği aylık verilerde 12, çeyreklik verilerde 4, haftalık verilerde 52 olarak girilir. Türkiye'nin verisini, zaman serisi grafiği olarak çizmek istersek.
+
+karbondioksit emisyonları (kişi başına metrik ton)
+
+```{r}
+library(ggplot2)
+library(ggfortify)
+autoplot(tsveri[,"Turkey"]) +
+  ggtitle("Türkiye'nin kişi başına metrik ton olarak karndioksit emisyonu") +
+  xlab("Sene") +
+  ylab("")
+```
+
+ggtitle, xlab ve ylab seçenekleri sadece grafiğinize isimler vermek için kullanılır. autoplot fonksiyonunuza renk katmak isterseniz, aşağıdaki seçenekleri uygulayabilirsiniz.
+
+```{r}
+autoplot(tsveri[,"Turkey"], ts.colour = 'red', ts.linetype = 'dashed')
+```
+En basit grafik ise plot fonksiyonuyla çizilebilir. Zaten ts objesine sahip olduğumuz için, sene değişkenini eklememize gerek yoktur. tsveri, veri setinin içinden, Mexico sütünunu yazmak isterseniz, kapalı parantezin içine virgülden sonra sütunun ismi yazılabilir, ya da rakamı yazılabilir. Virgülden önceki kısım, satırları belirtir. Virgülden sonraki kısım sütunları belirtir.
+
+```{r}
+plot(tsveri[,"Turkey"])
+```
+Eğer, bütün yılları gözlemlemek istersek, vigülden önceye birşey yazmamıza gerek yoktur. Türkiye, Meksikanın ve US'in verileri, ikinci, üçüncü ve dördüncü sütundadır. 2'den 4'cü sütuna kadar olan verileri grafiklemek istersek şu şekilde yazabiliriz.
+
+
+```{r}
+plot(tsveri[,2:4])
+```
+
+
+

@@ -1,0 +1,258 @@
+---
+title: "WDI datası ve grafikleri"
+author: "Dr. Hüseyin Utku Demir"
+date: 2020-12-01T21:13:14-05:00
+categories: ["R"]
+tags: ["R Markdown", "plot", "regression"]
+type: book
+weight: 100
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+
+
+<p>WDI <a href="https://datatopics.worldbank.org/world-development-indicators/" class="uri">https://datatopics.worldbank.org/world-development-indicators/</a> websitesinden ulaşabileceğiniz, Dünya bankasına ait, ve onların yaptığı tanıma göre “Dünya Kalkınma Göstergeleri, WDI, küresel kalkınma ve yoksullukla mücadele hakkında, yüksek kaliteli ve uluslararası düzeyde karşılaştırılabilir istatistiklerin bir derlemesidir. Veritabanı, 217 ekonomi ve 40’tan fazla ülke grubu için 1400 zaman serisi göstergesi içerir ve birçok göstergeye ilişkin veriler 50 yıldan daha eskiye dayanmaktadır.”</p>
+<div id="wdi-datası" class="section level2">
+<h2>WDI datası</h2>
+<p><a href="https://data.worldbank.org/" class="uri">https://data.worldbank.org/</a> websitesine girdiğinizde, verileri country (ülke) ve indicator (gösterge) olarak gözlemleyebilirsiniz. “Browse by Country or Indicator” seçeneklerinden, indicator’a girerseniz, birçok başlıkta birçok zaman serisine ulaşabilirsiniz. İlk başlık “Agriculture and Rural Development” (Tarım ve Kırsal Kalkınma) “Aid Effectiveness” (Yardım Etkinliği), üçüncü başlık “Climate Change” (İklim Değişikliği) şeklinde toplam 20 başlık altında, 1400 zaman serisiyle istediğiniz bir ülke için elde edebileceğiniz her çeşit veriye ulaşabilirsiniz.</p>
+<p>Bu veri setine R’dan ulaşabilmek için WDI paketini yüklemelisiniz. Sağ alt köşede bulunan Packages sekmesinden WDI paketini yükledikten sonra, library yapmalısınız.</p>
+<pre class="r"><code>library(WDI)</code></pre>
+<p>İstediğiniz veri setinin anahtar kelimesine nasıl ulaşabilirsiniz. Diyelim ki göstergeleri okuduğunuz, indicator seçeneğine tıkladınız ve <a href="https://data.worldbank.org/indicator" class="uri">https://data.worldbank.org/indicator</a> sayfasına ulaştınız. Ülkelerin, CO2 emissions (metric tons per capita), karbondioksit emisyonları (kişi başına metrik ton) verilerini merak ediyorsunuz. Bu yüzden Environment (Çevre) başlığı altında bu veri setine tıkladınız ve şu sayfa açıldı.</p>
+<p><a href="https://data.worldbank.org/indicator/EN.ATM.CO2E.PC?view=chart" class="uri">https://data.worldbank.org/indicator/EN.ATM.CO2E.PC?view=chart</a></p>
+<p>web sayfasının ortasında bulunan EN.ATM.CO2E.PC bu veri setinin anahtar kelimesidir. Siz Meksika, Türkiye ve US’in bu konu hakkındaki verilerini 1960’dan 2018’e kadar indirmek istiyorsunuz. Bu veri setini R’a df olarak kaydedelim.</p>
+<pre class="r"><code>df = WDI(indicator=&#39;EN.ATM.CO2E.PC&#39;, country=c(&#39;MX&#39;,&#39;TR&#39;,&#39;US&#39;), start=1960, end=2018)</code></pre>
+<p>Bu veri setini gözlemleyelim.</p>
+<pre class="r"><code>head(df)</code></pre>
+<pre><code>##   iso2c country EN.ATM.CO2E.PC year
+## 1    MX  Mexico       3.741478 2018
+## 2    MX  Mexico       3.781216 2017
+## 3    MX  Mexico       3.885809 2016
+## 4    MX  Mexico       3.878195 2015
+## 5    MX  Mexico       3.808063 2014
+## 6    MX  Mexico       3.954147 2013</code></pre>
+<p>Veriye verilen isimler ingilizce ve çok uzun, df veri setinde bulunan değişkenlere yeniden isim vermek isterseniz, rename foksiyonu sütünlara göre şu şekilde kullanabilirsiniz.</p>
+<pre class="r"><code>library(dplyr)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<pre class="r"><code>df &lt;- df %&gt;%
+  rename(ulkekodu = 1,
+         ulke = 2,
+         karbondioksit = 3,
+         sene = 4)</code></pre>
+<p>Veri seti alt alta dizilmiş şekilde verilmektedir. En üste Meksika, ortada Türkiye en altta US bulunmakta. Bu veri setini yan yana görmel istersek şu fonksiyonu kullanmalıyız.</p>
+<p>Veriyi, ülkelere göre geniş şekilde gözlemlemek istiyoruz.</p>
+<pre class="r"><code>library(reshape2)
+data_genis &lt;- dcast(df, sene ~ ulke, value.var=&quot;karbondioksit&quot;)</code></pre>
+<pre class="r"><code>head(data_genis)</code></pre>
+<pre><code>##   sene   Mexico    Turkey United States
+## 1 1960 1.670990 0.6122715      15.99978
+## 2 1961 1.675962 0.6168793      15.68126
+## 3 1962 1.587485 0.7502431      16.01394
+## 4 1963 1.600528 0.7676379      16.48276
+## 5 1964 1.736658 0.8707899      16.96812
+## 6 1965 1.705355 0.8842807      17.45173</code></pre>
+<p>Veri setinde bulunan bütün ülkelerin 2010 ve 2020 arası GSYH’larını indirmek isterseniz aşağıdaki kodu kullanabilirsiniz.</p>
+<pre class="r"><code>df2 &lt;- WDI(
+  country = &quot;all&quot;,
+  indicator = &quot;NY.GDP.PCAP.KD&quot;,
+  start = 2010,
+  end = 2020,
+  extra = TRUE,
+  cache = NULL,
+  latest = NULL,
+  language = &quot;tr&quot;
+)</code></pre>
+<pre><code>## Warning in WDI(country = &quot;all&quot;, indicator = &quot;NY.GDP.PCAP.KD&quot;, start = 2010, :
+## This language is only supported partially.</code></pre>
+<p>bütün opsiyonlar isteğe bağlıdır. indicator seçeneğinden sonraki hiçbir opsiyonu yazmasanızda olur. start ve end seçeneklerini yazmasaydınız, verileri 1960’dan günümüze kadar yüklerdiniz. extra, seçeneği size ülkelerin enlem ve boylamlarını verir ve R’da harita çizmek isterseniz işinize yarar. language, seçeneği ülkelerin türkçe adlarını vermek için kullanılabilir. Ama türkçe seçeneği, anlaşılabileceği üzere tam olarak çalışmamaktadır. View(df2) ile veri setini açarsanız, country sütünunda türkçe isimler gözlemlersiniz.</p>
+<p>Anahtar kelime aramasını direk, R üzerinden de yapabilirsiniz. Diyelim ki elektrik ile ilgili bir veri arıyorsunuz.</p>
+<pre class="r"><code>WDIsearch(&quot;electricity&quot;) </code></pre>
+<pre><code>##       indicator                        
+##  [1,] &quot;1.1_ACCESS.ELECTRICITY.TOT&quot;     
+##  [2,] &quot;1.2_ACCESS.ELECTRICITY.RURAL&quot;   
+##  [3,] &quot;1.3_ACCESS.ELECTRICITY.URBAN&quot;   
+##  [4,] &quot;2.0.cov.Ele&quot;                    
+##  [5,] &quot;2.0.hoi.Ele&quot;                    
+##  [6,] &quot;4.1.1_TOTAL.ELECTRICITY.OUTPUT&quot; 
+##  [7,] &quot;4.1.2_REN.ELECTRICITY.OUTPUT&quot;   
+##  [8,] &quot;4.1_SHARE.RE.IN.ELECTRICITY&quot;    
+##  [9,] &quot;9060000&quot;                        
+## [10,] &quot;EG.ELC.ACCS.RU.ZS&quot;              
+## [11,] &quot;EG.ELC.ACCS.UR.ZS&quot;              
+## [12,] &quot;EG.ELC.ACCS.ZS&quot;                 
+## [13,] &quot;EG.ELC.COAL.KH&quot;                 
+## [14,] &quot;EG.ELC.COAL.ZS&quot;                 
+## [15,] &quot;EG.ELC.FOSL.ZS&quot;                 
+## [16,] &quot;EG.ELC.HYRO.KH&quot;                 
+## [17,] &quot;EG.ELC.HYRO.ZS&quot;                 
+## [18,] &quot;EG.ELC.NGAS.KH&quot;                 
+## [19,] &quot;EG.ELC.NGAS.ZS&quot;                 
+## [20,] &quot;EG.ELC.NUCL.KH&quot;                 
+## [21,] &quot;EG.ELC.NUCL.ZS&quot;                 
+## [22,] &quot;EG.ELC.PETR.KH&quot;                 
+## [23,] &quot;EG.ELC.PETR.ZS&quot;                 
+## [24,] &quot;EG.ELC.PROD.KH&quot;                 
+## [25,] &quot;EG.ELC.RNEW.KH&quot;                 
+## [26,] &quot;EG.ELC.RNEW.ZS&quot;                 
+## [27,] &quot;EG.ELC.RNWX.KH&quot;                 
+## [28,] &quot;EG.ELC.RNWX.ZS&quot;                 
+## [29,] &quot;EN.CO2.ETOT.MT&quot;                 
+## [30,] &quot;EN.CO2.ETOT.ZS&quot;                 
+## [31,] &quot;EN.PRD.ELEC&quot;                    
+## [32,] &quot;EN.PRD.ELEC.POP.ZS&quot;             
+## [33,] &quot;HOU.ELC.ACSN.ZS&quot;                
+## [34,] &quot;IC.CNS.ELEC.ZS&quot;                 
+## [35,] &quot;IC.ELC.ACES.DFRN.DB1015&quot;        
+## [36,] &quot;IC.ELC.ACES.DFRN.DB1619&quot;        
+## [37,] &quot;IC.ELC.ACES.RK DB19&quot;            
+## [38,] &quot;IC.ELC.ACS.COST&quot;                
+## [39,] &quot;IC.ELC.ACS.COST.DFRN&quot;           
+## [40,] &quot;IC.ELC.COMM.TRFF.CG.01.DB1619&quot;  
+## [41,] &quot;IC.ELC.GEN.ZS&quot;                  
+## [42,] &quot;IC.ELC.LMTG.OUTG.01.DB1619&quot;     
+## [43,] &quot;IC.ELC.MONT.OUTG.01.DB1619&quot;     
+## [44,] &quot;IC.ELC.OUTG.FREQ.DURS.03.DB1619&quot;
+## [45,] &quot;IC.ELC.OUTG.MN.DB1619&quot;          
+## [46,] &quot;IC.ELC.PRI.KH.DB1619&quot;           
+## [47,] &quot;IC.ELC.PROC.NO&quot;                 
+## [48,] &quot;IC.ELC.PROC.NO.DFRN&quot;            
+## [49,] &quot;IC.ELC.REGU.MONT.01.DB1619&quot;     
+## [50,] &quot;IC.ELC.RSTOR.01.DB1619&quot;         
+## [51,] &quot;IC.ELC.RSTT.XD.08.DB1619&quot;       
+## [52,] &quot;IC.ELC.RSTT.XD.08.DFRN.DB1619&quot;  
+## [53,] &quot;IC.ELC.SAID.XD.DB1619&quot;          
+## [54,] &quot;IC.ELC.SAIF.XD.DB1619&quot;          
+## [55,] &quot;IC.ELC.TIME&quot;                    
+## [56,] &quot;IC.ELC.TIME.DFRN&quot;               
+## [57,] &quot;IC.ELEC.COST.PC.ZS&quot;             
+## [58,] &quot;IC.ELEC.PROC&quot;                   
+## [59,] &quot;IC.ELEC.TIME&quot;                   
+## [60,] &quot;IC.ELEC.XQ&quot;                     
+## [61,] &quot;IC.FRM.ELEC.ZS&quot;                 
+## [62,] &quot;IC.FRM.INFRA.IN10_C&quot;            
+## [63,] &quot;IC.FRM.INFRA.IN12&quot;              
+## [64,] &quot;IC.FRM.OBS.OBST8&quot;               
+## [65,] &quot;IN.ENRGY.ELEC.GEN&quot;              
+## [66,] &quot;NA.GDP.ELEC.GAS.SNA08.CR&quot;       
+## [67,] &quot;NA.GDP.ELEC.GAS.SNA08.KR&quot;       
+## [68,] &quot;NV.IND.GELW.CD&quot;                 
+## [69,] &quot;NV.IND.GELW.CN&quot;                 
+## [70,] &quot;NV.IND.GELW.KN&quot;                 
+## [71,] &quot;SG.COK.ELEC.ZS&quot;                 
+## [72,] &quot;SI.POV.ELEC.MI&quot;                 
+## [73,] &quot;SL.EMP.ELC&quot;                     
+## [74,] &quot;UIS.SCHBSP.1.PU.WELEC&quot;          
+## [75,] &quot;UIS.SCHBSP.2.PU.WELEC&quot;          
+##       name                                                                                                             
+##  [1,] &quot;Access to electricity (% of total population)&quot;                                                                  
+##  [2,] &quot;Access to electricity (% of rural population)&quot;                                                                  
+##  [3,] &quot;Access to electricity (% of urban population)&quot;                                                                  
+##  [4,] &quot;Coverage: Electricity&quot;                                                                                          
+##  [5,] &quot;HOI: Electricity&quot;                                                                                               
+##  [6,] &quot;Total electricity output (GWh)&quot;                                                                                 
+##  [7,] &quot;Renewable energy electricity output (GWh)&quot;                                                                      
+##  [8,] &quot;Renewable electricity (% in total electricity output)&quot;                                                          
+##  [9,] &quot;9060000:ACTUAL HOUSING, WATER, ELECTRICITY, GAS AND OTHER FUELS&quot;                                                
+## [10,] &quot;Access to electricity, rural (% of rural population)&quot;                                                           
+## [11,] &quot;Access to electricity, urban (% of urban population)&quot;                                                           
+## [12,] &quot;Access to electricity (% of population)&quot;                                                                        
+## [13,] &quot;Electricity production from coal sources (kWh)&quot;                                                                 
+## [14,] &quot;Electricity production from coal sources (% of total)&quot;                                                          
+## [15,] &quot;Electricity production from oil, gas and coal sources (% of total)&quot;                                             
+## [16,] &quot;Electricity production from hydroelectric sources (kWh)&quot;                                                        
+## [17,] &quot;Electricity production from hydroelectric sources (% of total)&quot;                                                 
+## [18,] &quot;Electricity production from natural gas sources (kWh)&quot;                                                          
+## [19,] &quot;Electricity production from natural gas sources (% of total)&quot;                                                   
+## [20,] &quot;Electricity production from nuclear sources (kWh)&quot;                                                              
+## [21,] &quot;Electricity production from nuclear sources (% of total)&quot;                                                       
+## [22,] &quot;Electricity production from oil sources (kWh)&quot;                                                                  
+## [23,] &quot;Electricity production from oil sources (% of total)&quot;                                                           
+## [24,] &quot;Electricity production (kWh)&quot;                                                                                   
+## [25,] &quot;Electricity production from renewable sources (kWh)&quot;                                                            
+## [26,] &quot;Renewable electricity output (% of total electricity output)&quot;                                                   
+## [27,] &quot;Electricity production from renewable sources, excluding hydroelectric (kWh)&quot;                                   
+## [28,] &quot;Electricity production from renewable sources, excluding hydroelectric (% of total)&quot;                            
+## [29,] &quot;CO2 emissions from electricity and heat production, total (million metric tons)&quot;                                
+## [30,] &quot;CO2 emissions from electricity and heat production, total (% of total fuel combustion)&quot;                         
+## [31,] &quot;Electricity production (million kwh)&quot;                                                                           
+## [32,] &quot;Electricity production (kwh per capita)&quot;                                                                        
+## [33,] &quot;Household Access to Electricity: Total (in % of total household)&quot;                                               
+## [34,] &quot;Electricity (% of managers surveyed ranking this as a major constraint)&quot;                                        
+## [35,] &quot;Getting electricity (DB10-15 methodology) - Score&quot;                                                              
+## [36,] &quot;Getting electricity (DB16-20 methodology) - Score&quot;                                                              
+## [37,] &quot;Rank: Getting electricity (1=most business-friendly regulations)&quot;                                               
+## [38,] &quot;Getting electricity: Cost to get electricity (% of income per capita)&quot;                                          
+## [39,] &quot;Getting electricity: Cost to get electricity (% of income per capita) - Score&quot;                                  
+## [40,] &quot;Getting electricity: Communication of tariffs and tariff changes (0-1) (DB16-20 methodology)&quot;                   
+## [41,] &quot;Electricity from Generator (%)&quot;                                                                                 
+## [42,] &quot;Getting electricity: Financial deterrents aimed at limiting outages (0-1) (DB16-20 methodology)&quot;                
+## [43,] &quot;Getting electricity: Mechanisms for monitoring outages (0-1) (DB16-20 methodology)&quot;                             
+## [44,] &quot;Getting electricity: Total duration and frequency of outages per customer a year (0-3) (DB16-20 methodology)&quot;   
+## [45,] &quot;Getting electricity: Minimum outage time (in minutes)  (DB16-20 methodology)&quot;                                   
+## [46,] &quot;Getting electricity: Price of electricity (US cents per kWh) (DB16-20 methodology)&quot;                             
+## [47,] &quot;Getting electricity: Procedures (number)&quot;                                                                       
+## [48,] &quot;Getting electricity: Procedures (number) - Score&quot;                                                               
+## [49,] &quot;Getting electricity: Regulatory monitoring (0-1) (DB16-20 methodology)&quot;                                         
+## [50,] &quot;Getting electricity: Mechanisms for restoring service (0-1) (DB16-20 methodology)&quot;                              
+## [51,] &quot;Getting electricity: Reliability of supply and transparency of tariff index (0-8) (DB16-20 methodology)&quot;        
+## [52,] &quot;Getting electricity: Reliability of supply and transparency of tariff index (0-8) (DB16-20 methodology) - Score&quot;
+## [53,] &quot;Getting electricity: System average interruption duration index (SAIDI) (DB16-20 methodology)&quot;                  
+## [54,] &quot;Getting electricity: System average interruption frequency index (SAIFI) (DB16-20 methodology)&quot;                 
+## [55,] &quot;Time required to get electricity (days)&quot;                                                                        
+## [56,] &quot;Getting electricity: Time (days) - Score&quot;                                                                       
+## [57,] &quot;Cost to get electricity connection (% of income per capita)&quot;                                                    
+## [58,] &quot;Procedures required to get electricity (number)&quot;                                                                
+## [59,] &quot;Time required to get electricity (days)&quot;                                                                        
+## [60,] &quot;Getting electricity (rank)&quot;                                                                                     
+## [61,] &quot;Electricity (% of firms identifying this as a major constraint)&quot;                                                
+## [62,] &quot;If a generator is used, average proportion of electricity from a generator (%)&quot;                                 
+## [63,] &quot;Percent of firms identifying electricity as a major constraint&quot;                                                 
+## [64,] &quot;Percent of firms choosing electricity as their biggest obstacle&quot;                                                
+## [65,] &quot;Total-Electricity Generated Gross (GWh)&quot;                                                                        
+## [66,] &quot;GDP on Electricity &amp; Gas Supply Sector (in IDR Million), SNA 2008, Current Price&quot;                               
+## [67,] &quot;GDP on Electricity &amp; Gas Supply Sector (in IDR Million), SNA 2008, Constant Price&quot;                              
+## [68,] &quot;Electricity, gas and water supply, value added (current US$)&quot;                                                   
+## [69,] &quot;Electricity, gas and water supply, value added (current LCU)&quot;                                                   
+## [70,] &quot;Electricity, gas and water supply, value added (constant LCU)&quot;                                                  
+## [71,] &quot;Main cooking fuel: electricity  (% of households)&quot;                                                              
+## [72,] &quot;Multidimensional poverty, Electricity (% of population deprived)&quot;                                               
+## [73,] &quot;Number of people employed in electricity and utilities sector&quot;                                                  
+## [74,] &quot;Proportion of public primary schools with access to electricity (%)&quot;                                            
+## [75,] &quot;Proportion of public lower secondary schools with access to electricity (%)&quot;</code></pre>
+<p>Size elektirik ile ilgili bütün anahtar kelimeleri verecektir. Google translate yardımıyla istediğiniz veriye ulaşabilirsiniz.</p>
+<p>Biz data_genis veri setimizi, bir zaman serisine çevirelim. R’da bu tür zaman serilerine, ts denilir.</p>
+<pre class="r"><code>tsveri &lt;- ts(data_genis, start=1960, frequency=1)</code></pre>
+<p>tsveri, artık bir zaman serisi.</p>
+<pre class="r"><code>head(tsveri)</code></pre>
+<pre><code>##      sene   Mexico    Turkey United States
+## [1,] 1960 1.670990 0.6122715      15.99978
+## [2,] 1961 1.675962 0.6168793      15.68126
+## [3,] 1962 1.587485 0.7502431      16.01394
+## [4,] 1963 1.600528 0.7676379      16.48276
+## [5,] 1964 1.736658 0.8707899      16.96812
+## [6,] 1965 1.705355 0.8842807      17.45173</code></pre>
+<p>frequency, seçeneği aylık verilerde 12, çeyreklik verilerde 4, haftalık verilerde 52 olarak girilir. Türkiye’nin verisini, zaman serisi grafiği olarak çizmek istersek.</p>
+<p>karbondioksit emisyonları (kişi başına metrik ton)</p>
+<pre class="r"><code>library(ggplot2)
+library(ggfortify)
+autoplot(tsveri[,&quot;Turkey&quot;]) +
+  ggtitle(&quot;Türkiye&#39;nin kişi başına metrik ton olarak karndioksit emisyonu&quot;) +
+  xlab(&quot;Sene&quot;) +
+  ylab(&quot;&quot;)</code></pre>
+<p><img src="/courses/example/WDI_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>ggtitle, xlab ve ylab seçenekleri sadece grafiğinize isimler vermek için kullanılır. autoplot fonksiyonunuza renk katmak isterseniz, aşağıdaki seçenekleri uygulayabilirsiniz.</p>
+<pre class="r"><code>autoplot(tsveri[,&quot;Turkey&quot;], ts.colour = &#39;red&#39;, ts.linetype = &#39;dashed&#39;)</code></pre>
+<p><img src="/courses/example/WDI_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+En basit grafik ise plot fonksiyonuyla çizilebilir. Zaten ts objesine sahip olduğumuz için, sene değişkenini eklememize gerek yoktur. tsveri, veri setinin içinden, Mexico sütünunu yazmak isterseniz, kapalı parantezin içine virgülden sonra sütunun ismi yazılabilir, ya da rakamı yazılabilir. Virgülden önceki kısım, satırları belirtir. Virgülden sonraki kısım sütunları belirtir.</p>
+<pre class="r"><code>plot(tsveri[,&quot;Turkey&quot;])</code></pre>
+<p><img src="/courses/example/WDI_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+Eğer, bütün yılları gözlemlemek istersek, vigülden önceye birşey yazmamıza gerek yoktur. Türkiye, Meksikanın ve US’in verileri, ikinci, üçüncü ve dördüncü sütundadır. 2’den 4’cü sütuna kadar olan verileri grafiklemek istersek şu şekilde yazabiliriz.</p>
+<pre class="r"><code>plot(tsveri[,2:4])</code></pre>
+<p><img src="/courses/example/WDI_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+</div>
