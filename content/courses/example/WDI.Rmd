@@ -43,7 +43,7 @@ head(df)
 Veriye verilen isimler ingilizce ve çok uzun, df veri setinde bulunan değişkenlere yeniden isim vermek isterseniz, rename foksiyonu sütünlara göre şu şekilde kullanabilirsiniz. 
 
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 library(dplyr)
 df <- df %>%
   rename(ulkekodu = 1,
@@ -51,6 +51,8 @@ df <- df %>%
          karbondioksit = 3,
          sene = 4)
 ```
+
+rename fonksiyonuyla, değiştirmek istediğiniz değişkenlerin isimlerini, sütünlarına göre yazabilirsiniz. Örneğin, country ikinci sütünda olduğu için, ikinci sütünun ismini ulke yapmak isterseniz, ulke = 2 yazabilirsiniz.
 
 Veri seti alt alta dizilmiş şekilde verilmektedir. En üste Meksika, ortada Türkiye en altta US bulunmakta. Bu veri setini yan yana görmel istersek şu fonksiyonu kullanmalıyız. 
 
@@ -67,7 +69,7 @@ head(data_genis)
 
 Veri setinde bulunan bütün ülkelerin 2010 ve 2020 arası GSYH'larını indirmek isterseniz aşağıdaki kodu kullanabilirsiniz.
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 df2 <- WDI(
   country = "all",
   indicator = "NY.GDP.PCAP.KD",

@@ -31,20 +31,13 @@ weight: 100
 ## 5    MX  Mexico       3.808063 2014
 ## 6    MX  Mexico       3.954147 2013</code></pre>
 <p>Veriye verilen isimler ingilizce ve çok uzun, df veri setinde bulunan değişkenlere yeniden isim vermek isterseniz, rename foksiyonu sütünlara göre şu şekilde kullanabilirsiniz.</p>
-<pre class="r"><code>library(dplyr)</code></pre>
-<pre><code>## 
-## Attaching package: &#39;dplyr&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:stats&#39;:
-## 
-##     filter, lag</code></pre>
-<pre><code>## The following objects are masked from &#39;package:base&#39;:
-## 
-##     intersect, setdiff, setequal, union</code></pre>
-<pre class="r"><code>df &lt;- df %&gt;%
+<pre class="r"><code>library(dplyr)
+df &lt;- df %&gt;%
   rename(ulkekodu = 1,
          ulke = 2,
          karbondioksit = 3,
          sene = 4)</code></pre>
+<p>rename fonksiyonuyla, değiştirmek istediğiniz değişkenlerin isimlerini, sütünlarına göre yazabilirsiniz. Örneğin, country ikinci sütünda olduğu için, ikinci sütünun ismini ulke yapmak isterseniz, ulke = 2 yazabilirsiniz.</p>
 <p>Veri seti alt alta dizilmiş şekilde verilmektedir. En üste Meksika, ortada Türkiye en altta US bulunmakta. Bu veri setini yan yana görmel istersek şu fonksiyonu kullanmalıyız.</p>
 <p>Veriyi, ülkelere göre geniş şekilde gözlemlemek istiyoruz.</p>
 <pre class="r"><code>library(reshape2)
@@ -68,8 +61,6 @@ data_genis &lt;- dcast(df, sene ~ ulke, value.var=&quot;karbondioksit&quot;)</co
   latest = NULL,
   language = &quot;tr&quot;
 )</code></pre>
-<pre><code>## Warning in WDI(country = &quot;all&quot;, indicator = &quot;NY.GDP.PCAP.KD&quot;, start = 2010, :
-## This language is only supported partially.</code></pre>
 <p>bütün opsiyonlar isteğe bağlıdır. indicator seçeneğinden sonraki hiçbir opsiyonu yazmasanızda olur. start ve end seçeneklerini yazmasaydınız, verileri 1960’dan günümüze kadar yüklerdiniz. extra, seçeneği size ülkelerin enlem ve boylamlarını verir ve R’da harita çizmek isterseniz işinize yarar. language, seçeneği ülkelerin türkçe adlarını vermek için kullanılabilir. Ama türkçe seçeneği, anlaşılabileceği üzere tam olarak çalışmamaktadır. View(df2) ile veri setini açarsanız, country sütünunda türkçe isimler gözlemlersiniz.</p>
 <p>Anahtar kelime aramasını direk, R üzerinden de yapabilirsiniz. Diyelim ki elektrik ile ilgili bir veri arıyorsunuz.</p>
 <pre class="r"><code>WDIsearch(&quot;electricity&quot;) </code></pre>
