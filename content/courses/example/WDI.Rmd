@@ -162,3 +162,24 @@ legend("topright",
        col = 2:4)
 ```
 
+Tabiki veri setimizi tekrar uzun formata alıp grafiğini öyle de gösterebiliriz.
+
+Veri setinde sene isimli değişkene göre, veri setini uzun formatına geri getirelim.
+
+```{r}
+data_uzun <- melt(data_genis, id.vars = "sene") 
+```
+
+data_uzun veri seti artık variable ve value isimli iki değişkene sahip, variable değişkeni üç ülkeyi sırasıyla gösteriyor, value değişkeni ise bu ülkelerdeki karbondioksit değerlerini veriyor.
+
+ggplot paketini kullanarak aynı grafiği gösterelim.
+
+```{r}
+ggplot(data_uzun,                           
+       aes(x = sene,
+           y = value,
+           col = variable)) +
+  geom_line()
+```
+
+

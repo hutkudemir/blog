@@ -267,4 +267,15 @@ legend(&quot;topright&quot;,
        lty = 1,
        col = 2:4)</code></pre>
 <p><img src="/courses/example/WDI_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p>Tabiki veri setimizi tekrar uzun formata alıp grafiğini öyle de gösterebiliriz.</p>
+<p>Veri setinde sene isimli değişkene göre, veri setini uzun formatına geri getirelim.</p>
+<pre class="r"><code>data_uzun &lt;- melt(data_genis, id.vars = &quot;sene&quot;) </code></pre>
+<p>data_uzun veri seti artık variable ve value isimli iki değişkene sahip, variable değişkeni üç ülkeyi sırasıyla gösteriyor, value değişkeni ise bu ülkelerdeki karbondioksit değerlerini veriyor.</p>
+<p>ggplot paketini kullanarak aynı grafiği gösterelim.</p>
+<pre class="r"><code>ggplot(data_uzun,                           
+       aes(x = sene,
+           y = value,
+           col = variable)) +
+  geom_line()</code></pre>
+<p><img src="/courses/example/WDI_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 </div>
