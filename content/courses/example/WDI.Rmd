@@ -136,5 +136,29 @@ Eğer, bütün yılları gözlemlemek istersek, vigülden önceye birşey yazmam
 plot(tsveri[,2:4])
 ```
 
+Aynı grafikte göstermek isterseniz, plot type girebilirsiniz.
 
+```{r}
+plot(tsveri[,2:4], plot.type = "single")
+```
+Grafiğinizi geliştirmek isterseniz aşağıdaki kodu inceleyin.
+
+```{r}
+plot(tsveri[,2],
+     type = "l",
+     col = 2,
+     ylim = c(0, 25),
+     xlab = "Sene",
+     ylab = "Karbondioksit")
+lines(tsveri[,3],
+      type = "l",
+      col = 3)
+lines(tsveri[,4],
+      type = "l",
+      col = 4)
+legend("topright",                           
+       c("Meksika", "Türkiye", "US"),
+       lty = 1,
+       col = 2:4)
+```
 

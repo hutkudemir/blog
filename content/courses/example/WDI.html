@@ -246,4 +246,25 @@ En basit grafik ise plot fonksiyonuyla çizilebilir. Zaten ts objesine sahip old
 Eğer, bütün yılları gözlemlemek istersek, vigülden önceye birşey yazmamıza gerek yoktur. Türkiye, Meksikanın ve US’in verileri, ikinci, üçüncü ve dördüncü sütundadır. 2’den 4’cü sütuna kadar olan verileri grafiklemek istersek şu şekilde yazabiliriz.</p>
 <pre class="r"><code>plot(tsveri[,2:4])</code></pre>
 <p><img src="/courses/example/WDI_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p>Aynı grafikte göstermek isterseniz, plot type girebilirsiniz.</p>
+<pre class="r"><code>plot(tsveri[,2:4], plot.type = &quot;single&quot;)</code></pre>
+<p><img src="/courses/example/WDI_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+Grafiğinizi geliştirmek isterseniz aşağıdaki kodu inceleyin.</p>
+<pre class="r"><code>plot(tsveri[,2],
+     type = &quot;l&quot;,
+     col = 2,
+     ylim = c(0, 25),
+     xlab = &quot;Sene&quot;,
+     ylab = &quot;Karbondioksit&quot;)
+lines(tsveri[,3],
+      type = &quot;l&quot;,
+      col = 3)
+lines(tsveri[,4],
+      type = &quot;l&quot;,
+      col = 4)
+legend(&quot;topright&quot;,                           
+       c(&quot;Meksika&quot;, &quot;Türkiye&quot;, &quot;US&quot;),
+       lty = 1,
+       col = 2:4)</code></pre>
+<p><img src="/courses/example/WDI_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 </div>
