@@ -8,7 +8,7 @@ highlight: true
 image:
   placement: 3
 math: true
-title: Pandemi ve Gelişmekte Olan Piyasalar Krizi $\colon$ Ekonomiler Ne Kadar Kırılgan?
+title: Pandemi ve Gelişmekte Olan Piyasalar Krizi, Ekonomiler Ne Kadar Kırılgan?
 ---
 
 **Bu çalışma CUNY Graduate Center Economics Studies Group (ESG) websitesinden alınmıştır. Yazının ingilizce [orjinaline](https://esg.gc.cuny.edu/2020/06/11/the-pandemic-and-the-emerging-markets-crisis-how-fragile-are-the-economies/) ve içinde Nobel Ödüllü Paul Krugman dahil bir çok yazarın analizlerine ulaşmak için lütfen https://esg.gc.cuny.edu/ web sitesini ziyaret edin.**
