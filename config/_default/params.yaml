@@ -29,6 +29,11 @@ contact_links:
     icon_pack: fab
     name: Tweet
     link: 'https://twitter.com/hutkudemir'
+content:
+  form:
+    provider: netlify
+    netlify:
+      captcha: true
 
 # Site header
 
@@ -48,12 +53,6 @@ time_format: '3:04 PM'
 address_format: en-us
 
 # Site features
-
-content:
-  form:
-    provider: netlify
-    netlify:
-      captcha: true
 
 highlight: true
 highlight_languages:
