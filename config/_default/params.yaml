@@ -49,6 +49,12 @@ address_format: en-us
 
 # Site features
 
+content:
+  form:
+    provider: netlify
+    netlify:
+      captcha: true
+
 highlight: true
 highlight_languages:
   - r
