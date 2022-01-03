@@ -5,7 +5,7 @@
 
 # Appearance
 
-theme: "1950s"
+theme: "forest"
 day_night: true
 font: ''
 font_size: L
@@ -122,7 +122,7 @@ map:
   api_key: ''
   zoom: 15
 marketing:
-  google_analytics: 'G-NJG5T6RHWM'
+  google_analytics: 'G-88X73XEV1X'
   google_tag_manager: ''
   google_site_verification: ''
   baidu_site_verification: ''
