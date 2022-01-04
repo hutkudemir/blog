@@ -12,11 +12,13 @@ weight: 60
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Geçmiş verilerle, geleceği tahmin etmeye çalışmak iş alanlarında ve ekonomide yaygın kullanılan bir yöntemdir. Bu bölümde kullanacağımız yöntemler makine öğrenimi konusunun altında da geçmektedir.
+Geçmiş verilerle, geleceği tahmin etmeye çalışmak iş alanlarında ve ekonomide yaygın kullanılan bir yöntemdir.
+
+<!--more-->
 
 ## Zaman Serisi Tahmini Nedir?
 
-Eğer elimizde düzenli olarak kaydedilen veriler varsa, bu verileri kullanarak gelecek olan düzenli gözlemi tahmin etmeye çalışabiliriz. Örneğin, GSYH her çeyrekte ve her yıl açıklanmaktadır. Biz bugüne kadar olan, GSYH verilerini kullanarak, gelecek yılın veya gelecek çeyreğin GSYH verisini tahmin etmeye çalışabiliriz. Aynı durum hisse senedi fiyatları, döviz kurları veya benzeri veriler içinde geçerli olabilir.
+Bu bölümde kullanacağımız yöntemler makine öğrenimi konusunun altında da geçmektedir. Eğer elimizde düzenli olarak kaydedilen veriler varsa, bu verileri kullanarak gelecek olan düzenli gözlemi tahmin etmeye çalışabiliriz. Örneğin, GSYH her çeyrekte ve her yıl açıklanmaktadır. Biz bugüne kadar olan, GSYH verilerini kullanarak, gelecek yılın veya gelecek çeyreğin GSYH verisini tahmin etmeye çalışabiliriz. Aynı durum hisse senedi fiyatları, döviz kurları veya benzeri veriler içinde geçerli olabilir.
 
 ## Zaman Serisi Bileşenleri?
 

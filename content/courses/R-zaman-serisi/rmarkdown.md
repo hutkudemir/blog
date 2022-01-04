@@ -2,7 +2,7 @@
 date: "2021-01-01"
 title: R markdown kullanma, ödev hazırlama ve web sitesi olarak yükleme
 type: book
-weight: 80
+weight: 40
 ---
 
 Rmarkdown dosyası oluşturun ve kullanmaya başlayın.

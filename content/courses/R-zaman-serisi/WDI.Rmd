@@ -5,17 +5,20 @@ date: 2020-12-01T21:13:14-05:00
 categories: ["R"]
 tags: ["R Markdown", "plot", "regression"]
 type: book
-weight: 100
+weight: 80
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-WDI https://datatopics.worldbank.org/world-development-indicators/ websitesinden ulaşabileceğiniz, Dünya bankasına ait, ve onların yaptığı tanıma göre "Dünya Kalkınma Göstergeleri, WDI, küresel kalkınma ve yoksullukla mücadele hakkında, yüksek kaliteli ve uluslararası düzeyde karşılaştırılabilir istatistiklerin bir derlemesidir. Veritabanı, 217 ekonomi ve 40'tan fazla ülke grubu için 1400 zaman serisi göstergesi içerir ve birçok göstergeye ilişkin veriler 50 yıldan daha eskiye dayanmaktadır."
+Dünya bankasına ait, ve onların yaptığı tanıma göre "Dünya Kalkınma Göstergeleri, WDI, küresel kalkınma ve yoksullukla mücadele hakkında, yüksek kaliteli ve uluslararası düzeyde karşılaştırılabilir istatistiklerin bir derlemesidir."
+
+<!--more-->
 
 ## WDI datası
 
+Veritabanı, 217 ekonomi ve 40'tan fazla ülke grubu için 1400 zaman serisi göstergesi içerir ve birçok göstergeye ilişkin veriler 50 yıldan daha eskiye dayanmaktadır.
 https://data.worldbank.org/ websitesine girdiğinizde, verileri country (ülke) ve indicator (gösterge) olarak gözlemleyebilirsiniz. "Browse by Country or Indicator" seçeneklerinden, indicator'a girerseniz, birçok başlıkta birçok zaman serisine ulaşabilirsiniz. İlk başlık "Agriculture and Rural Development" (Tarım ve Kırsal Kalkınma) "Aid Effectiveness" (Yardım Etkinliği), üçüncü başlık "Climate Change" (İklim Değişikliği) şeklinde toplam 20 başlık altında, 1400 zaman serisiyle istediğiniz bir ülke için elde edebileceğiniz her çeşit veriye ulaşabilirsiniz.
 
 Bu veri setine R'dan ulaşabilmek için WDI paketini yüklemelisiniz. Sağ alt köşede bulunan Packages sekmesinden WDI paketini yükledikten sonra, library yapmalısınız.

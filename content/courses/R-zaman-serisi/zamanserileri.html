@@ -1,5 +1,5 @@
 ---
-title: "Zaman Serileri Tahmini ve Quantmod Paketi"
+title: "Zaman Serileri ve Quantmod Paketi"
 author: "Dr. Hüseyin Utku Demir"
 date: 2020-12-01T21:13:14-05:00
 categories: ["R"]
@@ -11,10 +11,11 @@ weight: 60
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
-<p>Geçmiş verilerle, geleceği tahmin etmeye çalışmak iş alanlarında ve ekonomide yaygın kullanılan bir yöntemdir. Bu bölümde kullanacağımız yöntemler makine öğrenimi konusunun altında da geçmektedir.</p>
+<p>Geçmiş verilerle, geleceği tahmin etmeye çalışmak iş alanlarında ve ekonomide yaygın kullanılan bir yöntemdir.</p>
+<!--more-->
 <div id="zaman-serisi-tahmini-nedir" class="section level2">
 <h2>Zaman Serisi Tahmini Nedir?</h2>
-<p>Eğer elimizde düzenli olarak kaydedilen veriler varsa, bu verileri kullanarak gelecek olan düzenli gözlemi tahmin etmeye çalışabiliriz. Örneğin, GSYH her çeyrekte ve her yıl açıklanmaktadır. Biz bugüne kadar olan, GSYH verilerini kullanarak, gelecek yılın veya gelecek çeyreğin GSYH verisini tahmin etmeye çalışabiliriz. Aynı durum hisse senedi fiyatları, döviz kurları veya benzeri veriler içinde geçerli olabilir.</p>
+<p>Bu bölümde kullanacağımız yöntemler makine öğrenimi konusunun altında da geçmektedir. Eğer elimizde düzenli olarak kaydedilen veriler varsa, bu verileri kullanarak gelecek olan düzenli gözlemi tahmin etmeye çalışabiliriz. Örneğin, GSYH her çeyrekte ve her yıl açıklanmaktadır. Biz bugüne kadar olan, GSYH verilerini kullanarak, gelecek yılın veya gelecek çeyreğin GSYH verisini tahmin etmeye çalışabiliriz. Aynı durum hisse senedi fiyatları, döviz kurları veya benzeri veriler içinde geçerli olabilir.</p>
 </div>
 <div id="zaman-serisi-bileşenleri" class="section level2">
 <h2>Zaman Serisi Bileşenleri?</h2>
@@ -71,7 +72,7 @@ weight: 60
 <pre><code>## [1] &quot;TSLA&quot;</code></pre>
 <p>Artık teslanın 26 Haziran 2010 sonrası günlük verilerine sahibiz. Dataya bir göz atalım. Datanın boyutuna dim() komutuyla bakalım, ve verinin ilk 6 ve son 6 gözlemine bir göz atalım.</p>
 <pre class="r"><code>dim(TSLA)</code></pre>
-<pre><code>## [1] 2894    6</code></pre>
+<pre><code>## [1] 2901    6</code></pre>
 <pre class="r"><code>head(TSLA)</code></pre>
 <pre><code>##            TSLA.Open TSLA.High TSLA.Low TSLA.Close TSLA.Volume TSLA.Adjusted
 ## 2010-06-29     3.800     5.000    3.508      4.778    93831500         4.778
@@ -82,28 +83,28 @@ weight: 60
 ## 2010-07-07     3.280     3.326    2.996      3.160    34608500         3.160</code></pre>
 <pre class="r"><code>tail(TSLA)</code></pre>
 <pre><code>##            TSLA.Open TSLA.High TSLA.Low TSLA.Close TSLA.Volume TSLA.Adjusted
-## 2021-12-16    994.50    994.98   921.85     926.92    27590500        926.92
-## 2021-12-17    914.77    960.66   909.04     932.57    33479100        932.57
-## 2021-12-20    910.70    921.69   893.39     899.94    18826700        899.94
-## 2021-12-21    916.87    939.50   886.12     938.53    23839300        938.53
-## 2021-12-22    965.66   1015.66   957.05    1008.87    31211400       1008.87
-## 2021-12-23   1006.80   1072.98   997.56    1067.00    30841900       1067.00</code></pre>
+## 2021-12-28   1109.49   1119.00  1078.42    1088.47    20108000       1088.47
+## 2021-12-29   1098.64   1104.00  1064.14    1086.19    18718000       1086.19
+## 2021-12-30   1061.33   1095.55  1053.15    1070.34    15680300       1070.34
+## 2021-12-31   1073.44   1082.00  1054.59    1056.78    13528700       1056.78
+## 2022-01-03   1147.75   1201.07  1136.04    1199.78    34643800       1199.78
+## 2022-01-04   1189.55   1208.00  1123.05    1149.59    33235903       1149.59</code></pre>
 <p>TSLA.Open, hisse senedinin o günkü açılış fiyatı, Close, kapanış, High, en yüksek, Low, en düşük, Adjuste, Ayarlanmış fiyatlarını vermektedir.Volume, Kaç kişinin işlem yaptığını gösterir.</p>
 <p>Bu zaman serisinin grafiğini chartSeries() ile gösterebiliriz.</p>
 <pre class="r"><code>chartSeries(TSLA)</code></pre>
-<p><img src="/courses/example/zamanserileri_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="/courses/R-zaman-serisi/zamanserileri_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>Bu hem zaman serisinin grafiğini, hem işlem yapan kişi sayısını göstermektedir. Aynı grafiği beyaz olarak almak isterseniz</p>
 <pre class="r"><code>chartSeries(TSLA, theme=&quot;white&quot;)</code></pre>
-<p><img src="/courses/example/zamanserileri_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="/courses/R-zaman-serisi/zamanserileri_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>kullanabilirsiniz.</p>
 <p>Mesela, Türkiye’nin 16-24 yaş arası işsizlik oranının verisini indirmek istiyorsunuz. FRED, bu veri setinin sembolünü size verir. Bu zaman serisi için sembol LRHU24TTTRM156S’dir.</p>
 <pre class="r"><code>getSymbols(&quot;LRHU24TTTRM156S&quot;,src=&quot;FRED&quot;)</code></pre>
 <pre><code>## [1] &quot;LRHU24TTTRM156S&quot;</code></pre>
 <pre class="r"><code>chartSeries(LRHU24TTTRM156S,theme=&quot;white&quot;) </code></pre>
-<p><img src="/courses/example/zamanserileri_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="/courses/R-zaman-serisi/zamanserileri_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p>Farketiyseniz, src kaynağınızın neresi olacağını yazabilmenizi sağlıyor. Hiçbirşey yazmasanız, sembolü Yahoo’da arayacaktır. Diyelim ki, son bir yıl için TL USD değerini istiyorsunuz. getFX("") komutunu her döviz kuru için kullanabilirsiniz.</p>
 <pre class="r"><code>getFX(&quot;USD/TRY&quot;,from=&quot;2020-01-01&quot;)</code></pre>
 <pre><code>## [1] &quot;USD/TRY&quot;</code></pre>
 <pre class="r"><code>chartSeries(USDTRY,theme=&quot;white&quot;) </code></pre>
-<p><img src="/courses/example/zamanserileri_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="/courses/R-zaman-serisi/zamanserileri_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 </div>

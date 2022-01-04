@@ -4,11 +4,17 @@ author: "Dr. Hüseyin Utku Demir"
 date: 2020-12-01T21:13:14-05:00
 categories: ["R"]
 tags: ["R Markdown", "plot", "regression"]
+type: book
+weight: 80
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+Bu bölümde bazı örnek soruları cevap veriyoruz.
+
+<!--more-->
 
 ## Ödev
 

@@ -5,16 +5,18 @@ date: 2020-12-01T21:13:14-05:00
 categories: ["R"]
 tags: ["R Markdown", "plot", "regression"]
 type: book
-weight: 100
+weight: 80
 ---
 
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
-<p>WDI <a href="https://datatopics.worldbank.org/world-development-indicators/" class="uri">https://datatopics.worldbank.org/world-development-indicators/</a> websitesinden ulaşabileceğiniz, Dünya bankasına ait, ve onların yaptığı tanıma göre “Dünya Kalkınma Göstergeleri, WDI, küresel kalkınma ve yoksullukla mücadele hakkında, yüksek kaliteli ve uluslararası düzeyde karşılaştırılabilir istatistiklerin bir derlemesidir. Veritabanı, 217 ekonomi ve 40’tan fazla ülke grubu için 1400 zaman serisi göstergesi içerir ve birçok göstergeye ilişkin veriler 50 yıldan daha eskiye dayanmaktadır.”</p>
+<p>Dünya bankasına ait, ve onların yaptığı tanıma göre “Dünya Kalkınma Göstergeleri, WDI, küresel kalkınma ve yoksullukla mücadele hakkında, yüksek kaliteli ve uluslararası düzeyde karşılaştırılabilir istatistiklerin bir derlemesidir.”</p>
+<!--more-->
 <div id="wdi-datası" class="section level2">
 <h2>WDI datası</h2>
-<p><a href="https://data.worldbank.org/" class="uri">https://data.worldbank.org/</a> websitesine girdiğinizde, verileri country (ülke) ve indicator (gösterge) olarak gözlemleyebilirsiniz. “Browse by Country or Indicator” seçeneklerinden, indicator’a girerseniz, birçok başlıkta birçok zaman serisine ulaşabilirsiniz. İlk başlık “Agriculture and Rural Development” (Tarım ve Kırsal Kalkınma) “Aid Effectiveness” (Yardım Etkinliği), üçüncü başlık “Climate Change” (İklim Değişikliği) şeklinde toplam 20 başlık altında, 1400 zaman serisiyle istediğiniz bir ülke için elde edebileceğiniz her çeşit veriye ulaşabilirsiniz.</p>
+<p>Veritabanı, 217 ekonomi ve 40’tan fazla ülke grubu için 1400 zaman serisi göstergesi içerir ve birçok göstergeye ilişkin veriler 50 yıldan daha eskiye dayanmaktadır.
+<a href="https://data.worldbank.org/" class="uri">https://data.worldbank.org/</a> websitesine girdiğinizde, verileri country (ülke) ve indicator (gösterge) olarak gözlemleyebilirsiniz. “Browse by Country or Indicator” seçeneklerinden, indicator’a girerseniz, birçok başlıkta birçok zaman serisine ulaşabilirsiniz. İlk başlık “Agriculture and Rural Development” (Tarım ve Kırsal Kalkınma) “Aid Effectiveness” (Yardım Etkinliği), üçüncü başlık “Climate Change” (İklim Değişikliği) şeklinde toplam 20 başlık altında, 1400 zaman serisiyle istediğiniz bir ülke için elde edebileceğiniz her çeşit veriye ulaşabilirsiniz.</p>
 <p>Bu veri setine R’dan ulaşabilmek için WDI paketini yüklemelisiniz. Sağ alt köşede bulunan Packages sekmesinden WDI paketini yükledikten sonra, library yapmalısınız.</p>
 <pre class="r"><code>library(WDI)</code></pre>
 <p>İstediğiniz veri setinin anahtar kelimesine nasıl ulaşabilirsiniz. Diyelim ki göstergeleri okuduğunuz, indicator seçeneğine tıkladınız ve <a href="https://data.worldbank.org/indicator" class="uri">https://data.worldbank.org/indicator</a> sayfasına ulaştınız. Ülkelerin, CO2 emissions (metric tons per capita), karbondioksit emisyonları (kişi başına metrik ton) verilerini merak ediyorsunuz. Bu yüzden Environment (Çevre) başlığı altında bu veri setine tıkladınız ve şu sayfa açıldı.</p>
@@ -236,19 +238,19 @@ autoplot(tsveri[,&quot;Turkey&quot;]) +
   ggtitle(&quot;Türkiye&#39;nin kişi başına metrik ton olarak karndioksit emisyonu&quot;) +
   xlab(&quot;Sene&quot;) +
   ylab(&quot;&quot;)</code></pre>
-<p><img src="/courses/example/WDI_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><img src="/courses/R-zaman-serisi/WDI_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p>ggtitle, xlab ve ylab seçenekleri sadece grafiğinize isimler vermek için kullanılır. autoplot fonksiyonunuza renk katmak isterseniz, aşağıdaki seçenekleri uygulayabilirsiniz.</p>
 <pre class="r"><code>autoplot(tsveri[,&quot;Turkey&quot;], ts.colour = &#39;red&#39;, ts.linetype = &#39;dashed&#39;)</code></pre>
-<p><img src="/courses/example/WDI_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+<p><img src="/courses/R-zaman-serisi/WDI_files/figure-html/unnamed-chunk-12-1.png" width="672" />
 En basit grafik ise plot fonksiyonuyla çizilebilir. Zaten ts objesine sahip olduğumuz için, sene değişkenini eklememize gerek yoktur. tsveri, veri setinin içinden, Mexico sütünunu yazmak isterseniz, kapalı parantezin içine virgülden sonra sütunun ismi yazılabilir, ya da rakamı yazılabilir. Virgülden önceki kısım, satırları belirtir. Virgülden sonraki kısım sütunları belirtir.</p>
 <pre class="r"><code>plot(tsveri[,&quot;Turkey&quot;])</code></pre>
-<p><img src="/courses/example/WDI_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+<p><img src="/courses/R-zaman-serisi/WDI_files/figure-html/unnamed-chunk-13-1.png" width="672" />
 Eğer, bütün yılları gözlemlemek istersek, vigülden önceye birşey yazmamıza gerek yoktur. Türkiye, Meksikanın ve US’in verileri, ikinci, üçüncü ve dördüncü sütundadır. 2’den 4’cü sütuna kadar olan verileri grafiklemek istersek şu şekilde yazabiliriz.</p>
 <pre class="r"><code>plot(tsveri[,2:4])</code></pre>
-<p><img src="/courses/example/WDI_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p><img src="/courses/R-zaman-serisi/WDI_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <p>Aynı grafikte göstermek isterseniz, plot type girebilirsiniz.</p>
 <pre class="r"><code>plot(tsveri[,2:4], plot.type = &quot;single&quot;)</code></pre>
-<p><img src="/courses/example/WDI_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+<p><img src="/courses/R-zaman-serisi/WDI_files/figure-html/unnamed-chunk-15-1.png" width="672" />
 Grafiğinizi geliştirmek isterseniz aşağıdaki kodu inceleyin.</p>
 <pre class="r"><code>plot(tsveri[,2],
      type = &quot;l&quot;,
@@ -266,7 +268,7 @@ legend(&quot;topright&quot;,
        c(&quot;Meksika&quot;, &quot;Türkiye&quot;, &quot;US&quot;),
        lty = 1,
        col = 2:4)</code></pre>
-<p><img src="/courses/example/WDI_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p><img src="/courses/R-zaman-serisi/WDI_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <p>Tabiki veri setimizi tekrar uzun formata alıp grafiğini öyle de gösterebiliriz.</p>
 <p>Veri setinde sene isimli değişkene göre, veri setini uzun formatına geri getirelim.</p>
 <pre class="r"><code>data_uzun &lt;- melt(data_genis, id.vars = &quot;sene&quot;) </code></pre>
@@ -277,5 +279,5 @@ legend(&quot;topright&quot;,
            y = value,
            col = variable)) +
   geom_line()</code></pre>
-<p><img src="/courses/example/WDI_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p><img src="/courses/R-zaman-serisi/WDI_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 </div>

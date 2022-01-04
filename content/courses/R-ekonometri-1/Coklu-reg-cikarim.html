@@ -4,6 +4,8 @@ author: "Dr. Hüseyin Utku Demir"
 date: 2020-12-01T21:13:14-05:00
 categories: ["R"]
 tags: ["R Markdown", "plot", "regression"]
+type: book
+weight: 60
 ---
 
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
@@ -11,7 +13,9 @@ tags: ["R Markdown", "plot", "regression"]
 <script src="/rmarkdown-libs/pagedtable/js/pagedtable.js"></script>
 
 
-<p>Bu bölümde, çoklu regresyon analizine devam ediyoruz. Popülasyon regresyon modelindeki parametrelerle ilgili hipotezleri test etmemiz gerekiyor. En küçük kareler yöntemiyle tahmin ettiğimiz parametrelerin dağılımlarına bakacağız ve normal dağılıp dağılmadığını anlamaya çalışacağız. Daha sonra parametrelerle ilgili hipotez testlerini oluşturacağız.</p>
+<p>Bu bölümde, çoklu regresyon analizine devam ediyoruz.</p>
+<!--more-->
+<p>Popülasyon regresyon modelindeki parametrelerle ilgili hipotezleri test etmemiz gerekiyor. En küçük kareler yöntemiyle tahmin ettiğimiz parametrelerin dağılımlarına bakacağız ve normal dağılıp dağılmadığını anlamaya çalışacağız. Daha sonra parametrelerle ilgili hipotez testlerini oluşturacağız.</p>
 <div id="en-küçük-kareler-tahmincilerinin-örneklem-dağılımları" class="section level2">
 <h2>En küçük kareler tahmincilerinin örneklem dağılımları</h2>
 <p>Bu bölüme başlamadan önce 6. varsayımımızı hatırlamamız gerekecek.</p>
@@ -133,7 +137,7 @@ summary(maasreg)</code></pre>
 
 ## Warning: It is deprecated to specify `guide = FALSE` to remove a guide. Please
 ## use `guide = &quot;none&quot;` instead.</code></pre>
-<p><img src="/courses/example/ders_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="/courses/R-ekonometri-1/Coklu-reg-cikarim_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>Grafikten de görebileceğiniz gibi exper katsayısı 0’a çok yakın ama güven aralığı 0’ı kapsamıyor.</p>
 </div>
 <div id="çoklu-doğrusal-kısıtların-testi" class="section level2">
