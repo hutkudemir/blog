@@ -46,7 +46,7 @@ Bu salgından sonra, halk sağlığı ve sosyal güvenlik sistemlerinin kurulmas
 
 Okul, sinema tiyatro gibi yerlerin kapatılması oldukça isabetli kararlar olmuştur. Her ne kadar bazı okullar kapatma kararlarına uymamışsa da halkın bu tür yerlerden uzak durması için uyarılması bile önem arz etmektedir. O dönemde grip salgınına yakalanan bir kişiye yapılması gerekenlerin başında bu kişinin tecrit edilmesi, iyi bir bakım görmesi, hijyen koşullarına riayet etmesi ve istirahat etmesidir.  Tabip ve ilaç yetersizliğinin yaşandığı bir dönemde önleyici sağlık hizmetlerine ağırlık vermek İstanbul Şehremaneti’nin yapabileceği en iyi yöntemlerin başında geliyordu. 
 
-{{< figure library="true" title="Gazate Haberi ileri 28 Kunun-i Evvel 1337 " src="h1.png" >}}
+{{< figure library="true" title="Gazate Haberi ileri 28 Kunun-i Evvel 1337 " src="h2.png" >}}
 
 Osmanlı İspanyol Gribine karşı okulları belli bir süre tatil etti. Fotoğraf 2’de kırmızıyla işaretlenen yerde şöyle yazıyor: İspanyol hastalığı hasebiyle mektepler 10 gün tatil edildi. (İleri, 28 Kanun-I Evvel 1337)
 Salgın Osmanlı Devleti’nde sadece İstanbul’da yaygın değildi. Anadolu’nun pek çok yerinde de salgın vardı. Özellikle Yozgat’ta vaka sayısının yüksekliği dikkat çekici bir durumdur. Anadolu dışında grip salgınları Orta Doğu’da da yaygındı. Bugünkü Suriye’nin ve Lübnan’ın sahil kesimlerinde grip salgınları görülmekteydi. 
