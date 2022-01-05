@@ -58,7 +58,6 @@ Osmanlı’da İspanyol Gribinden kaç kişinin öldüğü tam olarak belli değ
 
 ## Kaynakça
 
-
 Meydan, S. (2020, 03 16). Savaşlardan çok Salgınlar Öldürdü İspanyol Gribi. Retrieved from Sözcü: https://www.sozcu.com.tr/2020/yazarlar/sinan-meydan/savaslardan-cok-salginlar-oldurdu-ispanyol-gribi-5681024/
 Temel, M. (2015, 04). Gelmiş Geçmiş En Büyük Katil: 1918 "İspanyol" Gribi. Retrieved from Academia: https://www.academia.edu/14579958/Gelmi%C5%9F_Ge%C3%A7mi%C5%9F_En_B%C3%BCy%C3%BCk_Katil_1918_%C4%B0spanyol_Gribi
 Yolun, M. (2010). İspanyol Gribinin Dünya ve Osmanlı Üzerine Etkileri. Adıyaman: Yüksek Lisans Tezi.
