@@ -157,7 +157,7 @@ a.
 library(wooldridge)
 library(rmarkdown)
 data("bwght")
-paged_table(bwght)
+head(bwght)
 help(bwght)
 ```
 
@@ -193,7 +193,7 @@ Regresyona faminc eklendiğinde sigara içmenin etkisi biraz daha az ama aradaki
 a. 
 ```{r}
 data("discrim")
-paged_table(discrim)
+head(discrim)
 help(discrim)
 ```
 

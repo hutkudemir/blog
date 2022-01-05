@@ -73,8 +73,7 @@ data(wage1)
 Verilere bir göz gezdirin.
 
 ```{r}
-library(rmarkdown)
-paged_table(wage1)
+head(wage1)
 ```
 
 Kullanacağımız değişkenlerin açıklamalarına bakalım.
@@ -153,10 +152,12 @@ level detayını eklemeniz gerecektir.
 
 Coefplot paketini yüklerseniz size güven aralığı grafiğini çıkaran bir kod sunar.
 
-```{r}
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+library(ggplot2)
 library(coefplot)
 coefplot(maasreg)
 ```
+
 
 
 Grafikten de görebileceğiniz gibi exper katsayısı 0'a çok yakın ama güven aralığı 0'ı kapsamıyor.

@@ -98,10 +98,11 @@ library(wooldridge)
 data(gpa1)
 ```
 
-```{r, layout="l-body-outset"}
+```{r message=FALSE, warning=FALSE, paged.print=TRUE}
 library(rmarkdown)
 paged_table(gpa1)
 ```
+
 
 Örnek için kullanacağımız değişkenlerin tanımlarını şöyle yapabiliriz.
 
