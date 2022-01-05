@@ -41,4 +41,5 @@ title: Hüseyin Utku Demir
 
 Ekonometri, Uluslararası Ekonomi, Makine Öğrenmesi ilgi alanlanlarım. Ayrıca CUNY bünyesinde Brooklyn Koleji, Hunter Koleji, City Kolejinde çeşitli yüksek lisans ve lisans dersleri verdim.
 
-{{< icon name="download" pack="fas" >}} Özgeçmişimi {{< staticref "uploads/resume.pdf" "newtab" >}}indirin{{< /staticref >}}.
+Not-Bu websitesi iki farklı url ile çalışabilir.
+Primary domain [demir.pw](https://demir.pw/) ve subdomain [demir.netlify.app](https://demir.netlify.app/)
