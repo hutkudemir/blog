@@ -35,4 +35,4 @@ Bu ders için daha önceden Ekonometri dersi almış olmanız beklenir. Bu sited
 Her dönem işlenen dersler ve güncellemeri yüklenecektir.
 {{< /spoiler >}}
 
-{{< cta cta_text="Derse başlayın" cta_link="rstudioyukleme" >}}
+{{< cta cta_text="Derse başlayın" cta_link="Matrisler" >}}

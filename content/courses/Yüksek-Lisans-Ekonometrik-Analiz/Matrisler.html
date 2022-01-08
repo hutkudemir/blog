@@ -85,7 +85,7 @@ A \cdot C = \begin{bmatrix} 1 &amp; 2 &amp; 3 \\ 4 &amp; 5 &amp; 6 \\ 7 &amp; 8 
 <p><span class="math display">\[
 A \cdot C =  \begin{bmatrix} A_{1}^{satır}\cdot A_{1}^{sütun} &amp; A_{1}^{satır}\cdot A_{2}^{sütun} &amp; A_{1}^{satır}\cdot A_{3}^{sütun}\\  A_{2}^{satır}\cdot A_{1}^{sütun} &amp; A_{2}^{satır}\cdot A_{2}^{sütun} &amp; A_{2}^{satır}\cdot A_{3}^{sütun}\\  A_{3}^{satır}\cdot A_{1}^{sütun} &amp; A_{3}^{satır}\cdot A_{2}^{sütun} &amp; A_{3}^{satır}\cdot A_{3}^{sütun}  \end{bmatrix}
 \]</span></p>
-<p>Çarpımın sonunda yine 3x3 bir matris elde etmiş oluruz. Eğer A matrisimiz 3 satırlı ve iki sütunlu olsaydı, C matrisinin 2 satırlı olma mecburiyeti vardı. Diyelim ki C matrisinin boyutu 2x4, yani iki satırlı ve 4 sütunlu bir matris. Bu durumda, A çarpı C bize 3x2 ve 2x4 boyutlu matrisleri çarptığımız için, 3x4 boyutlu bir matris vermek zorundaydı.</p>
+<p>Çarpımın sonunda yine 3x3 bir matris elde etmiş oluruz.</p>
 <p><span class="math display">\[
 \begin{smallmatrix}
 (1 \cdot 0.1 + 2 \cdot 0.4 + 3 \cdot 0.7) &amp; (1 \cdot 0.2 + 2 \cdot 0.5 + 3 \cdot 0.8) &amp; (1 \cdot 0.3 + 2 \cdot 0.6 + 3 \cdot 0.9) \\ 
@@ -95,8 +95,9 @@ A \cdot C =  \begin{bmatrix} A_{1}^{satır}\cdot A_{1}^{sütun} &amp; A_{1}^{sat
 <span class="math display">\[
 A \cdot C = \begin{bmatrix} 3 &amp; 3.6 &amp; 4.2 \\ 6.6 &amp; 8.1 &amp; 9.6\\ 10.2 &amp; 12.6 &amp; 15 
 \end{bmatrix}
-\]</span></p>
-<p>Bir matrisin transpozisyonunu (transpose) almak ya “T” harfiyle ya da “′” işaretiyle gösterilir. Satır ve sütun yer değiştirir.</p>
+\]</span>
+Eğer A matrisimiz 3 satırlı ve iki sütunlu olsaydı, C matrisinin 2 satırlı olma mecburiyeti vardı. Diyelim ki C matrisinin boyutu 2x4, yani iki satırlı ve 4 sütunlu bir matris. Bu durumda, A çarpı C bize 3x2 ve 2x4 boyutlu matrisleri çarptığımız için, 3x4 boyutlu bir matris vermek zorundaydı.</p>
+<p>Bir matrisin transpozisyonunu (transpose) almak ya T harfiyle ya da ′ işaretiyle gösterilir. Satır ve sütun yer değiştirir.</p>
 <p><span class="math display">\[C^T = \begin{bmatrix} 0.1 &amp; 0.4 &amp; 0.7 \\ 0.2 &amp; 0.5 &amp; 0.8 \\ 0.3 &amp; 0.6 &amp; 0.9 \end{bmatrix}\]</span></p>
 </div>
 <div id="bazı-önemli-özellikler" class="section level2">
@@ -104,7 +105,7 @@ A \cdot C = \begin{bmatrix} 3 &amp; 3.6 &amp; 4.2 \\ 6.6 &amp; 8.1 &amp; 9.6\\ 1
 <p><span class="math inline">\(A + B = B + A\)</span></p>
 <p><span class="math inline">\(A\cdot(B\cdot C) = (A \cdot B) \cdot C\)</span></p>
 <p>$A(B + C) = AB + AC $</p>
-<p>$(B + C)^T = B^T + A^T $</p>
+<p>$(B + C)^T = B^T + C^T $</p>
 <p>$(A B)^T = B^T A^T $</p>
 </div>
 <div id="özel-matrisler" class="section level2">
@@ -237,26 +238,26 @@ ile bulunur.</p>
 <h2>Cramer Kuralı (Cramer’s rule)</h2>
 <p>Bir eşitlikler kümesi matris şeklinde gösterilip çözülebilir.</p>
 <p><span class="math display">\[
-3 \cdot x_1 + 5 \cdot x_2 + 2 \cdot x_3 = 19
+3 \cdot x_1 +  x_2 + 2 \cdot x_3 = 11
 \]</span>
 <span class="math display">\[
-2 \cdot x_1 + 2 \cdot x_2 + 2 \cdot x_3 = 12
+2 \cdot x_1 +  x_3 = 5
 \]</span></p>
 <p><span class="math display">\[
-3 \cdot x_1 +  x_2 + 4 \cdot x_3 = 17
+x_2 + 3 \cdot x_3 = 11
 \]</span></p>
 <p>Bu üç eşitlik matris formunda şu şekilde yazılabilir.</p>
 <p><span class="math display">\[
 Ax = b
 \]</span>
 <span class="math display">\[
-A = \begin{bmatrix} 3 &amp; 5 &amp; 2 \\ 2 &amp; 2 &amp; 2 \\ 3 &amp; 1 &amp; 4 \end{bmatrix}
+A = \begin{bmatrix} 3 &amp; 1 &amp; 2 \\ 2 &amp; 0 &amp; 1 \\ 0 &amp; 1 &amp; 3 \end{bmatrix}
 \]</span></p>
 <p><span class="math display">\[
 x = \begin{bmatrix} x_1 \\ x_2 \\ x_3  \end{bmatrix}
 \]</span>
 <span class="math display">\[
-b = \begin{bmatrix} 19 \\ 12 \\ 17 \end{bmatrix}
+b = \begin{bmatrix} 11 \\ 5 \\ 11 \end{bmatrix}
 \]</span></p>
 <p>Cramer kuralına göre bilinmeyen x’ler b vektörünün A matrisinde gerekli sütununa yazılarak bulunacak ikinci bir matris yardımıyla bulunabilir.</p>
 <p><span class="math display">\[
@@ -270,7 +271,7 @@ x_3 = \frac{\lvert  A \rvert}{\lvert  A_3 \rvert}
 \]</span></p>
 <p>A matrisinin determinantını bulmayı biliyoruz. <span class="math inline">\(A_1\)</span> matrisini bulmamız lazım.</p>
 <p><span class="math display">\[
-A_1 = \begin{bmatrix} 19 &amp; 5 &amp; 2 \\ 12 &amp; 2 &amp; 2 \\ 17 &amp; 1 &amp; 4 \end{bmatrix}
+A_1 = \begin{bmatrix} 11 &amp; 1 &amp; 2 \\ 5 &amp; 0 &amp; 1 \\ 11 &amp; 1 &amp; 3 \end{bmatrix}
 \]</span>
 <span class="math inline">\(A_1\)</span> matrisi, 1. sütunun yerine, b vektörünün yazılmasıyla bulunur. Bu iki matrisin detarminantlarının bölümü çözümü verir.</p>
 </div>

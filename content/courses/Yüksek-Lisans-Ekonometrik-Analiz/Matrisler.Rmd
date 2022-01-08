@@ -107,8 +107,7 @@ $$
 A \cdot C =  \begin{bmatrix} A_{1}^{satır}\cdot A_{1}^{sütun} & A_{1}^{satır}\cdot A_{2}^{sütun} & A_{1}^{satır}\cdot A_{3}^{sütun}\\  A_{2}^{satır}\cdot A_{1}^{sütun} & A_{2}^{satır}\cdot A_{2}^{sütun} & A_{2}^{satır}\cdot A_{3}^{sütun}\\  A_{3}^{satır}\cdot A_{1}^{sütun} & A_{3}^{satır}\cdot A_{2}^{sütun} & A_{3}^{satır}\cdot A_{3}^{sütun}  \end{bmatrix}
 $$
 
-
-Çarpımın sonunda yine 3x3 bir matris elde etmiş oluruz. Eğer A matrisimiz 3 satırlı ve iki sütunlu olsaydı, C matrisinin 2 satırlı olma mecburiyeti vardı. Diyelim ki C matrisinin boyutu 2x4, yani iki satırlı ve 4 sütunlu bir matris. Bu durumda, A çarpı C bize 3x2 ve 2x4 boyutlu matrisleri çarptığımız için, 3x4 boyutlu bir matris vermek zorundaydı. 
+Çarpımın sonunda yine 3x3 bir matris elde etmiş oluruz. 
 
 $$
 \begin{smallmatrix}
@@ -120,8 +119,9 @@ $$
 A \cdot C = \begin{bmatrix} 3 & 3.6 & 4.2 \\ 6.6 & 8.1 & 9.6\\ 10.2 & 12.6 & 15 
 \end{bmatrix}
 $$
+Eğer A matrisimiz 3 satırlı ve iki sütunlu olsaydı, C matrisinin 2 satırlı olma mecburiyeti vardı. Diyelim ki C matrisinin boyutu 2x4, yani iki satırlı ve 4 sütunlu bir matris. Bu durumda, A çarpı C bize 3x2 ve 2x4 boyutlu matrisleri çarptığımız için, 3x4 boyutlu bir matris vermek zorundaydı. 
 
-Bir matrisin transpozisyonunu (transpose) almak ya "T" harfiyle ya da "′" işaretiyle gösterilir. Satır ve sütun yer değiştirir.
+Bir matrisin transpozisyonunu (transpose) almak ya T harfiyle ya da ′ işaretiyle gösterilir. Satır ve sütun yer değiştirir.
 
 $$C^T = \begin{bmatrix} 0.1 & 0.4 & 0.7 \\ 0.2 & 0.5 & 0.8 \\ 0.3 & 0.6 & 0.9 \end{bmatrix}$$
 
@@ -133,7 +133,7 @@ $A\cdot(B\cdot C) = (A \cdot B) \cdot C$
 
 $A\cdot(B + C) = A\cdot B + A\cdot C $
 
-$(B + C)^T = B^T + A^T $
+$(B + C)^T = B^T + C^T $
 
 $(A \cdot B)^T = B^T \cdot A^T $
 
@@ -306,14 +306,14 @@ $$adj(A) = \begin{smallmatrix} (a_{22} \cdot a_{33} - a_{32} \cdot a_{23}  ) & -
 Bir eşitlikler kümesi matris şeklinde gösterilip çözülebilir.
 
 $$
-3 \cdot x_1 + 5 \cdot x_2 + 2 \cdot x_3 = 19
+3 \cdot x_1 +  x_2 + 2 \cdot x_3 = 11
 $$
 $$
-2 \cdot x_1 + 2 \cdot x_2 + 2 \cdot x_3 = 12
+2 \cdot x_1 +  x_3 = 5
 $$
 
 $$
-3 \cdot x_1 +  x_2 + 4 \cdot x_3 = 17
+x_2 + 3 \cdot x_3 = 11
 $$
 
 Bu üç eşitlik matris formunda şu şekilde yazılabilir.
@@ -322,14 +322,14 @@ $$
 Ax = b
 $$
 $$
-A = \begin{bmatrix} 3 & 5 & 2 \\ 2 & 2 & 2 \\ 3 & 1 & 4 \end{bmatrix}
+A = \begin{bmatrix} 3 & 1 & 2 \\ 2 & 0 & 1 \\ 0 & 1 & 3 \end{bmatrix}
 $$
 
 $$
 x = \begin{bmatrix} x_1 \\ x_2 \\ x_3  \end{bmatrix}
 $$
 $$
-b = \begin{bmatrix} 19 \\ 12 \\ 17 \end{bmatrix}
+b = \begin{bmatrix} 11 \\ 5 \\ 11 \end{bmatrix}
 $$
 
 Cramer kuralına göre bilinmeyen x'ler b vektörünün A matrisinde gerekli sütununa yazılarak bulunacak ikinci bir matris yardımıyla bulunabilir.
@@ -348,7 +348,7 @@ $$
 A matrisinin determinantını bulmayı biliyoruz. $A_1$ matrisini bulmamız lazım.
 
 $$
-A_1 = \begin{bmatrix} 19 & 5 & 2 \\ 12 & 2 & 2 \\ 17 & 1 & 4 \end{bmatrix}
+A_1 = \begin{bmatrix} 11 & 1 & 2 \\ 5 & 0 & 1 \\ 11 & 1 & 3 \end{bmatrix}
 $$
 $A_1$ matrisi, 1. sütunun yerine, b vektörünün yazılmasıyla bulunur. Bu iki matrisin detarminantlarının bölümü çözümü verir.
 
