@@ -512,12 +512,21 @@ $M_0$ matrisi simetrik bir matrisdir.
 $$
 M_0 = M_0^T =  I_n - i(i^T i)^{-1}i^T =  (I_n - i(i^T i)^{-1}i^T)^T
 $$
-$M_0$'tu $M_0$ ile çarparsak $M_0$ buluruz. Dolayısıyla $M_0$ idempotent'dir.
+$M_0$'yu $M_0$ ile çarparsak $M_0$ buluruz. Dolayısıyla $M_0$ idempotent'dir.
 
 
-
-
-
+$$
+M_0 M_0 = (I_n - i(i^T i)^{-1}i^T)  (I_n - i(i^T i)^{-1}i^T)
+$$
+$$
+= I_n - i(i^T i)^{-1}i^T - i(i^T i)^{-1}i^T) + i(i^T i)^{-1}i^Ti(i^T i)^{-1}i^T
+$$
+$$
+= I_n - i(i^T i)^{-1}i^T - i(i^T i)^{-1}i^T) + i(i^T i)^{-1}i^T
+$$
+$$
+= I_n - i(i^T i)^{-1}i^T = M_0
+$$
 
 
 
