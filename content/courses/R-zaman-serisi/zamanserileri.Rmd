@@ -20,6 +20,17 @@ Geçmiş verilerle, geleceği tahmin etmeye çalışmak iş alanlarında ve ekon
 
 Bu bölümde kullanacağımız yöntemler makine öğrenimi konusunun altında da geçmektedir. Eğer elimizde düzenli olarak kaydedilen veriler varsa, bu verileri kullanarak gelecek olan düzenli gözlemi tahmin etmeye çalışabiliriz. Örneğin, GSYH her çeyrekte ve her yıl açıklanmaktadır. Biz bugüne kadar olan, GSYH verilerini kullanarak, gelecek yılın veya gelecek çeyreğin GSYH verisini tahmin etmeye çalışabiliriz. Aynı durum hisse senedi fiyatları, döviz kurları veya benzeri veriler içinde geçerli olabilir.
 
+$$
+\left(\begin{array}{cc} 
+0.8944272 & 0.4472136\\
+-0.4472136 & -0.8944272
+\end{array}\right)
+\left(\begin{array}{cc} 
+10 & 0\\ 
+0 & 5
+\end{array}\right)
+$$ 
+
 ## Zaman Serisi Bileşenleri?
 
 Bu tahmini yapabilmek için zaman serilerinin yapısını iyi anlamamız gerekir. Zaman serileri 4 ana bileşenden oluşur.

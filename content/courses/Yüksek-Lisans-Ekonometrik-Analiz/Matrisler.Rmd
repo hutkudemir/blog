@@ -1,0 +1,359 @@
+---
+title: "Matris cebir hatırlatma"
+author: "Dr. Hüseyin Utku Demir"
+date: 2020-12-01T21:13:14-05:00
+categories: ["R"]
+tags: ["matrisler"]
+type: book
+weight: 20
+---
+
+Matris bilgilerinizi hatırlatma.
+
+<!--more-->
+
+## Matris hatırlatma
+
+3x3 bir A matrisi tanımlayalım
+
+$$A = \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{bmatrix}$$
+Bir de genel yazılımı göstermek için çok satırlı ve çok sütunlu bir B matrisi gösterelim.
+
+$$
+B = \begin{bmatrix} 
+b_{1,1} & b_{1,2} & b_{1,3} & ... & b_{1,k} \\ 
+b_{2,1} & b_{2,2} & b_{2,3} & ... & b_{2,k} \\ 
+... & ...  & ...  & ...  & ...  \\ 
+...  & ...  & ...  & ...  & ...  \\ 
+b_{n,1} & b_{n,2} & b_{n,3} & ... & b_{n,k} 
+\end{bmatrix}
+$$
+
+A matrisinin 2. satırını yazmak isterseniz aşağıdaki notasyonu kullanmanız gerekir.
+
+$$A_{2}^{satır} = \begin{bmatrix}  4 & 5 & 6  \end{bmatrix}$$
+A matrisinin 3. sütununu yazmak isterseniz aşağıdaki notasyonu kullanmanız gerekir.
+
+$$A_{3}^{sütun} = \begin{bmatrix}  3 \\  6 \\ 9 \end{bmatrix}$$
+
+Daha genel yazılımı kullanmak istersek, mesela B matrisinin i'nci satırını yazalım.
+
+$$
+B_{i}^{satır} = \begin{bmatrix} 
+b_{i,1} & b_{i,2} & b_{i,3} & ... & b_{i,k} 
+\end{bmatrix}
+$$
+mesela B matrisinin j'nci sütununu yazalım.
+
+$$
+B_{j}^{sütun}= \begin{bmatrix} 
+b_{1,j} \\ 
+b_{2,j} \\ 
+... \\ 
+...  \\ 
+b_{n,j} 
+\end{bmatrix}
+$$
+## Toplama işlemi
+
+Matrislerde toplama yapabilmek için, toplaması yapılacak matrislerin boyutları eşit olmalıdır. Örneğin A matrisimizin boyutu 3x3, yani 3 satır ve 3 sütunu var. Elimizde bir başka 3x3 matris varsa, bu ikisi direk toplanabilir. Örneğin 3x3 bir C matrisi düşünelim.
+
+$$C = \begin{bmatrix} 0.1 & 0.2 & 0.3 \\ 0.4 & 0.5 & 0.6 \\ 0.7 & 0.8 & 0.9 \end{bmatrix}$$
+
+O zaman A + C
+
+$$A + C = \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{bmatrix} + \begin{bmatrix} 0.1 & 0.2 & 0.3 \\ 0.4 & 0.5 & 0.6 \\ 0.7 & 0.8 & 0.9 \end{bmatrix} = \begin{bmatrix} 1.1 & 2.2 & 3.3 \\ 4.4 & 5.5 & 6.6 \\ 7.7 & 8.8 & 9.9 \end{bmatrix} $$
+olur.
+
+Daha genel göstermek istersek B matrisiyke nxk olan bir D matrisini toplayabiliriz.
+
+$$
+D = \begin{bmatrix} 
+d_{1,1} & d_{1,2} & d_{1,3} & ... & d_{1,k} \\ 
+d_{2,1} & d_{2,2} & d_{2,3} & ... & d_{2,k} \\ 
+... & ...  & ...  & ...  & ...  \\ 
+...  & ...  & ...  & ...  & ...  \\ 
+d_{n,1} & d_{n,2} & d_{n,3} & ... & d_{n,k} 
+\end{bmatrix}
+$$
+
+
+$$
+B+D = \begin{bmatrix} 
+b_{1,1} & b_{1,2} & b_{1,3} & ... & b_{1,k} \\ 
+b_{2,1} & b_{2,2} & b_{2,3} & ... & b_{2,k} \\ 
+... & ...  & ...  & ...  & ...  \\ 
+...  & ...  & ...  & ...  & ...  \\ 
+b_{n,1} & b_{n,2} & b_{n,3} & ... & b_{n,k} 
+\end{bmatrix} + \begin{bmatrix} d_{1,1} & d_{1,2} & d_{1,3} & ... & d_{1,k} \\ d_{2,1} & d_{2,2}& d_{2,3} & ... & d_{2,k} \\ ... & ...  & ...  & ...  & ...  \\ ...  & ...  & ...  & ...  & ...  \\ d_{n,1} & d_{n,2} & d_{n,3} & ... & d_{n,k} \end{bmatrix}
+$$
+
+$$
+B+D = \begin{bmatrix}b_{1,1}+ d_{1,1} & b_{1,2}+ d_{1,2} & b_{1,3}+d_{1,3} & ... & b_{1,k}+d_{1,k} \\ b_{2,1}+ d_{2,1} & b_{2,2}+ d_{2,2}& b_{2,3}+d_{2,3} & ... &  b_{2,k}+d_{2,k} \\ ... & ...  & ...  & ...  & ...  \\ ...  & ...  & ...  & ...  & ...  \\b_{n,1}+ d_{n,1} &  b_{n,2}+ d_{n,2} &b_{n,3}+ d_{n,3} & ... & b_{n,k} + d_{n,k} \end{bmatrix}
+$$
+şeklinde yazılabilir. 
+
+Herhangi bir matris, başka bir sayıyla direk çarpılabilir. Örneğin A matrisimizi 5 sayısıyla çarparsak
+
+$$5 \cdot A = \begin{bmatrix} 5 \cdot1 & 5 \cdot2 & 5 \cdot3 \\ 5 \cdot4 & 5 \cdot5 & 5 \cdot6 \\ 5 \cdot7 & 5 \cdot8 & 5 \cdot9 \end{bmatrix} = \begin{bmatrix} 5 & 10 & 15 \\ 20 & 25 & 30 \\ 35 & 40 & 45 \end{bmatrix}$$
+
+sonucunu verecektir. Eğer iki matrisi çarpmak istersek ilk martisin sütun sayısıyla, ikinci matrisin satır sayısı eşit olmak zorundadır. Örneğin A ve C matrislerini çarparsak
+
+$$
+A \cdot C = \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{bmatrix} \cdot \begin{bmatrix} 0.1 & 0.2 & 0.3 \\ 0.4 & 0.5 & 0.6 \\ 0.7 & 0.8 & 0.9 \end{bmatrix} 
+$$
+
+$$
+A \cdot C =  \begin{bmatrix} A_{1}^{satır}\cdot A_{1}^{sütun} & A_{1}^{satır}\cdot A_{2}^{sütun} & A_{1}^{satır}\cdot A_{3}^{sütun}\\  A_{2}^{satır}\cdot A_{1}^{sütun} & A_{2}^{satır}\cdot A_{2}^{sütun} & A_{2}^{satır}\cdot A_{3}^{sütun}\\  A_{3}^{satır}\cdot A_{1}^{sütun} & A_{3}^{satır}\cdot A_{2}^{sütun} & A_{3}^{satır}\cdot A_{3}^{sütun}  \end{bmatrix}
+$$
+
+
+Çarpımın sonunda yine 3x3 bir matris elde etmiş oluruz. Eğer A matrisimiz 3 satırlı ve iki sütunlu olsaydı, C matrisinin 2 satırlı olma mecburiyeti vardı. Diyelim ki C matrisinin boyutu 2x4, yani iki satırlı ve 4 sütunlu bir matris. Bu durumda, A çarpı C bize 3x2 ve 2x4 boyutlu matrisleri çarptığımız için, 3x4 boyutlu bir matris vermek zorundaydı. 
+
+$$
+\begin{smallmatrix}
+(1 \cdot 0.1 + 2 \cdot 0.4 + 3 \cdot 0.7) & (1 \cdot 0.2 + 2 \cdot 0.5 + 3 \cdot 0.8) & (1 \cdot 0.3 + 2 \cdot 0.6 + 3 \cdot 0.9) \\ 
+(4 \cdot 0.1 + 5 \cdot 0.4 + 6 \cdot 0.7) & (4 \cdot 0.2 + 5 \cdot 0.5 + 6 \cdot 0.8) & (4 \cdot 0.3 + 5 \cdot 0.6 + 6 \cdot 0.9) \\ 
+(7 \cdot 0.1 + 8 \cdot 0.4 + 9 \cdot 0.7) & (7 \cdot 0.2 + 8 \cdot 0.5 + 9 \cdot 0.8) & (7 \cdot 0.3 + 8 \cdot 0.6 + 9 \cdot 0.9) \end{smallmatrix}
+$$
+$$
+A \cdot C = \begin{bmatrix} 3 & 3.6 & 4.2 \\ 6.6 & 8.1 & 9.6\\ 10.2 & 12.6 & 15 
+\end{bmatrix}
+$$
+
+Bir matrisin transpozisyonunu (transpose) almak ya "T" harfiyle ya da "′" işaretiyle gösterilir. Satır ve sütun yer değiştirir.
+
+$$C^T = \begin{bmatrix} 0.1 & 0.4 & 0.7 \\ 0.2 & 0.5 & 0.8 \\ 0.3 & 0.6 & 0.9 \end{bmatrix}$$
+
+## Bazı Önemli Özellikler
+
+$A + B = B + A$
+
+$A\cdot(B\cdot C) = (A \cdot B) \cdot C$
+
+$A\cdot(B + C) = A\cdot B + A\cdot C $
+
+$(B + C)^T = B^T + A^T $
+
+$(A \cdot B)^T = B^T \cdot A^T $
+
+
+## Özel Matrisler
+
+- Kare matrisler: Satır ve sütun sayısı aynı olan matrislerdir.
+- Simetrik matrisler: Transpozisyonuyla aynı olan matrislerdir. $A = A^T$ dolayısıyla kare matristir.
+- Diagonal matrisler: Diagonalı dışında kalan kısmı sıfır olan simetrik matrislerdir.
+- Birim matrisler: Diagonal öğeleri bir olan diagonal matrislerdir.
+
+## Matrisin İzi (Trace)
+
+Bir matrisin izi diagonal elementlerinin toplamıyla bulunur.
+
+$$A = \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{bmatrix}$$
+
+$tr(A) = 1 + 5 + 9 = 15$
+
+
+### Matrisin İzinin (Trace) Özellikleri
+
+$tr(c \cdot A) = c \cdot tr(A)$
+
+$tr(A^T) = tr(A)$
+
+$tr(B + C) = tr(A) + tr(B) $
+
+$ tr(I_n) = n $
+
+$ tr(A \cdot B) = tr(B \cdot A)  $
+
+
+## Matrisin Tersi 
+
+Bir matrisin başka bir matrisle çarpımı birim matris veriyorsa bu iki matris birbirlerinin tersidir.
+
+$ A \cdot B = I $ ise
+
+$ B = A^{-1} $ dir.
+
+### Ters matrislerin özellikleri
+
+$ (A \cdot C)^{-1} = C^{-1} \cdot A^{-1} $ 
+
+$ (A^T)^{-1} = (A^{-1})^T $ 
+
+## Determinant
+
+nxn A matrisinin determinantı, $\lvert A \rvert$ ya da $\det(A)$ şeklinde gösterilir.
+
+$$
+\lvert A \rvert = \sum (-1)^{j+1} \cdot a_{1j} \cdot \lvert A_{ij} \rvert
+$$
+$A_{ij}$ matrisi, A matrisinin i satırının ve j sütunun çıkarılmış halidir.
+
+### 2x2 matrisin determinantı
+
+2x2 bir A matrisi düşünelim
+
+
+$$A = \begin{bmatrix} a_{11} & a_{12}  \\ a_{21} & a_{22}  \end{bmatrix}$$
+
+$$
+\lvert A \rvert = a_{11} \cdot a_{22}  - a_{12} \cdot a_{21}
+$$
+
+
+$$A = \begin{bmatrix} 3 & 4  \\ 2 & 7  \end{bmatrix}$$
+
+$$
+\lvert A \rvert = 3 \cdot 7  - 2 \cdot 4 = 13
+$$
+
+### 3x3 matrisin determinantı 
+
+3x3 bir A matrisi düşünelim
+
+
+$$A = \begin{bmatrix} a_{11} & a_{12} & a_{13} \\ a_{21} & a_{22} & a_{23} \\ a_{31} & a_{32} & a_{33} \end{bmatrix}$$
+
+$$
+\lvert A \rvert = \sum (-1)^{j+1} \cdot a_{1j} \cdot \lvert A_{ij} \rvert
+$$
+
+$$
+\lvert A \rvert =  (-1)^{1+1} \cdot a_{11} \cdot \lvert A_{11} \rvert + (-1)^{1+2} \cdot a_{12} \cdot \lvert A_{12} \rvert + (-1)^{1+3} \cdot a_{13} \cdot \lvert A_{13} \rvert
+$$
+$$A_{11} = \begin{bmatrix}   a_{22} & a_{23} \\  a_{32} & a_{33} \end{bmatrix}$$
+$$A_{12} = \begin{bmatrix}   a_{21} & a_{23} \\  a_{31} & a_{33} \end{bmatrix}$$
+$$A_{13} = \begin{bmatrix}   a_{21} & a_{22} \\  a_{31} & a_{32} \end{bmatrix}$$
+$$A = \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{bmatrix}$$
+$$
+\lvert A \rvert =  (-1)^{1+1} \cdot a_{11} \cdot \lvert A_{11} \rvert + (-1)^{1+2} \cdot a_{12} \cdot \lvert A_{12} \rvert + (-1)^{1+3} \cdot a_{13} \cdot \lvert A_{13} \rvert
+$$
+$$
+\lvert A \rvert =  (-1)^{2} \cdot 1 \cdot \lvert A_{11} \rvert + (-1)^{3} \cdot 2 \cdot \lvert A_{12} \rvert + (-1)^{4} \cdot 3 \cdot \lvert A_{13} \rvert
+$$
+$$
+\lvert A \rvert =   \lvert \begin{bmatrix}   5 & 6 \\  8 & 9 \end{bmatrix} \rvert  - 2 \cdot \lvert \begin{bmatrix}   4 & 6 \\  7 & 9 \end{bmatrix} \rvert +  3 \cdot \lvert \begin{bmatrix}   4 & 5 \\  7 & 8 \end{bmatrix} \rvert
+$$
+$$
+\lvert A \rvert =   (5 \cdot 9 - 8 \cdot 6)  - 2 \cdot (4 \cdot 9 - 7 \cdot 6)
++  3 \cdot (4 \cdot 8 - 7 \cdot 5)
+$$
+
+$$
+\lvert A \rvert =   (45 -48)  - 2 \cdot (36 -  42) +  3 \cdot (32 - 35)
+$$
+
+$$
+\lvert A \rvert =  -3  - 2 \cdot (-6) +  3 \cdot (-3) = -3 + 12 - 9 = 0
+$$
+
+### Determinantın özellikleri
+
+$$
+\lvert A \rvert = \lvert A^T \rvert
+$$
+nxn alt üçgensel veya üst üçgensel matrislerin determinantı diagonal elemetlerin çarpımıdır.
+
+$$
+\lvert A \rvert = \Pi^n_{i=1} a_{ii}
+$$
+
+$$A = \begin{bmatrix} 1 & 2 & 3 \\ 0 & 5 & 6 \\ 0 & 0 & 9 \end{bmatrix}$$
+
+$$
+\lvert A \rvert = 1 \cdot 5 \cdot 9 = 45
+$$
+
+
+$$
+\lvert \alpha \cdot A \rvert = \alpha^n \cdot \lvert  A \rvert
+$$
+
+$$
+\lvert A \cdot B \rvert = \lvert  A \rvert \cdot \lvert  B \rvert
+$$
+
+$$
+\lvert A^{-1} \rvert = \frac{1}{\lvert  A \rvert}
+$$
+
+## Adjoint (katımlı) matris
+
+Bir A matrisinin adjoint matrisi, A matrisinin her elamanının yerine $(-1)^{i+j} \cdot \lvert A_{ij} \rvert$ yazılarak bulunur. adj(A) ile gösterilir.
+
+A matrisinin tersi, 
+
+$$
+ A^{-1} = \frac{1}{\lvert  A \rvert} \cdot adj(A)
+$$
+ile bulunur.
+
+Bir matrisin tersi olabilmesi için $\lvert  A \rvert$ sıfır'a eşit olmamalıdır.
+
+$$A = \begin{bmatrix} a_{11} & a_{12} & a_{13} \\ a_{21} & a_{22} & a_{23} \\ a_{31} & a_{32} & a_{33} \end{bmatrix}$$
+
+$$adj(A) = \begin{bmatrix} (-1)^{1+1} \cdot \lvert A_{11} \rvert & (-1)^{1+2} \cdot \lvert A_{12} \rvert & (-1)^{1+3} \cdot \lvert A_{13} \rvert \\ (-1)^{2+1} \cdot \lvert A_{21} \rvert & (-1)^{2+2} \cdot \lvert A_{22} \rvert & (-1)^{2+3} \cdot \lvert A_{23} \rvert \\ (-1)^{3+1} \cdot \lvert A_{31} \rvert & (-1)^{3+2} \cdot \lvert A_{32} \rvert & (-1)^{3+3} \cdot \lvert A_{33} \rvert \end{bmatrix}$$
+
+$$adj(A) = \begin{bmatrix}  \lvert A_{11} \rvert & - \lvert A_{12} \rvert &  \lvert A_{13} \rvert \\ -\lvert A_{21} \rvert & \lvert A_{22} \rvert & - \lvert A_{23} \rvert \\ \lvert A_{31} \rvert & - \lvert A_{32} \rvert &  \lvert A_{33} \rvert \end{bmatrix}$$
+
+$$adj(A) = \begin{bmatrix}  \lvert \begin{bmatrix}   a_{22} & a_{23} \\  a_{32} & a_{33} \end{bmatrix}\rvert & - \lvert \begin{bmatrix}   a_{21} & a_{23} \\  a_{31} & a_{33} \end{bmatrix} \rvert &  \lvert \begin{bmatrix}   a_{21} & a_{22} \\  a_{31} & a_{32} \end{bmatrix} \rvert \\ -\lvert \begin{bmatrix}   a_{12} & a_{13} \\  a_{32} & a_{33} \end{bmatrix} \rvert & \lvert \begin{bmatrix}   a_{11} & a_{13} \\  a_{31} & a_{33} \end{bmatrix} \rvert & - \lvert \begin{bmatrix}   a_{11} & a_{12} \\  a_{31} & a_{32} \end{bmatrix} \rvert \\ \lvert \begin{bmatrix}   a_{12} & a_{13} \\  a_{22} & a_{23} \end{bmatrix} \rvert & - \lvert \begin{bmatrix}   a_{11} & a_{13} \\  a_{21} & a_{23} \end{bmatrix} \rvert &  \lvert \begin{bmatrix}   a_{11} & a_{12} \\  a_{21} & a_{22} \end{bmatrix} \rvert \end{bmatrix}$$
+
+$$adj(A) = \begin{smallmatrix} (a_{22} \cdot a_{33} - a_{32} \cdot a_{23}  ) & - (a_{21} \cdot a_{33} - a_{31} \cdot a_{23}  )& (a_{21} \cdot a_{32} - a_{31} \cdot a_{22}) \\ -(a_{12} \cdot a_{33} - a_{32} \cdot a_{13}) & (a_{11} \cdot a_{33} - a_{31} \cdot a_{13}) & - (a_{11} \cdot a_{32} - a_{31} \cdot a_{12})\\ (a_{12} \cdot a_{23} - a_{22} \cdot a_{13}) & - (a_{11} \cdot a_{23} - a_{21} \cdot a_{13})&  (a_{11} \cdot a_{22} - a_{21} \cdot a_{12}) \end{smallmatrix}$$
+
+## Cramer Kuralı (Cramer's rule)
+
+Bir eşitlikler kümesi matris şeklinde gösterilip çözülebilir.
+
+$$
+3 \cdot x_1 + 5 \cdot x_2 + 2 \cdot x_3 = 19
+$$
+$$
+2 \cdot x_1 + 2 \cdot x_2 + 2 \cdot x_3 = 12
+$$
+
+$$
+3 \cdot x_1 +  x_2 + 4 \cdot x_3 = 17
+$$
+
+Bu üç eşitlik matris formunda şu şekilde yazılabilir.
+
+$$
+Ax = b
+$$
+$$
+A = \begin{bmatrix} 3 & 5 & 2 \\ 2 & 2 & 2 \\ 3 & 1 & 4 \end{bmatrix}
+$$
+
+$$
+x = \begin{bmatrix} x_1 \\ x_2 \\ x_3  \end{bmatrix}
+$$
+$$
+b = \begin{bmatrix} 19 \\ 12 \\ 17 \end{bmatrix}
+$$
+
+Cramer kuralına göre bilinmeyen x'ler b vektörünün A matrisinde gerekli sütununa yazılarak bulunacak ikinci bir matris yardımıyla bulunabilir.
+
+$$
+x_1 = \frac{\lvert  A \rvert}{\lvert  A_1 \rvert}
+$$
+$$
+x_2 = \frac{\lvert  A \rvert}{\lvert  A_2 \rvert}
+$$
+
+$$
+x_3 = \frac{\lvert  A \rvert}{\lvert  A_3 \rvert}
+$$
+
+A matrisinin determinantını bulmayı biliyoruz. $A_1$ matrisini bulmamız lazım.
+
+$$
+A_1 = \begin{bmatrix} 19 & 5 & 2 \\ 12 & 2 & 2 \\ 17 & 1 & 4 \end{bmatrix}
+$$
+$A_1$ matrisi, 1. sütunun yerine, b vektörünün yazılmasıyla bulunur. Bu iki matrisin detarminantlarının bölümü çözümü verir.
+
+## Ödev
+
+- x vektörünün çözümlerini Cramer kuralıyla bulun.
+
+
