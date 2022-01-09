@@ -14,7 +14,7 @@ Bu bölümde, R yardımıyla matris alıştırmaları bulacaksınız
 
 <!--more-->
 
-İlk olarak 6x2 yani 6 satırlı ve 3 sütunlu bir matris oluşturalım ve A matrisi diyelim.
+İlk olarak 6x2 yani 6 satırlı ve 2 sütunlu bir matris oluşturalım ve A matrisi diyelim.
 
 
 ```r
@@ -32,7 +32,7 @@ A
 ## [6,]    9   48
 ```
 
-Gördüğünüz gibi R, yazmış olduğunuz her rakamı yukardam aşağıya doğru sütunlara göre yazdı ve 6 tane nrow (satır) belirledi. Eğer nrow değilde ncol (sütun) belirtseydik de aynı sonuca ulaşırdır.
+Gördüğünüz gibi R, yazmış olduğunuz her rakamı yukardan aşağıya doğru sütunlara göre yazdı ve 6 tane nrow (satır) belirledi. Eğer nrow değilde ncol (sütun) belirtseydik de aynı sonuca ulaşırdır.
 
 
 ```r
@@ -121,7 +121,7 @@ t(C)
 
 Diyelim ki bir matriste sadece bir sütuna veya bir satıra ihtiyacınız var, bu durumda kareli parantez kullanırız. kareli parantezin virgülden önce yazılan kısmı satırlar, sonrası sütunlar içindir.
 
-Mesala, A matrisinin ikinci sütununu kullunmak isterseniz
+Mesala, A matrisinin ikinci satırını kullunmak isterseniz
 
 
 ```r
@@ -388,7 +388,7 @@ k
 ## [3,]   26
 ```
 
-t(i) ve k'nın çarpımı bize k vektörünün elementlerinin toplamını (7 + 9 + 26 = 42) verir. i vektörü 3x1 bir matristir. i'nin transpozu 1x3 matris olur. k 3x1 bir matristir. `\(i^T k\)` b'ze 1x1 bir sonuç verecektir. Arada kalan 3 sütun ve 3 satır çarpım koşuludur.
+t(i) ve k'nın çarpımı bize k vektörünün elementlerinin toplamını (7 + 9 + 26 = 42) verir. i vektörü 3x1 bir matristir. i'nin transpozu 1x3 matris olur. k 3x1 bir matristir. $i^T k$ b'ze 1x1 bir sonuç verecektir. Arada kalan 3 sütun ve 3 satır çarpım koşuludur.
 
 
 ```r
@@ -403,7 +403,7 @@ t(i) %*% k
 
 i matrisi daha büyük boyutlu matrislerde de işimize yarayacaktır.
 
-Burdan da anlaşılacağı üzere `\(i^T i\)` toplam kaç tane satır bulunduğunu söyler. Bizim örneğimizde satır sayısı üçtür.
+Burdan da anlaşılacağı üzere $i^T i$ toplam kaç tane satır bulunduğunu söyler. Bizim örneğimizde satır sayısı üçtür.
 
 
 ```r
@@ -415,7 +415,7 @@ t(i) %*% i
 ## [1,]    3
 ```
 
-`\((i^T i)^{-1}\)` bize `\(1/n\)`'i verecektir.
+$(i^T i)^{-1}$ bize $1/n$'i verecektir.
 
 
 ```r
@@ -427,7 +427,7 @@ solve(t(i) %*% i)
 ## [1,] 0.3333333
 ```
 
-`\(i^T k\)` sütunun toplamını veriyor, `\((i^T i)^{-1}\)` ise `\(1/n\)`'i veriyor. Buna göre `\((i^T i)^{-1}i^T k\)` bize bu sütunun ortalamasını verecektir.
+$i^T k$ sütunun toplamını veriyor, $(i^T i)^{-1}$ ise $1/n$'i veriyor. Buna göre $(i^T i)^{-1}i^T k$ bize bu sütunun ortalamasını verecektir.
 
 
 ```r
@@ -453,7 +453,7 @@ i %*%  solve(t(i) %*% i)  %*%  t(i) %*% k
 ## [3,]   14
 ```
 
-Bu matrisi k matrisimizden çıkarırsak `\(k - \bar{k}\)`'yı her bir öğe için bulmuş oluruz. 
+Bu matrisi k matrisimizden çıkarırsak $k - \bar{k}$'yı her bir öğe için bulmuş oluruz. 
 
 
 ```r
@@ -467,7 +467,7 @@ k - i %*%  solve(t(i) %*% i)  %*%  t(i) %*% k
 ## [3,]   12
 ```
 
-Ama biliyoruz ki ortalamaların toplamı sıfırı verir. Bu matrisi `\(t(i)\)` ile çarparsak bütün sütunun öğelerinin toplayacağı için sonucu 0 olarak verecektir.
+Ama biliyoruz ki ortalamaların toplamı sıfırı verir. Bu matrisi $t(i)$ ile çarparsak bütün sütunun öğelerinin toplayacağı için sonucu 0 olarak verecektir.
 
 
 ```r
@@ -487,12 +487,12 @@ $$
 $$
 i^T(I_n - i(i^T i)^{-1}i^T) k= 0
 $$
-`\(i^T\)`'u parantez içine dağıtalım.
+$i^T$'u parantez içine dağıtalım.
 
 $$
 (i^T - i^Ti(i^T i)^{-1}i^T) k= 0
 $$
-`\(i^Ti(i^T i)^{-1}\)` birbirleribi götüreceklerdir.
+$i^Ti(i^T i)^{-1}$ birbirleribi götüreceklerdir.
 
 $$
 (i^T - i^T) k= 0
@@ -506,13 +506,13 @@ Bu parantez içinde kalan matrise özel bir isim verelim.
 $$
 M_0 = I_n - i(i^T i)^{-1}i^T
 $$
-`\(M_0\)` matrisi simetrik bir matrisdir.
+$M_0$ matrisi simetrik bir matrisdir.
 
 
 $$
 M_0 = M_0^T =  I_n - i(i^T i)^{-1}i^T =  (I_n - i(i^T i)^{-1}i^T)^T
 $$
-`\(M_0\)`'yu `\(M_0\)` ile çarparsak `\(M_0\)` buluruz. Dolayısıyla `\(M_0\)` idempotent'dir.
+$M_0$'yu $M_0$ ile çarparsak $M_0$ buluruz. Dolayısıyla $M_0$ idempotent'dir.
 
 
 $$

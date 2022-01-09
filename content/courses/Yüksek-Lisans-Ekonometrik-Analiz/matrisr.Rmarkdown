@@ -16,14 +16,14 @@ Bu bölümde, R yardımıyla matris alıştırmaları bulacaksınız
 
 <!--more-->
 
-İlk olarak 6x2 yani 6 satırlı ve 3 sütunlu bir matris oluşturalım ve A matrisi diyelim.
+İlk olarak 6x2 yani 6 satırlı ve 2 sütunlu bir matris oluşturalım ve A matrisi diyelim.
 
 ```{r}
 A <- matrix(c(3,4,2,16,5,9,4,7,33,8,9,48),nrow=6)
 A
 ```
 
-Gördüğünüz gibi R, yazmış olduğunuz her rakamı yukardam aşağıya doğru sütunlara göre yazdı ve 6 tane nrow (satır) belirledi. Eğer nrow değilde ncol (sütun) belirtseydik de aynı sonuca ulaşırdır.
+Gördüğünüz gibi R, yazmış olduğunuz her rakamı yukardan aşağıya doğru sütunlara göre yazdı ve 6 tane nrow (satır) belirledi. Eğer nrow değilde ncol (sütun) belirtseydik de aynı sonuca ulaşırdır.
 
 ```{r}
 B<- matrix(c(3,4,2,16,5,9,4,7,33,8,9,48),ncol=2)
@@ -64,7 +64,7 @@ t(C)
 
 Diyelim ki bir matriste sadece bir sütuna veya bir satıra ihtiyacınız var, bu durumda kareli parantez kullanırız. kareli parantezin virgülden önce yazılan kısmı satırlar, sonrası sütunlar içindir.
 
-Mesala, A matrisinin ikinci sütununu kullunmak isterseniz
+Mesala, A matrisinin ikinci satırını kullunmak isterseniz
 
 ```{r}
 A[2,]
