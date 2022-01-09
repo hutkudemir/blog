@@ -160,7 +160,7 @@ $tr(c \cdot A) = c \cdot tr(A)$
 
 $tr(A^T) = tr(A)$
 
-$tr(B + C) = tr(A) + tr(B) $
+$tr(B + C) = tr(C) + tr(B) $
 
 $ tr(I_n) = n $
 
