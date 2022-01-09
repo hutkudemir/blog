@@ -290,10 +290,10 @@ $$
 M_0 M_0 = (I_n - i(i^T i)^{-1}i^T)  (I_n - i(i^T i)^{-1}i^T)
 $$
 $$
-= I_n - i(i^T i)^{-1}i^T - i(i^T i)^{-1}i^T) + i(i^T i)^{-1}i^Ti(i^T i)^{-1}i^T
+= I_n - i(i^T i)^{-1}i^T - i(i^T i)^{-1}i^T + i(i^T i)^{-1}i^Ti(i^T i)^{-1}i^T
 $$
 $$
-= I_n - i(i^T i)^{-1}i^T - i(i^T i)^{-1}i^T) + i(i^T i)^{-1}i^T
+= I_n - i(i^T i)^{-1}i^T - i(i^T i)^{-1}i^T + i(i^T i)^{-1}i^T
 $$
 $$
 = I_n - i(i^T i)^{-1}i^T = M_0

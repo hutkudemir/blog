@@ -104,7 +104,7 @@ A \cdot C = \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \end{bmatrix} \c
 $$
 
 $$
-A \cdot C =  \begin{bmatrix} A_{1}^{satır}\cdot A_{1}^{sütun} & A_{1}^{satır}\cdot A_{2}^{sütun} & A_{1}^{satır}\cdot A_{3}^{sütun}\\  A_{2}^{satır}\cdot A_{1}^{sütun} & A_{2}^{satır}\cdot A_{2}^{sütun} & A_{2}^{satır}\cdot A_{3}^{sütun}\\  A_{3}^{satır}\cdot A_{1}^{sütun} & A_{3}^{satır}\cdot A_{2}^{sütun} & A_{3}^{satır}\cdot A_{3}^{sütun}  \end{bmatrix}
+A \cdot C =  \begin{bmatrix} A_{1}^{satır}\cdot C_{1}^{sütun} & A_{1}^{satır}\cdot C_{2}^{sütun} & A_{1}^{satır}\cdot C_{3}^{sütun}\\  A_{2}^{satır}\cdot C_{1}^{sütun} & A_{2}^{satır}\cdot C_{2}^{sütun} & A_{2}^{satır}\cdot C_{3}^{sütun}\\  A_{3}^{satır}\cdot C_{1}^{sütun} & A_{3}^{satır}\cdot C_{2}^{sütun} & A_{3}^{satır}\cdot C_{3}^{sütun}  \end{bmatrix}
 $$
 
 Çarpımın sonunda yine 3x3 bir matris elde etmiş oluruz. 
