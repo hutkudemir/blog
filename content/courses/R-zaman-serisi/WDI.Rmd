@@ -34,7 +34,7 @@ https://data.worldbank.org/indicator/EN.ATM.CO2E.PC?view=chart
 web sayfasının ortasında bulunan EN.ATM.CO2E.PC bu veri setinin anahtar kelimesidir. Siz Meksika, Türkiye ve US'in bu konu hakkındaki verilerini 1960'dan 2018'e kadar indirmek istiyorsunuz. Bu veri setini R'a df olarak kaydedelim.
 
 ```{r}
-df = WDI(indicator='EN.ATM.CO2E.PC', country=c('MX','TR','US'), start=1960, end=2018)
+df = WDI(indicator = c("gdp" = "NY.GDP.MKTP.KD","en" = "EG.USE.PCAP.KG.OE"), country = "all", start=1980, end=2014)
 ```
 
 Bu veri setini gözlemleyelim.
