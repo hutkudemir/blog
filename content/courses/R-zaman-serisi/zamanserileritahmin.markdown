@@ -183,6 +183,7 @@ e1<-y-f1
 e2<-y-f2
 rmse<-sqrt(mean(e1^2))
 mae<-mean(abs(e1))
+<<<<<<< HEAD
 ```
 
 ```r
@@ -192,6 +193,8 @@ mae2<-mean(abs(e2))
 
 
 ```r
+=======
+>>>>>>> origin
 rmse
 ```
 
@@ -208,6 +211,11 @@ mae
 ```
 
 ```r
+<<<<<<< HEAD
+=======
+rmse2<-sqrt(mean(e2^2))
+mae2<-mean(abs(e2))
+>>>>>>> origin
 rmse2
 ```
 
@@ -223,6 +231,9 @@ mae2
 ## [1] 0.2455728
 ```
 
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> origin
