@@ -16,16 +16,6 @@ weight: 60
 <div id="zaman-serisi-tahmini-nedir" class="section level2">
 <h2>Zaman Serisi Tahmini Nedir?</h2>
 <p>Bu bölümde kullanacağımız yöntemler makine öğrenimi konusunun altında da geçmektedir. Eğer elimizde düzenli olarak kaydedilen veriler varsa, bu verileri kullanarak gelecek olan düzenli gözlemi tahmin etmeye çalışabiliriz. Örneğin, GSYH her çeyrekte ve her yıl açıklanmaktadır. Biz bugüne kadar olan, GSYH verilerini kullanarak, gelecek yılın veya gelecek çeyreğin GSYH verisini tahmin etmeye çalışabiliriz. Aynı durum hisse senedi fiyatları, döviz kurları veya benzeri veriler içinde geçerli olabilir.</p>
-<p><span class="math display">\[
-\left(\begin{array}{cc} 
-0.8944272 &amp; 0.4472136\\
--0.4472136 &amp; -0.8944272
-\end{array}\right)
-\left(\begin{array}{cc} 
-10 &amp; 0\\ 
-0 &amp; 5
-\end{array}\right)
-\]</span></p>
 </div>
 <div id="zaman-serisi-bileşenleri" class="section level2">
 <h2>Zaman Serisi Bileşenleri?</h2>
@@ -82,7 +72,7 @@ weight: 60
 <pre><code>## [1] &quot;TSLA&quot;</code></pre>
 <p>Artık teslanın 26 Haziran 2010 sonrası günlük verilerine sahibiz. Dataya bir göz atalım. Datanın boyutuna dim() komutuyla bakalım, ve verinin ilk 6 ve son 6 gözlemine bir göz atalım.</p>
 <pre class="r"><code>dim(TSLA)</code></pre>
-<pre><code>## [1] 2903    6</code></pre>
+<pre><code>## [1] 2948    6</code></pre>
 <pre class="r"><code>head(TSLA)</code></pre>
 <pre><code>##            TSLA.Open TSLA.High TSLA.Low TSLA.Close TSLA.Volume TSLA.Adjusted
 ## 2010-06-29     3.800     5.000    3.508      4.778    93831500         4.778
@@ -93,12 +83,12 @@ weight: 60
 ## 2010-07-07     3.280     3.326    2.996      3.160    34608500         3.160</code></pre>
 <pre class="r"><code>tail(TSLA)</code></pre>
 <pre><code>##            TSLA.Open TSLA.High TSLA.Low TSLA.Close TSLA.Volume TSLA.Adjusted
-## 2021-12-30   1061.33   1095.55  1053.15    1070.34    15680300       1070.34
-## 2021-12-31   1073.44   1082.00  1054.59    1056.78    13528700       1056.78
-## 2022-01-03   1147.75   1201.07  1136.04    1199.78    34643800       1199.78
-## 2022-01-04   1189.55   1208.00  1123.05    1149.59    33416100       1149.59
-## 2022-01-05   1146.65   1170.34  1081.01    1088.12    26706600       1088.12
-## 2022-01-06   1077.00   1088.00  1020.50    1064.70    29994600       1064.70</code></pre>
+## 2022-03-07   856.300    866.14   804.57     804.58    24164700        804.58
+## 2022-03-08   795.530    849.99   782.17     824.40    26799700        824.40
+## 2022-03-09   839.480    860.56   832.01     858.97    19728000        858.97
+## 2022-03-10   851.450    854.45   810.36     838.30    19549500        838.30
+## 2022-03-11   840.200    843.80   793.77     795.35    22272800        795.35
+## 2022-03-11   840.197    843.55   793.77     795.35    22345722        795.35</code></pre>
 <p>TSLA.Open, hisse senedinin o günkü açılış fiyatı, Close, kapanış, High, en yüksek, Low, en düşük, Adjuste, Ayarlanmış fiyatlarını vermektedir.Volume, Kaç kişinin işlem yaptığını gösterir.</p>
 <p>Bu zaman serisinin grafiğini chartSeries() ile gösterebiliriz.</p>
 <pre class="r"><code>chartSeries(TSLA)</code></pre>
