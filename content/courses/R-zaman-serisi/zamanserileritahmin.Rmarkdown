@@ -105,13 +105,19 @@ e1<-y-f1
 e2<-y-f2
 rmse<-sqrt(mean(e1^2))
 mae<-mean(abs(e1))
-rmse
-mae
 ```
 ```{r}
 rmse2<-sqrt(mean(e2^2))
 mae2<-mean(abs(e2))
+```
+
+```{r}
+rmse
+mae
 rmse2
 mae2
 ```
+
+
+
 
