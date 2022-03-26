@@ -93,6 +93,7 @@ f2<-predict(model2,newdata = window(tsph,start=1997))
 y<-window(tsph,start=1997)[,"unem"]
 ```
 
+
 ```{r}
 time=c(1997:2003)
 matplot(time,cbind(y,f1,f2),type = "l",lwd=2,lty=1:3, ylim = c(4,7))
@@ -113,6 +114,4 @@ mae2<-mean(abs(e2))
 rmse2
 mae2
 ```
-
-
 
