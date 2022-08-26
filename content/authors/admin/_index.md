@@ -15,7 +15,7 @@ interests:
 organizations:
 - name: Karabük Üniversitesi
   url: https://www.karabuk.edu.tr/
-role: Öğretim Görevlisi Dr.
+role: Dr. Öğretim Üyesi
 social:
 - icon: envelope
   icon_pack: fas
