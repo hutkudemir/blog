@@ -9,6 +9,11 @@ weight: 1
 
 {{< figure src="featured.jpg" >}}
 
+## Dersin Sunumları
+### Ekonometriye Giriş, Modern Yaklaşım, Wooldridge, Cilt 1 
+
+- [Bölüm 1](https://rpubs.com/Utku/wooldridge_1)
+
 ## Ne Öğreneceksiniz
 
 - Temel {{<hl>}}R programlama{{</hl>}}
