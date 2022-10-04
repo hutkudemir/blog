@@ -13,6 +13,7 @@ weight: 1
 ### Ekonometriye Giriş, Modern Yaklaşım, Wooldridge, Cilt 1 
 
 - [Bölüm 1](https://rpubs.com/Utku/wooldridge_1)
+- [Bölüm 6](https://rpubs.com/Utku/wooldridge_6)
 
 ## Ne Öğreneceksiniz
 
