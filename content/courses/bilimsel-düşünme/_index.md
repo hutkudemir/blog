@@ -15,3 +15,4 @@ weight: 1
 ## Ders Sunumları
 
 - [Ders 1](https://rpubs.com/Utku/BD_ders_1)
+- [Ders 2](https://rpubs.com/Utku/BD_ders_2)
