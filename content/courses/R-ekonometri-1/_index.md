@@ -16,6 +16,10 @@ weight: 1
 - [Bölüm 2](https://rpubs.com/Utku/bolum2)
 - [Bölüm 6](https://rpubs.com/Utku/wooldridge_6)
 
+### Ekonometriye Giriş, Modern Yaklaşım, Wooldridge, Cilt 2
+
+- [Bölüm 1](https://rpubs.com/Utku/C2B2)
+
 ## Ne Öğreneceksiniz
 
 - Temel {{<hl>}}R programlama{{</hl>}}
