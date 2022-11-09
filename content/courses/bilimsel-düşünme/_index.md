@@ -19,3 +19,4 @@ weight: 1
 - [Ders 3](https://rpubs.com/Utku/BD_ders_3)
 - [Ders 4](https://rpubs.com/Utku/BD_ders_4)
 - [Ders 5](https://rpubs.com/Utku/BD_ders_5)
+- [Ders 6](https://rpubs.com/Utku/BD_ders_6)
