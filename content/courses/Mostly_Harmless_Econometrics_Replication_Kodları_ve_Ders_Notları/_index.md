@@ -6,8 +6,6 @@ type: book
 weight: 1
 ---
 
-## Bilimsel Düşünme
-
 ## Eğitimci
 
 {{< mention "admin" >}}
