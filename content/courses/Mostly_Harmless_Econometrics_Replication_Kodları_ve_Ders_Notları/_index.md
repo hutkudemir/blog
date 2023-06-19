@@ -12,4 +12,4 @@ weight: 1
 
 ## Ders Sunumları
 
-- [Bölüm_6](https://rpubs.com/Utku/MHE6)
+- [Bölüm_6: Regression Discontinuity Designs](https://rpubs.com/Utku/MHE6)
