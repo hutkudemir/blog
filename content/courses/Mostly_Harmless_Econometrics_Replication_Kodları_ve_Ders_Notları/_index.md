@@ -12,4 +12,5 @@ weight: 1
 
 ## Ders Sunumları
 
-- [Bölüm_6: Regression Discontinuity Designs](https://rpubs.com/Utku/MHE6)
+- [Bölüm 1 ve 2: İdeal Deney](https://rpubs.com/Utku/MHE2)
+- [Bölüm 6: Regression Discontinuity Designs](https://rpubs.com/Utku/MHE6)
