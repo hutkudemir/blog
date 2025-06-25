@@ -1,8 +1,5 @@
 ---
 title: "Central Bank Game"
-date: 2025-06-27
-summary: "Play my browser-based monetary-policy simulation."
-type: page        # Wowchemy likes an explicit type
 draft: false
 ---
 
@@ -13,4 +10,3 @@ draft: false
     loading="lazy">
   </iframe>
 </div>
-
