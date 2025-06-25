@@ -3,20 +3,11 @@
   font-size: 1.5rem;
 }
 
-/* ─── Full-width iframe for the Central Bank Game ─────────────────── */
-.full-iframe {
-  margin: 0;                    /* remove theme margins             */
-  width: 100vw;                 /* full viewport width              */
-  max-width: 100vw;             /* override the centered container  */
-  position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;           /* break out of the column          */
-}
-
-.full-iframe iframe {
-  width: 100%;
-  height: 90vh;                 /* 90 % of viewport height          */
+/* ─── Big responsive area just for the game page ─────────── */
+.game-iframe {
+  width: 100%;      /* stretch across the column  */
+  max-width: 100%;  /* never shrink               */
+  height: 85vh;     /* 85 % of viewport height    */
   border: none;
 }
 
