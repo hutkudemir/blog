@@ -10,6 +10,9 @@ main:
   - name: Blog
     url: '#posts'
     weight: 20
+  - name: Merkez Bankası Oyunu   
+    url: game/
+    weight: 30
   - name: Dersler
     url: courses/
     weight: 60
