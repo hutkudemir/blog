@@ -1,8 +1,6 @@
 ---
 title: "Macroeconomics: An Island Story"
 date: 2025-09-17
-url: "https://www.amazon.com/dp/B0FRNQZMRP"
-featured: true
 ---
 
 ## Macroeconomics: An Island Story  
