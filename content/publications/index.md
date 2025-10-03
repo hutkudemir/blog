@@ -8,17 +8,16 @@ date: 2025-09-17
 
 ![](Macroeconomics.png)
 
-**One-Line Pitch**  
 Why do so many graduates struggle even after years of study? *Macroeconomics: An Island Story* combines clear explanations and engaging stories — from Island Country narratives to a central bank simulation game — to show how theory connects to real lives.
 
 ---
 
 ### Versions
 
-| Format | ASIN | Notes |
-|---|---|---|
-| **eBook (Kindle)** | *B0FRNQZMRP* | Digital version with “Look Inside” support |
-| **Paperback** | *B0FRPHPRJ5* | Traditional print edition, ideal for classrooms |
+| Format | ASIN | 
+|---|---|
+| **eBook (Kindle)** | *B0FRNQZMRP* | 
+| **Paperback** | *B0FRPHPRJ5* | 
 
 ---
 
@@ -27,7 +26,7 @@ Why do so many graduates struggle even after years of study? *Macroeconomics: An
 - Grasp macro concepts: inflation, unemployment, growth, fiscal/monetary policy  
 - Use human stories to anchor theory in everyday life  
 - Think like a policymaker via an interactive central bank simulation  
-- Analyze global crises, structural change, technology disruption  
+- Analyze global crises, structural change, and technology disruption  
 - Bridge theory and practice with charts, exercises, and real examples  
 
 ---
