@@ -15,7 +15,7 @@ Why do so many graduates struggle even after years of study? *Macroeconomics: An
 
 ---
 
-### Versions & Formats
+### Versions
 
 | Format | ASIN / Identifier | Notes |
 |---|---|---|
