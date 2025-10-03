@@ -40,10 +40,9 @@ Why do so many graduates struggle even after years of study? *Macroeconomics: An
 This textbook is written for undergraduates, graduate students, and instructors. *Macroeconomics: An Island Story* opens each chapter with a narrative from Island Country, grounding abstract models in real human experience. Then it builds through theory, data, and policy, connecting ideas to lived realities.
 
 > *“People started trading ‘fish receipts’ carved on wood … because drying fish took time. Thus money emerged from trust.”*  
-> — Excerpt from Chapter 1
+
 
 > *“Zeynep graduated with honors but now works at minimum wage; her friend’s father secured an internship job. That contrast lies at the heart of inequality and opportunity.”*  
-> — Story from a later chapter
 
 These narrative examples illustrate how macroeconomic dynamics — money, credit, inflation, crises — play out in the lives of individuals, not just in graphs and equations.
 
@@ -54,7 +53,7 @@ These narrative examples illustrate how macroeconomic dynamics — money, credit
 - Publication Date: September 17, 2025  
 - Language: English  
 - Page Count: 293 pages  
-- Format: Kindle / Print Replica / Paperback  
+- Format: Kindle / Paperback  
 - Publisher: Independently published  
 
 ---
@@ -73,13 +72,6 @@ This book is ideal for:
 - Instructors seeking a narrative approach to teaching macro  
 - Lifelong learners who want to see economics in real life  
 - Study groups, reading circles, or self‐study  
-
----
-
-### Related Works & Future Projects
-
-- *(If you plan future editions or companion volumes, mention them here.)*  
-- Supplemental teaching materials, case studies, or simulation tools you might develop.
 
 ---
 
