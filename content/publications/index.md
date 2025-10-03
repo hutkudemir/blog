@@ -6,7 +6,7 @@ date: 2025-09-17
 ## Macroeconomics: An Island Story  
 *(Kindle / Paperback)*
 
-![Macroeconomics Book Cover](macroeconomics-cover.jpg)
+![](Macroeconomics.png)
 
 **One-Line Pitch**  
 Why do so many graduates struggle even after years of study? *Macroeconomics: An Island Story* combines clear explanations and engaging stories — from Island Country narratives to a central bank simulation game — to show how theory connects to real lives.
