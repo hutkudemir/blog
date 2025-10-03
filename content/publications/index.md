@@ -1,11 +1,10 @@
 ---
-title: "Macroeconomics: An Island Story"  
-date: 2025-09-17  
-publication_types: ["Book"]  
-authors: ["admin"]  
-url: "https://www.amazon.com/dp/B0FRNQZMRP"  
-featured: true  
-tags: ["Macroeconomics", "Textbook", "Economics"]  
+title: "Macroeconomics: An Island Story"
+date: 2025-09-17
+publication_types: ["Book"]     # or however your theme labels “book”
+authors: ["admin"]               # assuming your author alias is “admin”
+url: "https://www.amazon.com/dp/B0FRNQZMRP"
+featured: true
 ---
 
 ## Macroeconomics: An Island Story  
