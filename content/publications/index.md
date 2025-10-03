@@ -85,6 +85,6 @@ This book is ideal for:
 
 ### Notes / Author
 
-Dr. Hüseyin Utku Demir is an economist and educator whose work blends storytelling and economic theory. He taught courses at CUNY (Brooklyn College, Hunter College, City College) and writes to make macroeconomics accessible and alive.
+Dr. Hüseyin Utku Demir is an economist and educator whose work blends storytelling and economic theory. He taught courses at Karabuk University and at CUNY (Brooklyn College, Hunter College, City College) and writes to make macroeconomics accessible and alive.
 
 ---
