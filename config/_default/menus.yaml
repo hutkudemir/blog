@@ -19,6 +19,9 @@ main:
   - name: Dersler
     url: courses/
     weight: 60
+  - name: Student Portal
+    url: https://demir-exam.streamlit.app
+    weight: 65
   - name: İletişim
     url: '#contact'
     weight: 70
