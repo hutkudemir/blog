@@ -47,7 +47,7 @@ draft: false
   <iframe
     id="gameFrame"
     class="game-iframe"
-    src="https://hutkudemir.github.io/central-bank-game/"
+    src="https://hutkudemir.github.io/central-bank-game-react/"
     loading="lazy">
   </iframe>
   <div class="fs-btn" id="fsBtn" title="Tam ekran"></div>
